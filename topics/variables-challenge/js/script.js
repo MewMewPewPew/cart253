@@ -36,10 +36,13 @@ function draw() {
 
   mrFurious.fill.g -= 2
   mrFurious.fill.b -= 2
+
+  let g = constrain(mrFurious.fill.g, 0, 255)
+  let b = constrain(mrFurious.fill.b, 0, 255)
   // Draw Mr. Furious as a coloured circle
   push();
   noStroke();
-  fill(mrFurious.fill.r, mrFurious.fill.g, mrFurious.fill.b);
+  fill(mrFurious.fill.r, g, b);
   ellipse(mrFurious.x, mrFurious.y, mrFurious.size);
   pop();
 }
