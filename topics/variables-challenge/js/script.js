@@ -29,6 +29,15 @@ let sky = {
     b: 200
   }
 };
+let birdy= {
+  x:-25,
+  y:50,
+  size: 50
+
+
+
+}
+     
 /**
  * Create the canvas
  */
@@ -50,12 +59,22 @@ function draw() {
 
   let g = constrain(mrFurious.fill.g, 0, 255)
   let b = constrain(mrFurious.fill.b, 0, 255)
+
   // Draw Mr. Furious as a coloured circle
   push();
   noStroke();
   fill(mrFurious.fill.r, g, b);
   ellipse(mrFurious.x, mrFurious.y, mrFurious.size);
   pop();
+
+  push();
+  noStroke();
+  fill("#aeb31aff");
+  ellipse(birdy.x, birdy.y, birdy.size);
+  pop();
+
+  birdy.x+=5 
+
 }
 
 
