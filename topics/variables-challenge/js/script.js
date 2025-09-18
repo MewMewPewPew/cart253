@@ -20,7 +20,15 @@ let mrFurious = {
     b: 225
   }
 };
+let sky = {
 
+  // Colour
+  fill: {
+    r: 160,
+    g: 180,
+    b: 200
+  }
+};
 /**
  * Create the canvas
  */
@@ -32,7 +40,10 @@ function setup() {
  * Draw (and update) Mr. Furious
  */
 function draw() {
-  background(160, 180, 200);
+  background(sky.fill.r, sky.fill.g, sky.fill.b);
+  sky.fill.r -= 2
+  sky.fill.g -= 2
+  sky.fill.b -= 2
 
   mrFurious.fill.g -= 2
   mrFurious.fill.b -= 2
@@ -46,3 +57,22 @@ function draw() {
   ellipse(mrFurious.x, mrFurious.y, mrFurious.size);
   pop();
 }
+
+
+// F(x) = x^2 
+// F(2) = 2^2 = 4
+function F(x) {
+  return x^2
+}
+
+F(2) // 4
+
+// function is a name, that takes parameters, those parameters
+// are used to compute a result or do an effect on the rest of 
+// the world
+
+// background is a function
+// background takes parameters
+//   - r: the red component of color
+//.  - g: the green...
+//.  - b: the blue ...
