@@ -7,6 +7,7 @@
 
 "use strict";
 
+let frameNumber = 0
 // Our friend Mr. Furious
 let mrFurious = {
   // Position and size
@@ -29,15 +30,15 @@ let sky = {
     b: 200
   }
 };
-let birdy= {
-  x:-25,
-  y:50,
+let birdy = {
+  x: -25,
+  y: 50,
   size: 50
 
 
 
 }
-     
+
 /**
  * Create the canvas
  */
@@ -49,6 +50,8 @@ function setup() {
  * Draw (and update) Mr. Furious
  */
 function draw() {
+  frameNumber += 1
+
   background(sky.fill.r, sky.fill.g, sky.fill.b);
   sky.fill.r -= 2
   sky.fill.g -= 2
@@ -73,25 +76,11 @@ function draw() {
   ellipse(birdy.x, birdy.y, birdy.size);
   pop();
 
-  birdy.x+=5 
-
+  const speed = frameNumber / 4 % 60
+  birdy.x += speed
+  if (frameNumber % 2 === 0) {
+    birdy.y -= 5
+  } else {
+    birdy.y += 5
+  }
 }
-
-
-// F(x) = x^2 
-// F(2) = 2^2 = 4
-function F(x) {
-  return x^2
-}
-
-F(2) // 4
-
-// function is a name, that takes parameters, those parameters
-// are used to compute a result or do an effect on the rest of 
-// the world
-
-// background is a function
-// background takes parameters
-//   - r: the red component of color
-//.  - g: the green...
-//.  - b: the blue ...
