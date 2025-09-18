@@ -70,14 +70,30 @@ function draw() {
   ellipse(mrFurious.x, mrFurious.y, mrFurious.size);
   pop();
 
+  // Math.min: We want the max value to be no larger
+  // than 20; otherwise the circle just leaves the screen
+  const rage = Math.min(frameNumber / 4, 20)
+  // If we are on every fourth frame, we want
+  // to adjust the position of mrFurius
+  if (frameNumber % 4 === 0) {
+    // Every second time we adjust the position, we adjust to
+    // the left
+    if (frameNumber % 8 === 0) {
+      mrFurious.x += rage
+    } else {
+      mrFurious.x -= rage
+    }
+  }
+
   push();
   noStroke();
   fill("#aeb31aff");
   ellipse(birdy.x, birdy.y, birdy.size);
   pop();
-
+  //increased the speed over time, and reset every 2 seconds
   const speed = frameNumber / 4 % 60
   birdy.x += speed
+  //Every odd frame moves down 5 and even frame moves up 5 
   if (frameNumber % 2 === 0) {
     birdy.y -= 5
   } else {
