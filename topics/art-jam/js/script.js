@@ -7,7 +7,56 @@
  */
 
 "use strict";
+let lines = {
+    x1: 0,
+    x2: 20,
+    y1: 999,
+    y2: 20,
+}
+let face = {
+    x: 500,
+    y: 500, 
+    size: 450,
+    height: 500,
+    fill : '#c2ffbcff'
+}
+let ear1 = {
+    x: 285,
+    y: 490, 
+    size: 280,
+    fill : '#c2ffbcff'
+}
+let ear2 = {
+    x: 715,
+    y: 490, 
+    size: 280,
+    fill : '#c2ffbcff'
+}
+let neck ={
+    x: 425,
+    y: 600, 
+    w: 150,
+    h: 300,
+    fill : '#050101ff',
+}
+let body = {
+    x: 500,
+    y: 1100,
+    w: 500,
+    h: 700,
+    fill : '#050101ff',
 
+}
+let mouth = {
+
+}
+let mousy = {
+    x: mouseX,
+    y: mouseY,
+    w: 100,
+    h: 100,
+    fill : '#050101ff',
+}
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
@@ -28,6 +77,7 @@ function draw() {
     pop();
     
     backgroundElements();
+    corpse ();
     simpleFace();
     mouseElement();
 
@@ -38,8 +88,8 @@ function draw() {
 function backgroundElements(){
 //stylistic choice, I like lines in the background (wondering if there is an easier way with a const to do this)
     push();
-    line(0, 20, 999, 20)
-    line(0, 40, 999, 40)
+    line(lines.x1, lines.x2, lines.y1, lines.y2) 
+    
     line(0, 60, 999, 60)
     line(0, 80, 999, 80)
     line(0, 100, 999, 100)
@@ -55,20 +105,44 @@ function backgroundElements(){
 /**
  * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
 */
-function simpleFace (){
+function corpse (){
+//neck
     push();
     noStroke();
-    fill('#c2ffbcff')
-    ellipse(width / 2, height / 2, 400, 500)
+    fill(neck.fill);
+    rect( neck.x, neck.y, neck.w, neck.h);
+    pop();
+//body
+    push();
+    noStroke();
+    fill(body.fill);
+    ellipse(body.x, body.y, body.w, body.h);
+    pop();
+}
+function simpleFace (){
+// face and ears
+    push();
+    noStroke();
+    fill(face.fill);
+    ellipse(face.x, face.y, face.size, face.height)
+    ellipse(ear1.x, ear1.y, ear1.size)
+    ellipse(ear2.x, ear2.y, ear2.size)
+    pop();
+//mouth :3
+    push();
+    textSize(100);
+    text(3, 500,600 );
+   
+    rotate(45);
     pop();
 }
 
 function mouseElement (){
-   
+//mouse thing
     push();
-    fill('#000000ff')
+    fill(mousy.fill)
     noStroke();
-    ellipse(mouseX, mouseY, 40, 500)
+    ellipse(mousy.x, mousy.y, mousy.w, mousy.h)
     pop();
     
 }
