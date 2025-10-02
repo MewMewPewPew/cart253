@@ -32,6 +32,24 @@ let ear2 = {
     size: 280,
     fill : '#c2ffbcff'
 }
+let catear1 = {
+    x1: 200,
+    y1: 400,
+    x2: 300,
+    y2: 250,
+    x3: 400,
+    y3: 400,
+    fill: '#c2ffbcff',
+}
+let catear2 = {
+    x1: 320,
+    y1: 600,
+    x2: 610,
+    y2: 334,
+    x3: 650,
+    y3: 600,
+    fill: '#c2ffbcff',
+}
 
 let neck ={
     x: 425,
@@ -98,7 +116,11 @@ let mousy = {
     h: 100,
     fill: '#050101ff',
 }
-let graphics =undefined;
+
+
+
+let graphics ={undefined}
+
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
@@ -107,6 +129,7 @@ function setup() {
    
     background('#ff94cfff');
     graphics =createGraphics(1000,1000,);
+    
  
 }
 
@@ -121,12 +144,12 @@ function draw() {
     colorMode(HSB);
     backgroundElements();
     corpse ();
-    simpleFace();
+    Face();
     eyes();
-    //mouseElement();
+    
     
     push();
-    // the star
+// the star
     translate(mouseX, mouseY);
     rotate(frameCount / -100.0);
     star(0, 0, 10, 25, 5);
@@ -173,7 +196,7 @@ function corpse (){
     ellipse(body.x, body.y, body.w, body.h);
     pop();
 }
-function simpleFace (){
+function Face (){
 // face and ears
     push();
     noStroke();
@@ -182,15 +205,26 @@ function simpleFace (){
     ellipse(ear1.x, ear1.y, ear1.size)
     ellipse(ear2.x, ear2.y, ear2.size)
     pop();
+//cat ear1
+    push();
+    rotate(PI / -20);
+    noStroke();
+    fill(catear1.fill);
+    triangle(catear1.x1, catear1.y1, catear1.x2, catear1.y2, catear1.x3, catear1.y3);
+    pop();
+//cat ear2
+    push();
+    rotate(PI / -15);
+    noStroke();
+    fill(catear1.fill);
+    triangle(catear2.x1, catear2.y1, catear2.x2, catear2.y2, catear2.x3, catear2.y3);
+    pop();
 //mouth :3
     push();
-    
     rotate(PI / 2 );
     textSize(100);
     textFont('Verdana');
     text(mouth.str, mouth.x, mouth.y);
-   
-    
     pop();
 }
 function eyes(){
