@@ -98,12 +98,15 @@ let mousy = {
     h: 100,
     fill: '#050101ff',
 }
+let graphics =undefined;
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
 function setup() {
     createCanvas(1000, 1000,);
-    loop();
+   
+    background('#ff94cfff');
+    graphics =createGraphics(1000,1000,);
  
 }
 
@@ -112,28 +115,31 @@ function setup() {
  * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
 */
 function draw() {
-    background('#ff94cfff')
-    frameRate(13);
-   
+    //frameRate(13);
+    strokeWeight(5);
+    graphics.strokeWeight(3);
+    colorMode(HSB);
     backgroundElements();
     corpse ();
     simpleFace();
     eyes();
-    mouseElement();
-
+    //mouseElement();
+    
     push();
-// the star
+    // the star
     translate(mouseX, mouseY);
     rotate(frameCount / -100.0);
     star(0, 0, 10, 25, 5);
     
     pop();
+    graphicLiner();
     
 }
 /**
  * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
 */
 function backgroundElements(){
+    background('#ff94cfff' )
 //stylistic choice, I like lines in the background (wondering if there is an easier way with a const to do this)
     push();
     line(lines.x1, lines.x2, lines.y1, lines.y2) 
@@ -211,15 +217,18 @@ function eyes(){
 }
 function mouseElement(){
 //mouse thing
-    //push();
-    //fill(mousy.fill)
-    //noStroke();
+    push();
+    fill(mousy.fill)
+    noStroke();
     
    
- //ellipse(mouseX, mouseY, mousy.w, mousy.h);
-    //pop();
+ ellipse(mouseX, mouseY, mousy.w, mousy.h);
+    pop();
 }
-function star(x, y, radius1, radius2, npoints) {
+
+function star(x, y, radius1, radius2, npoints) { 
+   
+    
   let angle = TWO_PI / npoints;
   let halfAngle = angle / 2.0;
   beginShape();
@@ -230,8 +239,19 @@ function star(x, y, radius1, radius2, npoints) {
     sx = x + cos(a + halfAngle) * radius1;
     sy = y + sin(a + halfAngle) * radius1;
     vertex(sx, sy);
-    
     fill ('red'); 
+    
   }
   endShape(CLOSE);
+  
+} 
+
+function graphicLiner(){
+    if (mouseIsPressed === true) {
+    image (graphics, 0, 0);
+    graphics.line(pmouseX,pmouseY, mouseX, mouseY);
+}
+    else {
+    image (graphics, 0, 0);
+}
 }
