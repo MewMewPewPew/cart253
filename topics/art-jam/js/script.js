@@ -51,8 +51,8 @@ let body = {
 
 let mouth = {
     str: 3,
-    x: 500,
-    y: 600, 
+    x: 550,
+    y: -480, 
 }
 
 let eye1 = {
@@ -179,7 +179,7 @@ function simpleFace (){
 //mouth :3
     push();
     
-    rotate(PI / 6 );
+    rotate(PI / 2 );
     textSize(100);
     text(mouth.str, mouth.x, mouth.y);
    
