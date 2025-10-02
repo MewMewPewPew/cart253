@@ -114,14 +114,15 @@ function setup() {
 function draw() {
     background('#ff94cfff')
     frameRate(13);
-// the star
-    
+   
     backgroundElements();
     corpse ();
     simpleFace();
     eyes();
     mouseElement();
-push();
+
+    push();
+// the star
     translate(width * 0.8, height * 0.5);
     rotate(frameCount / -100.0);
     star(0, 0, 30, 70, 5);
@@ -177,10 +178,12 @@ function simpleFace (){
     pop();
 //mouth :3
     push();
+    
+    rotate(PI / 6 );
     textSize(100);
     text(mouth.str, mouth.x, mouth.y);
    
-    rotate(45);
+    
     pop();
 }
 function eyes(){
