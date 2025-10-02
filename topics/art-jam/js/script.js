@@ -32,6 +32,7 @@ let ear2 = {
     size: 280,
     fill : '#c2ffbcff'
 }
+
 let neck ={
     x: 425,
     y: 600, 
@@ -47,21 +48,62 @@ let body = {
     fill : '#050101ff',
 
 }
-let mouth = {
 
+let mouth = {
+    str: 3,
+    x: 500,
+    y: 600, 
 }
-let mousy = {
-    x: mouseX,
-    y: mouseY,
+
+let eye1 = {
+    x: 390,
+    y: 490,
+    w: 60,
+    fill:  '#050101ff',   
+}
+let eye2 = {
+    x: 610,
+    y: 490,
+    w: 60,
+}
+let eye3 = {
+    x: 400,
+    y: 493,
+    w: 90,
+    h: 70,
+}
+let eye4 = {
+    x: 620,
+    y: 493,
+    w: 90,
+    h: 70,
+}
+let eyeRect1 = {
+    x: 350,
+    y: 490, 
     w: 100,
     h: 100,
-    fill : '#050101ff',
+    fill : '#c2ffbcff',
+}
+let eyeRect2 = {
+    x: 570,
+    y: 490, 
+    w: 200,
+    h: 100,
+    fill : '#c2ffbcff',
+}
+
+let mousy = {
+    w: 100,
+    h: 100,
+    fill: '#050101ff',
 }
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
 function setup() {
     createCanvas(1000, 1000,);
+    loop();
  
 }
 
@@ -71,16 +113,21 @@ function setup() {
 */
 function draw() {
     background('#ff94cfff')
-   
-    push();
-    
-    pop();
+    frameRate(13);
+// the star
     
     backgroundElements();
     corpse ();
     simpleFace();
+    eyes();
     mouseElement();
-
+push();
+    translate(width * 0.8, height * 0.5);
+    rotate(frameCount / -100.0);
+    star(0, 0, 30, 70, 5);
+    
+    pop();
+    
 }
 /**
  * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
@@ -131,18 +178,54 @@ function simpleFace (){
 //mouth :3
     push();
     textSize(100);
-    text(3, 500,600 );
+    text(mouth.str, mouth.x, mouth.y);
    
     rotate(45);
     pop();
 }
+function eyes(){
+    push();
+    noFill();
+    ellipse (eye3.x, eye3.y, eye3.w, eye3.h);
+    ellipse (eye4.x, eye4.y, eye4.w, eye4.h);
+    pop();
 
-function mouseElement (){
+    push();
+    noStroke();
+    fill (eyeRect1.fill);
+    rect(eyeRect1.x, eyeRect1.y, eyeRect1.w, eyeRect1.h)
+    rect(eyeRect2.x, eyeRect2.y, eyeRect2.w, eyeRect2.h)
+    pop();
+
+    push();
+    noStroke();
+    fill(eye1.fill);
+    ellipse(eye1.x, eye1.y, eye1.w);
+    ellipse(eye2.x, eye2.y, eye2.w);
+    pop();
+
+}
+function mouseElement(){
 //mouse thing
     push();
     fill(mousy.fill)
     noStroke();
-    ellipse(mousy.x, mousy.y, mousy.w, mousy.h)
-    pop();
     
+   
+ ellipse(mouseX, mouseY, mousy.w, mousy.h);
+    pop();
+}
+function star(x, y, radius1, radius2, npoints) {
+  let angle = TWO_PI / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
 }
