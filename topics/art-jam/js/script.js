@@ -27,7 +27,7 @@ let ear1 = {
     fill : '#c2ffbcff'
 }
 let ear2 = {
-    x: 715,
+    x: 710,
     y: 490, 
     size: 280,
     fill : '#c2ffbcff'
@@ -52,7 +52,7 @@ let body = {
 let mouth = {
     str: 3,
     x: 550,
-    y: -480, 
+    y: -490, 
 }
 
 let eye1 = {
@@ -123,9 +123,9 @@ function draw() {
 
     push();
 // the star
-    translate(width * 0.8, height * 0.5);
+    translate(mouseX, mouseY);
     rotate(frameCount / -100.0);
-    star(0, 0, 30, 70, 5);
+    star(0, 0, 10, 25, 5);
     
     pop();
     
@@ -181,6 +181,7 @@ function simpleFace (){
     
     rotate(PI / 2 );
     textSize(100);
+    textFont('Verdana');
     text(mouth.str, mouth.x, mouth.y);
    
     
@@ -210,13 +211,13 @@ function eyes(){
 }
 function mouseElement(){
 //mouse thing
-    push();
-    fill(mousy.fill)
-    noStroke();
+    //push();
+    //fill(mousy.fill)
+    //noStroke();
     
    
- ellipse(mouseX, mouseY, mousy.w, mousy.h);
-    pop();
+ //ellipse(mouseX, mouseY, mousy.w, mousy.h);
+    //pop();
 }
 function star(x, y, radius1, radius2, npoints) {
   let angle = TWO_PI / npoints;
@@ -229,6 +230,8 @@ function star(x, y, radius1, radius2, npoints) {
     sx = x + cos(a + halfAngle) * radius1;
     sy = y + sin(a + halfAngle) * radius1;
     vertex(sx, sy);
+    
+    fill ('red'); 
   }
   endShape(CLOSE);
 }
