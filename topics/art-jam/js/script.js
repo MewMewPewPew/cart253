@@ -1,12 +1,13 @@
 /**
- * Autoportrait? Art-Jam
+ * Mini me 
  * Ash 
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * For an Art-jam, I decided to represent myself in a comic style with a face a bit like 
+ * this ( ͡° ͜ʖ ͡°) and :3 because I use them a lot (especially the :3), cat-like features because I love cats. I also thought that something that kinda reprents me is my love for eyeliner and my creative use of it when I can. - so I made the user able to draw me one or just be creative. 
  */
 
 "use strict";
+//background?
 let lines = {
     x1: 0,
     x2: 20,
@@ -84,6 +85,7 @@ let eye2 = {
     y: 490,
     w: 60,
 }
+// all below is for the eyelid
 let eye3 = {
     x: 400,
     y: 493,
@@ -110,7 +112,7 @@ let eyeRect2 = {
     h: 100,
     fill : '#c2ffbcff',
 }
-
+// until here
 let mousy = {
     w: 100,
     h: 100,
@@ -122,7 +124,7 @@ let mousy = {
 let graphics ={undefined}
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * normal Canvas, but added createGraphics to be able to paint on all elements of the canvas
 */
 function setup() {
     createCanvas(1000, 1000,);
@@ -135,32 +137,30 @@ function setup() {
 
 
 /**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
+ * lil Ash is there chilling
 */
 function draw() {
     //frameRate(13);
     strokeWeight(5);
-    graphics.strokeWeight(3);
-    colorMode(HSB);
+    
     backgroundElements();
     corpse ();
     Face();
     eyes();
     
-    
     push();
-// the star
+    // the star
     translate(mouseX, mouseY);
     rotate(frameCount / -100.0);
     star(0, 0, 10, 25, 5);
-    
     pop();
+
+    //weight of the drawing graphic liner
+    graphics.strokeWeight(3);
     graphicLiner();
     
 }
-/**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
-*/
+
 function backgroundElements(){
     background('#ff94cfff' )
 //stylistic choice, I like lines in the background (wondering if there is an easier way with a const to do this)
@@ -179,9 +179,7 @@ function backgroundElements(){
     line(0, 240, 999, 240)
     pop();
 }
-/**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
-*/
+
 function corpse (){
 //neck
     push();
@@ -214,7 +212,7 @@ function Face (){
     pop();
 //cat ear2
     push();
-    rotate(PI / -15);
+    rotate(PI / -15); // i realized later I didn't need to do a rotation... oh well
     noStroke();
     fill(catear1.fill);
     triangle(catear2.x1, catear2.y1, catear2.x2, catear2.y2, catear2.x3, catear2.y3);
@@ -228,19 +226,20 @@ function Face (){
     pop();
 }
 function eyes(){
+//eyelid
     push();
     noFill();
     ellipse (eye3.x, eye3.y, eye3.w, eye3.h);
     ellipse (eye4.x, eye4.y, eye4.w, eye4.h);
     pop();
-
+//rectangle to make it only the top eyelid
     push();
     noStroke();
     fill (eyeRect1.fill);
     rect(eyeRect1.x, eyeRect1.y, eyeRect1.w, eyeRect1.h)
     rect(eyeRect2.x, eyeRect2.y, eyeRect2.w, eyeRect2.h)
     pop();
-
+//iris
     push();
     noStroke();
     fill(eye1.fill);
@@ -250,7 +249,7 @@ function eyes(){
 
 }
 function mouseElement(){
-//mouse thing
+//mouse thing - is not in use ! (star)
     push();
     fill(mousy.fill)
     noStroke();
@@ -259,7 +258,7 @@ function mouseElement(){
  ellipse(mouseX, mouseY, mousy.w, mousy.h);
     pop();
 }
-
+//make a STAR YAY !
 function star(x, y, radius1, radius2, npoints) { 
    
     
@@ -279,7 +278,7 @@ function star(x, y, radius1, radius2, npoints) {
   endShape(CLOSE);
   
 } 
-
+//to make the drawing intuitive
 function graphicLiner(){
     if (mouseIsPressed === true) {
     image (graphics, 0, 0);
