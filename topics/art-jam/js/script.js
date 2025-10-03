@@ -3,7 +3,8 @@
  * Ash 
  * 
  * For an Art-jam, I decided to represent myself in a comic style with a face a bit like 
- * this ( ͡° ͜ʖ ͡°) and :3 because I use them a lot (especially the :3), cat-like features because I love cats. I also thought that something that kinda reprents me is my love for eyeliner and my creative use of it when I can. - so I made the user able to draw me one or just be creative. 
+ * this ( ͡° ͜ʖ ͡°) and :3 because I use them a lot (especially the :3), cat-like features because I love cats. 
+ * I also thought that something that kinda reprents me is my love for eyeliner and my creative use of it when I can. - so I made the user able to draw me one or just be creative. 
  */
 
 "use strict";
@@ -139,7 +140,6 @@ let eyeRect2 = {
     fill : '#ffffffff',
 }
 // until here
-
 let mousy = {
 //is not in use (for now?)
     w: 100,
