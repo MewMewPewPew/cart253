@@ -14,6 +14,12 @@ let lines = {
     y1: 999,
     y2: 20,
 }
+//background star position
+let starP = {
+    x: 500,
+    y: 600,
+    fill: '#c2ffbcff',
+}
 let face = {
     x: 500,
     y: 500, 
@@ -42,6 +48,15 @@ let catear1 = {
     y3: 400,
     fill: '#ffffffff',
 }
+let catear1Inner = {
+    x1: 250,
+    y1: 380,
+    x2: 300,
+    y2: 300,
+    x3: 342,
+    y3: 370,
+    fill: '#ff94cfff',
+}
 let catear2 = {
     x1: 320,
     y1: 600,
@@ -51,6 +66,16 @@ let catear2 = {
     y3: 600,
     fill: '#ffffffff',
 }
+let catear2Inner = {
+    x1: 525,
+    y1: 450,
+    x2: 595,
+    y2: 383,
+    x3: 605,
+    y3: 480,
+    fill: '#ff94cfff',
+}
+
 
 let neck ={
     x: 425,
@@ -158,14 +183,14 @@ let piercing2Left = {
 
 }
 let piercing3Left = {
-    x: 810, 
+    x: 805, 
     y: 555,
     size: 15,
     fill: '#000000ff',
 
 }
 let piercing1SnakesBites = {
-    x: 550, 
+    x: 548, 
     y: 600,
     size: 1,
     h:  25,
@@ -180,25 +205,61 @@ let piercing2SnakesBites = {
     fill: '#000000ff',
 
 }
-//background star position
-let starP = {
-    x: 500,
-    y: 600,
-    fill: '#c2ffbcff',
+//eyeliner to draw
+let eyeLinerObject1 = {
+    x: 700,
+    y: 100,
+    w: 200,
+    h: 20, 
+    fill: '#000000ff',
+}
+let eyeLinerObject2 = {
+    x1: 700,
+    y1: 120,
+    x2: 660,
+    y2: 109,
+    x3: 700,
+    y3: 100, 
+    fill: '#000000ff',
+}
+let eyeLinerText ={
+    x: 720,
+    y: 114,
+    str: 'eyeliner?',
+    fillText:'#ffd000ff',
 }
 
-//speach bubble s
-const speach ={
-    str: 'hello!!',
-    x: 550,
-    y: 790,
+//speach bubble
+const speachAlt ={
+    x: 540,
+    y: 770,
+    x2: 580,
+    y2: 790,
     fill: '#ffd000ff',
-    delay: 10 * 1000,
+    delay:  1000,
+    str: 'Hello!! \n I have no arm but still seak new\n makeup and hair if you would be \nso kind to draw me some ♡ :3 ',
 }
-
+// tried to make the speach change with time ...
+//const speach ={
+   // x: 550,
+   // y: 840,
+   // fill: '#ffd000ff',
+   // delay:  1000,
+   // str: ' ',
+   // strs:{
+   //     hi:'hello!!',
+   //     liner:'I have no arm but seak makeup and hair if you would be so kind to draw me some :3', 
+   // } 
+//}
+let speachBox ={
+    x:525,
+    y:760,
+    w:355,
+    h: 115,
+}
 
 let graphics ={undefined}
-
+let button ={undefined}
 
 /**
  * normal Canvas, but added createGraphics to be able to paint on all elements of the canvas
@@ -207,7 +268,13 @@ function setup() {
     createCanvas(1000, 1000,);
    
     background('#ff94cfff');
+// Tried to add a button to make the "eyeliner"/drawing = true ... didn't figured it out yet
+//  button = createButton('Eyeliner ?', 'button_');
+//   button.position(820, 254);
+//   button.mousePressed(button_);
+    
     graphics =createGraphics(1000,1000,);
+
     
  
 }
@@ -233,9 +300,14 @@ function draw() {
     pop();
 
     corpse ();
+    catEars();
     Face();
     eyes();
     piercings();
+    //eyeLinerObject();
+    
+
+
 
 // the star
     push();
@@ -246,7 +318,7 @@ function draw() {
 
 //weight of the drawing graphic liner
     graphics.strokeWeight(5);
-    graphicLiner();
+    graphicLiner ();
     talking();
    
 }
@@ -298,8 +370,25 @@ function corpse (){
     ellipse(body.x, body.y, body.w, body.h);
     pop();
 }
+function catEars(){
+    //cat ear2
+    push();
+    rotate(PI / -15); 
+    noStroke();
+    fill(catear1.fill);
+    triangle(catear2.x1, catear2.y1, catear2.x2, catear2.y2, catear2.x3, catear2.y3);
+    pop();
+    //inner Cat Ear
+    push ();
+    rotate(PI / -15);
+    noStroke();
+    fill(catear2Inner.fill);
+    triangle(catear2Inner.x1, catear2Inner.y1, catear2Inner.x2, catear2Inner.y2, catear2Inner.x3, catear2Inner.y3);
+    pop ();
+    
+}
 function Face (){
-// face and ears
+    // face and ears
     push();
     noStroke();
     fill(face.fill);
@@ -307,21 +396,7 @@ function Face (){
     ellipse(ear1.x, ear1.y, ear1.size)
     ellipse(ear2.x, ear2.y, ear2.size)
     pop();
-//cat ear1
-    push();
-    rotate(PI / -20);
-    noStroke();
-    fill(catear1.fill);
-    triangle(catear1.x1, catear1.y1, catear1.x2, catear1.y2, catear1.x3, catear1.y3);
-    pop();
-//cat ear2
-    push();
-    rotate(PI / -15); // i realized later I didn't need to do a rotation... oh well
-    noStroke();
-    fill(catear1.fill);
-    triangle(catear2.x1, catear2.y1, catear2.x2, catear2.y2, catear2.x3, catear2.y3);
-    pop();
-//mouth :3
+    //mouth :3
     push();
     rotate(PI / 2 );
     textSize(100);
@@ -329,9 +404,23 @@ function Face (){
     fill(mouth.fill)
     text(mouth.str, mouth.x, mouth.y);
     pop();
+    //cat ear1
+        push();
+        rotate(PI / -20);
+        noStroke();
+       fill(catear1.fill);
+      triangle(catear1.x1, catear1.y1, catear1.x2, catear1.y2, catear1.x3, catear1.y3);
+        pop();
+       //inner Cat Ear
+        push ();
+       rotate(PI / -20);
+       noStroke();
+        fill(catear1Inner.fill);
+        triangle(catear1Inner.x1, catear1Inner.y1, catear1Inner.x2, catear1Inner.y2, catear1Inner.x3, catear1Inner.y3);
+        pop ();
 }
 function eyes(){
-//eyelid
+    //eyelid
     push();
     noFill();
     ellipse (eye3.x, eye3.y, eye3.w, eye3.h);
@@ -392,6 +481,29 @@ function piercings(){
     ellipse(piercing2SnakesBites.x, piercing2SnakesBites.y, piercing2SnakesBites.size, piercing2SnakesBites.h)
     pop();
 }
+//Tried to add a button to make the "eyeliner"/drawing = true ... didn't figured it out yet
+//function eyeLinerObject(){
+    //rectangle of eyeliner
+//    push();
+//    strokeWeight(3);
+//    stroke('#c2ffbcff');
+//    fill(eyeLinerObject1.fill);
+//    rect(eyeLinerObject1.x, eyeLinerObject1.y, eyeLinerObject1.w, eyeLinerObject1.h,)
+//    pop();
+    //rectangle of eyeliner
+//    push();
+//    strokeWeight(3);
+//    stroke('#c2ffbcff');
+//    fill(eyeLinerObject1.fill);
+//   triangle(eyeLinerObject2.x1, eyeLinerObject2.y1, eyeLinerObject2.x2, eyeLinerObject2.y2, eyeLinerObject2.x3, eyeLinerObject2.y3)   
+//    pop();
+    //text
+//       push();
+//        noStroke();
+//        fill(eyeLinerText.fillText);
+//        text(eyeLinerText.str, eyeLinerText.x, eyeLinerText.y)
+//        pop();
+//}
 function mouseElement(){
 //mouse thing - is not in use ! (star)
     push();
@@ -451,15 +563,39 @@ function graphicLiner(){
     image (graphics, 0, 0);
 }
 }
+// Tried to add a button to make the "eyeliner"/drawing = true ... didn't figured it out yet
+//function button_(){
+//    if (mouseIsPressed) {
+        //graphicLiner = true
+//    }
+//    else {
+        //graphicLiner = false
+//    }
+//} 
+
 function talking(){ 
+    
+    push();
+    strokeWeight(3);
+    stroke('#c2ffbcff');
+    fill(eyeLinerObject1.fill);
+    rect(speachBox.x, speachBox.y, speachBox.w, speachBox.h,)
+    pop();
     push();
     //textOutput(LABEL);
-
-    textSize(100);
+    textSize(20);
     textFont('Verdana');
-    fill(speach.fill);
+    fill(speachAlt.fill);
     textWrap(WORD);
-    text(speach.str, speach.x, speach.y);
-    
+    text(speachAlt.str, speachAlt.x, speachAlt.y, speachAlt.x2, speachAlt.y2);
     pop();
 }
+// tried to make the speach change with time ...
+//function changeSpeach(){
+    //if (speach.str === speach.str){
+        //speach.str = speach.strs.hi;
+    //}
+   // else if (speach.str === speach.strs.hi){
+       // speach.strs.hi = speach.strs.liner;
+    //}
+//}
