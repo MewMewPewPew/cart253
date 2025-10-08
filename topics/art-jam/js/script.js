@@ -229,30 +229,25 @@ let eyeLinerText ={
     fillText:'#ffd000ff',
 }
 
-//speach bubble
-const speachAlt ={
+//speech bubble
+const speechAlt ={
     x: 540,
     y: 770,
     x2: 580,
     y2: 790,
     fill: '#ffd000ff',
-    delay:  1000,
-    str: 'Hello!! \n I have no arm but still seak new\n makeup and hair if you would be \nso kind to draw me some ♡ :3 ',
+   //make the guy (me) say two things over time
+    strs:{
+        hey: 'Hello!!',
+        text: 'I have no arm but still seak new\n makeup and hair or anything cool \n if you would be so kind to draw it \n   on me ♡ :3 ',
+        
+    } ,
+    delay:  4000,
+    
 }
-// tried to make the speach change with time ...
-//const speach ={
-   // x: 550,
-   // y: 840,
-   // fill: '#ffd000ff',
-   // delay:  1000,
-   // str: ' ',
-   // strs:{
-   //     hi:'hello!!',
-   //     liner:'I have no arm but seak makeup and hair if you would be so kind to draw me some :3', 
-   // } 
-//}
-let speachBox ={
-    x:525,
+
+let speechBox ={
+    x:530,
     y:760,
     w:355,
     h: 115,
@@ -274,7 +269,8 @@ function setup() {
 //   button.mousePressed(button_);
     
     graphics =createGraphics(1000,1000,);
-
+    //set the Time for the 2 lines of speech
+    setTimeout(changeSpeech, speechAlt.delay);
     
  
 }
@@ -579,23 +575,19 @@ function talking(){
     strokeWeight(3);
     stroke('#c2ffbcff');
     fill(eyeLinerObject1.fill);
-    rect(speachBox.x, speachBox.y, speachBox.w, speachBox.h,)
+    rect(speechBox.x, speechBox.y, speechBox.w, speechBox.h,)
     pop();
     push();
     //textOutput(LABEL);
     textSize(20);
     textFont('Verdana');
-    fill(speachAlt.fill);
+    fill(speechAlt.fill);
     textWrap(WORD);
-    text(speachAlt.str, speachAlt.x, speachAlt.y, speachAlt.x2, speachAlt.y2);
+    text(speechAlt.strs.hey, speechAlt.x, speechAlt.y, speechAlt.x2, speechAlt.y2);
     pop();
 }
-// tried to make the speach change with time ...
-//function changeSpeach(){
-    //if (speach.str === speach.str){
-        //speach.str = speach.strs.hi;
-    //}
-   // else if (speach.str === speach.strs.hi){
-       // speach.strs.hi = speach.strs.liner;
-    //}
-//}
+// make the speech change with time 
+function changeSpeech(){
+    speechAlt.strs.hey = speechAlt.strs.text;
+}
+
