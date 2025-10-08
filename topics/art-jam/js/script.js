@@ -236,6 +236,7 @@ const speechAlt ={
     x2: 580,
     y2: 790,
     fill: '#ffd000ff',
+    size: 100,
    //make the guy (me) say two things over time
     strs:{
         hey: 'Hello!!',
@@ -579,7 +580,7 @@ function talking(){
     pop();
     push();
     //textOutput(LABEL);
-    textSize(20);
+    textSize(speechAlt.size);
     textFont('Verdana');
     fill(speechAlt.fill);
     textWrap(WORD);
@@ -589,5 +590,6 @@ function talking(){
 // make the speech change with time 
 function changeSpeech(){
     speechAlt.strs.hey = speechAlt.strs.text;
+    speechAlt.size = 20;
 }
 
