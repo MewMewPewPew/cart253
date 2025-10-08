@@ -6,7 +6,7 @@ Ash Oest O'Leary
 ## Description
 
 Probably an alternate version of me that exist. 
-I tried to mixed how I look visually, with the basic human features, my piercing and my online face I make :3, as well as some things I love like cats, stars, lined pattern and the ability to put makeup (eyeliner) and change it often.
+I tried to mixed how I look visually, with the basic human features, my piercing and my online face I make :3, as well as some things I love like cats, stars, lined pattern and the ability to put makeup (eyeliner) and to change it often.
 
 I recommend using the pressed mouse to draw anything creative on my mini me.
 
@@ -14,10 +14,11 @@ I recommend using the pressed mouse to draw anything creative on my mini me.
 ## Screenshot(s)
 
 Exemple of what you can do:
+HAVE FUN !!
 
-> ![Image of example1](./assets/images/ex-1.png)
-> ![Image of example2](./assets/images/ex-2.png)
-> ![Image of example3](./assets/images/ex-3.png)
+> ![Image of example1](./assets/images/NEWex-1.png)
+> ![Image of example2](./assets/images/NEWex-2.png)
+> ![Image of example3](./assets/images/NEWex-3.png)
 
 ## Attribution
 

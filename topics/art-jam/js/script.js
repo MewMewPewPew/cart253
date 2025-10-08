@@ -235,7 +235,7 @@ const speechAlt ={
     y: 770,
     x2: 580,
     y2: 790,
-    fill: '#ffd000ff',
+    fill: '#c2ffbcff',
     size: 100,
    //make the guy (me) say two things over time
     strs:{
@@ -246,12 +246,13 @@ const speechAlt ={
     delay:  4000,
     
 }
-
 let speechBox ={
     x:530,
     y:760,
     w:355,
     h: 115,
+    fill: '#000000d5',
+    fillStroke:'#c2ffbcff',
 }
 
 let graphics ={undefined}
@@ -311,6 +312,7 @@ function draw() {
     translate(mouseX, mouseY);
     rotate(frameCount / -100.0);
     star(0, 0, 10, 25, 5);
+    stroke('#000000ff');
     pop();
 
 //weight of the drawing graphic liner
@@ -323,6 +325,7 @@ function draw() {
 function backgroundElements(){
     background('#ff94cfff' )
     push();
+    stroke('#4e2f40ff');
     strokeWeight(20);
     line(0, 0, 999, 0);
     line(0, 40, 999, 40);
@@ -545,7 +548,7 @@ function starBackground(x, y, radius1, radius2, npoints){
         vertex(sx, sy);
         fill (starP.fill); 
     }
-    
+    stroke('#81ac7dff');
 endShape(CLOSE);
 pop();
 }
@@ -571,15 +574,15 @@ function graphicLiner(){
 //} 
 
 function talking(){ 
-    
+// box behind text 
     push();
     strokeWeight(3);
-    stroke('#c2ffbcff');
-    fill(eyeLinerObject1.fill);
+    stroke(speechBox.fillStroke);
+    fill(speechBox.fill);
     rect(speechBox.x, speechBox.y, speechBox.w, speechBox.h,)
     pop();
     push();
-    //textOutput(LABEL);
+// text
     textSize(speechAlt.size);
     textFont('Verdana');
     fill(speechAlt.fill);
