@@ -15,6 +15,18 @@
 
 "use strict";
 
+// event-challenge reference*
+// Current score
+/** s
+ */
+let score = {
+    start: 0,
+    x: 300,
+    y: 300,
+   
+}
+// Is the game over?
+let gameOver = false;
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -61,6 +73,10 @@ function draw() {
     moveTongue();
     drawFrog();
     checkTongueFlyOverlap();
+    // Only increase the score if the game is not over
+    scoreTotal();
+    displayScore();
+    displayGameover();
 }
 
 /**
@@ -180,3 +196,43 @@ function mousePressed() {
         frog.tongue.state = "outbound";
     }
 }
+
+function scoreTotal(){
+    if (!gameOver){
+    // Score increases relatively slowly
+    score += 1;
+  }
+
+}
+
+//event-challenge*
+function lose() {
+  
+      gameOver = true
+
+}
+function displayGameover() {
+  if (gameOver) {
+    push();
+    textSize(48);
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    text("You lose!", width/2, height/3);
+    pop();
+  }
+  
+}
+
+/**
+ * Display the score
+ */
+function displayScore() {
+  push();
+  textSize(48);
+  textStyle(BOLD);
+  fill("#000000");
+  
+  text(floor(scoreTotal), score.x, score.y);
+  pop();
+}
+//

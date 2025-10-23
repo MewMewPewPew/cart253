@@ -9,8 +9,9 @@ The initial idea:
 ## Experience design
 
 The experience:
-
+> *Title and instruction screen (70%opacity) "Frogsquare/Frog2", the frog can eat the play/start button to start the game (make it disappear)
 > The user controls a frog at the bottom of the screen, they can shoot out the frog's tongue and catch a fly which is moving on the screen. If the tongue hits the fly it gets eaten.
+> Ending start again make a restart button (that refresh the page)
 
 ## Breaking it down
 
