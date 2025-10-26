@@ -33,7 +33,11 @@ let ear1 = {
     y: 490, 
     size: 280,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     fill : '#ffffffff'
+=======
+    fill : '#c2ffbcff',
+>>>>>>> Stashed changes
 =======
     fill : '#c2ffbcff',
 >>>>>>> Stashed changes
@@ -43,9 +47,32 @@ let ear2 = {
     y: 490, 
     size: 280,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     fill : '#ffffffff'
 =======
     fill : '#c2ffbcff',
+=======
+    fill : '#c2ffbcff',
+}
+let catear1 = {
+    x1: 200,
+    y1: 300,
+    x2: 100,
+    y2: 50,
+    x3: 450,
+    y3: 300,
+    fill : '#f2bcffff',
+}
+let catear2 = {
+    x1: ,
+    y1: ,
+    x2: ,
+    y2: ,
+    x3: ,
+    y3: ,
+
+
+>>>>>>> Stashed changes
 }
 let catear1 = {
     x1: 200,
@@ -413,6 +440,7 @@ function corpse (){
     pop();
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 function catEars(){
     //cat ear2
     push();
@@ -433,6 +461,8 @@ function catEars(){
 function Face (){
     // face and ears
 =======
+=======
+>>>>>>> Stashed changes
 function faceStuff (){
 // face and ears
 >>>>>>> Stashed changes
@@ -443,6 +473,7 @@ function faceStuff (){
     ellipse(ear1.x, ear1.y, ear1.size)
     ellipse(ear2.x, ear2.y, ear2.size)
     pop();
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     //mouth :3
     push();
@@ -528,6 +559,8 @@ function piercings(){
     fill(piercing2SnakesBites.fill);
     ellipse(piercing2SnakesBites.x, piercing2SnakesBites.y, piercing2SnakesBites.size, piercing2SnakesBites.h)
 =======
+=======
+>>>>>>> Stashed changes
 //catear
     push();
     noStroke();
@@ -548,6 +581,9 @@ function piercings(){
     textSize(100);
     text(3, 500,600 );
    
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     pop();
 }
