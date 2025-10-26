@@ -32,26 +32,25 @@ let ear1 = {
     x: 285,
     y: 490, 
     size: 280,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
+    fill : '#ffffffff',
+
+    fill : '#c2ffbcff',
+
+    fill : '#c2ffbcff',
+
     fill : '#ffffffff'
-=======
-    fill : '#c2ffbcff',
->>>>>>> Stashed changes
-=======
-    fill : '#c2ffbcff',
->>>>>>> Stashed changes
+
 }
 let ear2 = {
     x: 710,
     y: 490, 
     size: 280,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    fill : '#ffffffff'
-=======
+
+    fill : '#ffffffff',
+
     fill : '#c2ffbcff',
-=======
+
     fill : '#c2ffbcff',
 }
 let catear1 = {
@@ -63,46 +62,7 @@ let catear1 = {
     y3: 300,
     fill : '#f2bcffff',
 }
-let catear2 = {
-    x1: ,
-    y1: ,
-    x2: ,
-    y2: ,
-    x3: ,
-    y3: ,
 
-
->>>>>>> Stashed changes
-}
-let catear1 = {
-    x1: 200,
-    y1: 300,
-    x2: 100,
-    y2: 50,
-    x3: 450,
-    y3: 300,
-    fill : '#f2bcffff',
-}
-let catear2 = {
-    x1: ,
-    y1: ,
-    x2: ,
-    y2: ,
-    x3: ,
-    y3: ,
-
-
->>>>>>> Stashed changes
-}
-let catear1 = {
-    x1: 200,
-    y1: 400,
-    x2: 300,
-    y2: 250,
-    x3: 400,
-    y3: 400,
-    fill: '#ffffffff',
-}
 let catear1Inner = {
     x1: 250,
     y1: 380,
@@ -340,23 +300,8 @@ function draw() {
     strokeWeight(5);
     
     backgroundElements();
-<<<<<<< Updated upstream
 // starBackground
  
-=======
-    corpse ();
-    faceStuff();
-    mouseElement();
-
-}
-/**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
-*/
-function backgroundElements(){
-//stylistic choice, I like lines in the background (wondering if there is an easier way with a const to do this)
-    push();
-    line(lines.x1, lines.x2, lines.y1, lines.y2) 
->>>>>>> Stashed changes
     
     push();
     //rotate(frameCount / -100.0);
@@ -439,8 +384,7 @@ function corpse (){
     ellipse(body.x, body.y, body.w, body.h);
     pop();
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 function catEars(){
     //cat ear2
     push();
@@ -460,12 +404,10 @@ function catEars(){
 }
 function Face (){
     // face and ears
-=======
-=======
->>>>>>> Stashed changes
+}
 function faceStuff (){
 // face and ears
->>>>>>> Stashed changes
+
     push();
     noStroke();
     fill(face.fill);
@@ -473,8 +415,7 @@ function faceStuff (){
     ellipse(ear1.x, ear1.y, ear1.size)
     ellipse(ear2.x, ear2.y, ear2.size)
     pop();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
     //mouth :3
     push();
     rotate(PI / 2 );
@@ -558,10 +499,8 @@ function piercings(){
     push();
     fill(piercing2SnakesBites.fill);
     ellipse(piercing2SnakesBites.x, piercing2SnakesBites.y, piercing2SnakesBites.size, piercing2SnakesBites.h)
-=======
-=======
->>>>>>> Stashed changes
-//catear
+
+    //catear
     push();
     noStroke();
     fill(face.fill);
@@ -581,10 +520,7 @@ function piercings(){
     textSize(100);
     text(3, 500,600 );
    
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     pop();
 }
 //Tried to add a button to make the "eyeliner"/drawing = true ... didn't figured it out yet
