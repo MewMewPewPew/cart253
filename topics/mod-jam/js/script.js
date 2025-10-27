@@ -390,7 +390,7 @@ function checkTongueButtonOverlap() {
         //Start the game
         
     }
-    console.log(started);
+   
 }
 
 
@@ -434,12 +434,12 @@ function startGame(){
 //stops flies from flying before the start button is pressed
     if (game === false){
        fly.speed = 0; 
-       fly.y = -30 ;
+       fly.y = -10 ;
     }
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
         fly.speed = 3;
-        fly.y = 200;
+        
         button.y = -1000;
         fairyScreen.light.fill = "#00000000";
         fairyScreen.wings.fill = "#00000000";

@@ -32,37 +32,23 @@ let ear1 = {
     x: 285,
     y: 490, 
     size: 280,
-
-    fill : '#ffffffff',
-
-    fill : '#c2ffbcff',
-
-    fill : '#c2ffbcff',
-
     fill : '#ffffffff'
-
 }
 let ear2 = {
     x: 710,
     y: 490, 
     size: 280,
-
-    fill : '#ffffffff',
-
-    fill : '#c2ffbcff',
-
-    fill : '#c2ffbcff',
+    fill : '#ffffffff'
 }
 let catear1 = {
     x1: 200,
-    y1: 300,
-    x2: 100,
-    y2: 50,
-    x3: 450,
-    y3: 300,
-    fill : '#f2bcffff',
+    y1: 400,
+    x2: 300,
+    y2: 250,
+    x3: 400,
+    y3: 400,
+    fill: '#ffffffff',
 }
-
 let catear1Inner = {
     x1: 250,
     y1: 380,
@@ -384,7 +370,6 @@ function corpse (){
     ellipse(body.x, body.y, body.w, body.h);
     pop();
 }
-
 function catEars(){
     //cat ear2
     push();
@@ -404,10 +389,6 @@ function catEars(){
 }
 function Face (){
     // face and ears
-}
-function faceStuff (){
-// face and ears
-
     push();
     noStroke();
     fill(face.fill);
@@ -415,7 +396,6 @@ function faceStuff (){
     ellipse(ear1.x, ear1.y, ear1.size)
     ellipse(ear2.x, ear2.y, ear2.size)
     pop();
-
     //mouth :3
     push();
     rotate(PI / 2 );
@@ -499,28 +479,6 @@ function piercings(){
     push();
     fill(piercing2SnakesBites.fill);
     ellipse(piercing2SnakesBites.x, piercing2SnakesBites.y, piercing2SnakesBites.size, piercing2SnakesBites.h)
-
-    //catear
-    push();
-    noStroke();
-    fill(face.fill);
-    triangle(catear1.x1, catear1.y1, catear1.x2, catear1.y2, catear1.x3, catear1.y3);
-    triangle(catear2.x1, catear2.y1, catear2.x2, catear2.y2, catear2.x3, catear2.y3);
-    pop();
-    noStroke();
-    fill(catear1.fill);
-    triangle(x1, y1, x2, y2, x3, y3);
-    triangle();
-    push();
-
-    pop();
-//mouth :3
-    push();
-    rotate(45);
-    textSize(100);
-    text(3, 500,600 );
-   
-
     pop();
 }
 //Tried to add a button to make the "eyeliner"/drawing = true ... didn't figured it out yet
@@ -637,4 +595,3 @@ function changeSpeech(){
     speechAlt.strs.hey = speechAlt.strs.text;
     speechAlt.size = 20;
 }
-
