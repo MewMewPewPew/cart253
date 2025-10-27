@@ -20,10 +20,97 @@
 /** s
  */
 let score = 0
- 
+let game = false;
 
 // Is the game over? 
 let gameOver = false;
+
+//Title screen
+let fairyScreen = {
+     body:{
+        x: 320,
+        y: 240,
+        size: 280,
+        fill: "#f096d9ff",
+        
+    },
+    //light "emenating" from the bodu
+    light:{
+        x: 320,
+        y: 240,
+        size: 320,
+        fill: "#ffdcef80",
+        
+    },
+    wings:{
+        fill: "#aaf39cff",
+        stoke: "#ffdcef80",
+        weight: 20,
+        bigL:{
+            x: 170,
+            y: 120,
+            width: 220,
+            height: 90,
+        },
+        bigR:{
+            x: 428,
+            y: 335,
+            width: 220,
+            height: 90,
+        },
+        smallL:{
+            x: 120,
+            y: 370,
+            width: 120,
+            height: 50,
+        },
+        smallR:{
+            x: 507,
+            y: 260,
+            width: 130,
+            height: 50,
+            
+        },
+    },
+   text:{
+    x: 320,
+    y: 240,
+    fill: "#000000ff",
+    str: "Hey! Listen! ",
+    size: 30,
+   }
+}
+
+//Start button
+const button ={
+    fill: "#ffffffff",
+    line: "#ffffff3a", 
+    x: 320,
+    y: 110,
+    w: 115,
+    h: 80,
+    //tr: 10,
+    fills: {
+    unpressed: "#ffffff",
+    pressed: "#dd878eff"
+    
+  },
+    text:{
+        str: "start",
+        fill: "#000000",
+        x: 285,
+        y: 120,
+        size: 35,
+        
+    },
+  soundEffect: undefined
+
+}
+//ad a sound for the start button
+function preload() {
+  button.soundEffect = loadSound("assets/sounds/bark.wav");
+}
+
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -50,13 +137,21 @@ const fly = {
     y: 200, // Will be random
     size: 10,
     speed: 3,
+    fill: "#f096d9ff",
+    line: "#ffdcef80",
+    weight: 4,
     wing1:{
-    x: 0,
-    y: 200, // Will be random
-    size: 10,
+        fill: "#aaf39cff",
+        line: "#ffdcef80",
+        weight: 2,
+        x: -10,
+        y: 200, 
+        size: 5,
     },
     wing2:{
-
+        x: -5,
+        y: 200, 
+        size: 5,
     },
 };
 //add two circle shaking as wings 
@@ -72,17 +167,78 @@ function setup() {
 }
 
 function draw() {
-    background("#87ceeb");
+    angleMode(DEGREES);
+    background("#98d2ebff");
+    fairyTitleScreen();
+    buttonStart();
+    startGame();
     moveFly();
     drawFly();
     moveFrog();
     moveTongue();
     drawFrog();
     checkTongueFlyOverlap();
+    checkTongueButtonOverlap();
     // Only increase the score if the game is not over
    // scoreTotal();
     displayScore();
     displayGameover();
+}
+//titlescreen
+function fairyTitleScreen (){
+//fairy light
+    push();
+    noStroke();
+    fill(fairyScreen.light.fill);
+    ellipse(fairyScreen.light.x, fairyScreen.light.y, fairyScreen.light.size);
+    pop();
+//wings 
+    //big-left
+    push();
+    stroke(fairyScreen.wings.stoke);
+    strokeWeight(fairyScreen.wings.weight);
+    rotate(20);
+    fill(fairyScreen.wings.fill);
+    ellipse(fairyScreen.wings.bigL.x, fairyScreen.wings.bigL.y, fairyScreen.wings.bigL.width, fairyScreen.wings.bigL.height );
+    pop();
+    //small-Left
+    push();
+    stroke(fairyScreen.wings.stoke);
+    strokeWeight(fairyScreen.wings.weight);
+    rotate(-10);
+    fill(fairyScreen.wings.fill);
+    ellipse(fairyScreen.wings.smallL.x, fairyScreen.wings.smallL.y, fairyScreen.wings.smallL.width, fairyScreen.wings.smallL.height );
+    pop();
+    //big-right
+    push();
+    stroke(fairyScreen.wings.stoke);
+    strokeWeight(fairyScreen.wings.weight);
+    rotate(-20);
+    fill(fairyScreen.wings.fill);
+    ellipse(fairyScreen.wings.bigR.x, fairyScreen.wings.bigR.y, fairyScreen.wings.bigR.width, fairyScreen.wings.bigR.height );
+    pop();
+    //small-right
+    push();
+    stroke(fairyScreen.wings.stoke);
+    strokeWeight(fairyScreen.wings.weight);
+    rotate(10);
+    fill(fairyScreen.wings.fill);
+    ellipse(fairyScreen.wings.smallR.x, fairyScreen.wings.smallR.y, fairyScreen.wings.smallR.width, fairyScreen.wings.smallR.height );
+    pop();
+
+//fairy body
+    push();
+    noStroke();
+    fill(fairyScreen.body.fill);
+    ellipse(fairyScreen.body.x, fairyScreen.body.y, fairyScreen.body.size);
+    pop();
+//Instruction text
+    push();
+    noStroke();
+    fill(fairyScreen.text.fill);
+    text(fairyScreen.text.str, fairyScreen.text.x, fairyScreen.text.y);
+    textSize(fairyScreen.text.size);
+    
 }
 
 /**
@@ -96,6 +252,11 @@ function moveFly() {
     if (fly.x > width) {
         resetFly();
     }
+    //relate the fly to its wings
+    fly.wing1.x = fly.x -2;
+    fly.wing1.y = fly.y -5;
+    fly.wing2.x = fly.x -5;
+    fly.wing2.y = fly.y -5;
 }
 /**function MoveWings(){
     //make the wings shake and follow the fly position
@@ -108,18 +269,22 @@ function moveFly() {
  */
 function drawFly() {
     push();
-    noStroke();
-    fill("#000000");
+    stroke(fly.line);
+    strokeWeight(fly.weight);
+    fill(fly.fill);
     ellipse(fly.x, fly.y, fly.size);
     pop();
 //wings of the fly attributes
     push();
-    fill("#2e88c4ff");
+    noStroke(fly.wing1.line);
+    fill(fly.wing1.fill);
     ellipse(fly.wing1.x, fly.wing1.y, fly.wing1.size);
     pop();
     push();
-    fill("#146eaaff");
-    ellipse(fly.wing2.x, fly.wing2y, fly.wing2.size);
+    stroke(fly.wing1.line);
+    strokeWeight(fly.wing1.weight);
+    fill(fly.wing1.fill);
+    ellipse(fly.wing2.x, fly.wing2.y, fly.wing2.size);
     pop();
  
 }
@@ -201,6 +366,7 @@ function checkTongueFlyOverlap() {
     const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     // Check if it's an overlap
     const eaten = (d < frog.tongue.size/2 + fly.size/2);
+    
     if (eaten) {
         // Reset the fly
         resetFly();
@@ -211,6 +377,38 @@ function checkTongueFlyOverlap() {
     }
 }
 
+function checkTongueButtonOverlap() {
+    // Get distance from tongue to fly
+    const d = dist(frog.tongue.x, frog.tongue.y, button.x, button.y);
+    // Check if it's an overlap
+    const started = (d < frog.tongue.size/2 + button.w/2);
+    
+    if (started) {
+        game = true;  
+        // Bring back the tongue
+        frog.tongue.state = "inbound";
+        //Start the game
+        
+    }
+    console.log(started);
+}
+
+
+function buttonStart(){
+    push();
+    stroke(button.line);
+    fill(button.fill);
+    ellipse(button.x, button.y, button.w, button.h)
+    //rect(button.x, button.y, button.w, button.h, button.tr)
+    pop();
+
+    push();
+    noStroke();
+    textSize(button.text.size);
+    fill(button.text.fill);
+    text(button.text.str,button.text.x, button.text.y)
+    pop();
+}
 /**
  * Launch the tongue on click (if it's not launched yet)
  */
@@ -232,6 +430,28 @@ If gameOver
 
 }
  */
+function startGame(){
+//stops flies from flying before the start button is pressed
+    if (game === false){
+       fly.speed = 0; 
+       fly.y = -30 ;
+    }
+//If start button is pressed, the game starts and the title + Instruction disappears
+    else if (game === true){
+        fly.speed = 3;
+        fly.y = 200;
+        button.y = -1000;
+        fairyScreen.light.fill = "#00000000";
+        fairyScreen.wings.fill = "#00000000";
+        fairyScreen.body.fill = "#00000000";
+        fairyScreen.wings.stoke = "#00000000";
+        fairyScreen.text.fill = "#00000000";
+        button.text.fill = "#00000000";
+
+
+    }
+    
+}
 
 //event-challenge*
 function lose() {
