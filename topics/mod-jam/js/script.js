@@ -19,20 +19,17 @@
 // Current score
 /** s
  */
-let score = {
-    start: 0,
-    x: 300,
-    y: 300,
-   
-}
-// Is the game over?
+let score = 0
+ 
+
+// Is the game over? 
 let gameOver = false;
 // Our frog
 const frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
-        y: 520,
+        y: 510,
         size: 150
     },
     // The frog's tongue has a position, size, speed, and state
@@ -52,8 +49,17 @@ const fly = {
     x: 0,
     y: 200, // Will be random
     size: 10,
-    speed: 3
+    speed: 3,
+    wing1:{
+    x: 0,
+    y: 200, // Will be random
+    size: 10,
+    },
+    wing2:{
+
+    },
 };
+//add two circle shaking as wings 
 
 /**
  * Creates the canvas and initializes the fly
@@ -74,7 +80,7 @@ function draw() {
     drawFrog();
     checkTongueFlyOverlap();
     // Only increase the score if the game is not over
-    scoreTotal();
+   // scoreTotal();
     displayScore();
     displayGameover();
 }
@@ -91,7 +97,12 @@ function moveFly() {
         resetFly();
     }
 }
+/**function MoveWings(){
+    //make the wings shake and follow the fly position
+    position([fly.x], [fly.y])
 
+}
+*/
 /**
  * Draws the fly as a black circle
  */
@@ -101,6 +112,16 @@ function drawFly() {
     fill("#000000");
     ellipse(fly.x, fly.y, fly.size);
     pop();
+//wings of the fly attributes
+    push();
+    fill("#2e88c4ff");
+    ellipse(fly.wing1.x, fly.wing1.y, fly.wing1.size);
+    pop();
+    push();
+    fill("#146eaaff");
+    ellipse(fly.wing2.x, fly.wing2y, fly.wing2.size);
+    pop();
+ 
 }
 
 /**
@@ -185,6 +206,8 @@ function checkTongueFlyOverlap() {
         resetFly();
         // Bring back the tongue
         frog.tongue.state = "inbound";
+        
+        score += 1;
     }
 }
 
@@ -196,14 +219,19 @@ function mousePressed() {
         frog.tongue.state = "outbound";
     }
 }
+/** 
+function scoreTotal() {
+    score
 
-function scoreTotal(){
+If gameOver 
     if (!gameOver){
     // Score increases relatively slowly
     score += 1;
   }
 
+
 }
+ */
 
 //event-challenge*
 function lose() {
@@ -228,11 +256,17 @@ function displayGameover() {
  */
 function displayScore() {
   push();
-  textSize(48);
+  textSize(30);
   textStyle(BOLD);
   fill("#000000");
-  
-  text(floor(scoreTotal), score.x, score.y);
+  text(score, frog.body.x - 10, 475);
   pop();
+  /** 
+  if(score < 100){
+    text(score, frog.body.x - 10, 475) =  text(score, 100, 475) 
+    textSize(40);
+    fill("#ff6ff3ff");
+  }
+  */
 }
 //
