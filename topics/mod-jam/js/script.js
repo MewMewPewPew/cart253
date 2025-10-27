@@ -73,22 +73,38 @@ let fairyScreen = {
         },
     },
    text:{
-    x: 320,
+    x: 220,
     y: 240,
-    fill: "#000000ff",
-    str: "Hey! Listen! ",
-    size: 30,
+    fill:"#000000ff",
+    title:{
+        x: 30,
+        y: 60,
+        size: 50,
+        str: "Radioactive Fairy Sacrifice",
+        fill:"#810202ff",
+    } ,
+    strs:{
+        hey: "Hey! Listen! ",
+        instruction:"instruction instruction \ninstruction \ninstruction instruction\ninstruction\ninstruction\ninstruction\ninstruction",
+        size: 40,
+        x: 220,
+        y: 180,
+
+    },
+    delay: 2000,
+    
    }
 }
 
 //Start button
 const button ={
-    fill: "#ffffffff",
-    line: "#ffffff3a", 
+    fill: "#ffffffe5",
+    line: "#ffffff3a",  
     x: 320,
-    y: 110,
+    y: -200,
     w: 115,
     h: 80,
+    outline: 10,
     //tr: 10,
     fills: {
     unpressed: "#ffffff",
@@ -96,13 +112,15 @@ const button ={
     
   },
     text:{
+        
         str: "start",
         fill: "#000000",
         x: 285,
-        y: 120,
+        y: -100,
         size: 35,
         
     },
+    delay: 5000,
   soundEffect: undefined
 
 }
@@ -161,7 +179,8 @@ const fly = {
  */
 function setup() {
     createCanvas(640, 480);
-
+    setTimeout(changeSpeech, fairyScreen.text.delay);
+    setTimeout(startButtonApparition, button.delay);
     // Give the fly its first random position
     resetFly();
 }
@@ -236,11 +255,29 @@ function fairyTitleScreen (){
     push();
     noStroke();
     fill(fairyScreen.text.fill);
-    text(fairyScreen.text.str, fairyScreen.text.x, fairyScreen.text.y);
-    textSize(fairyScreen.text.size);
+    textSize(fairyScreen.text.strs.size);
+    text(fairyScreen.text.strs.hey, fairyScreen.text.x, fairyScreen.text.y);   
+    pop();
+//Title
+    push();
+    noStroke();
+    fill(fairyScreen.text.title.fill);
+    textSize(fairyScreen.text.title.size);
+    text(fairyScreen.text.title.str, fairyScreen.text.title.x, fairyScreen.text.title.y);
+    pop();
     
 }
-
+function changeSpeech(){
+    fairyScreen.text.strs.hey = fairyScreen.text.strs.instruction;
+    fairyScreen.text.strs.size = 20;
+    fairyScreen.text.x = fairyScreen.text.strs.x;
+    fairyScreen.text.y= fairyScreen.text.strs.y;
+    
+}
+function startButtonApparition (){
+    button.y = 110;
+    button.text.y = 120;
+}
 /**
  * Moves the fly according to its speed
  * Resets the fly if it gets all the way to the right
@@ -396,6 +433,7 @@ function checkTongueButtonOverlap() {
 
 function buttonStart(){
     push();
+    strokeWeight(button.outline);
     stroke(button.line);
     fill(button.fill);
     ellipse(button.x, button.y, button.w, button.h)
@@ -439,7 +477,7 @@ function startGame(){
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
         fly.speed = 3;
-        
+        // gives time between start and first fly   
         button.y = -1000;
         fairyScreen.light.fill = "#00000000";
         fairyScreen.wings.fill = "#00000000";
@@ -447,6 +485,7 @@ function startGame(){
         fairyScreen.wings.stoke = "#00000000";
         fairyScreen.text.fill = "#00000000";
         button.text.fill = "#00000000";
+        fairyScreen.text.title.fill ="#00000000";
 
 
     }
