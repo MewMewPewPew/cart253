@@ -96,7 +96,8 @@ let fairyScreen = {
    }
 }
 const mlem ={
-soundEffect: undefined
+soundEffect: undefined,
+delay: 0,
 }
 
 //Start button
@@ -124,12 +125,12 @@ const button ={
         
     },
     delay: 5000,
-  soundEffect: undefined
+  
 
 }
 //ad a sound for when the frog eats the fly/fairy
 function preload() {
-    mlem.soundEffect = loadSound("assets/sounds/Yoshi mlem.mp3");
+    mlem.soundEffect = loadSound("assets/sounds/Yoshi mlem.wav");
 }
 
 // Our frog
@@ -158,7 +159,10 @@ const fly = {
     y: 200, // Will be random
     size: 10,
     speed: 3,
-    buzziness: 4,
+    buzziness:{
+        body: 4,
+        wing: 2,
+    }, 
     fill: "#f096d9ff",
     line: "#ffdcef80",
     weight: 4,
@@ -185,6 +189,7 @@ function setup() {
     createCanvas(640, 480);
     setTimeout(changeSpeech, fairyScreen.text.delay);
     setTimeout(startButtonApparition, button.delay);
+    setTimeout(checkTongueButtonOverlap, mlem.delay);
     // Give the fly its first random position
     resetFly();
 }
@@ -289,17 +294,22 @@ function startButtonApparition (){
 function moveFly() {
     // Move the fly
     fly.x += fly.speed;
-    fly.x += random(-fly.buzziness,fly.buzziness);
-    fly.y += random(-fly.buzziness,fly.buzziness);
-    // Handle the fly going off the canvas
-    if (fly.x > width) {
-        resetFly();
+    fly.x += random(-fly.buzziness.body,fly.buzziness.body);
+    fly.y += random(-fly.buzziness.body,fly.buzziness.body);
+   // Handle the fly going off the canvas
+   if (fly.x > width) {
+       resetFly();
     }
     //relate the fly to its wings
     fly.wing1.x = fly.x -2;
     fly.wing1.y = fly.y -5;
     fly.wing2.x = fly.x -5;
     fly.wing2.y = fly.y -5;
+    //give the wings even more buzzing 
+    fly.wing1.x += random(-fly.buzziness.wing,fly.buzziness.wing);
+    fly.wing1.y += random(-fly.buzziness.wing,fly.buzziness.wing);
+    fly.wing2.x += random(-fly.buzziness.wing,fly.buzziness.wing);
+    fly.wing2.y += random(-fly.buzziness.wing,fly.buzziness.wing);
 }
 /**function MoveWings(){
     //make the wings shake and follow the fly position
@@ -429,6 +439,8 @@ function checkTongueButtonOverlap() {
     const started = (d < frog.tongue.size/2 + button.w/2);
     
     if (started) {
+        //make a mlem sound 
+        mlem.soundEffect.play();
         game = true;  
         // Bring back the tongue
         frog.tongue.state = "inbound";
