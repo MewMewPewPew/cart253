@@ -95,6 +95,9 @@ let fairyScreen = {
     
    }
 }
+const mlem ={
+soundEffect: undefined
+}
 
 //Start button
 const button ={
@@ -124,9 +127,9 @@ const button ={
   soundEffect: undefined
 
 }
-//ad a sound for the start button
+//ad a sound for when the frog eats the fly/fairy
 function preload() {
-  button.soundEffect = loadSound("assets/sounds/bark.wav");
+    mlem.soundEffect = loadSound("assets/sounds/Yoshi mlem.mp3");
 }
 
 // Our frog
@@ -155,6 +158,7 @@ const fly = {
     y: 200, // Will be random
     size: 10,
     speed: 3,
+    buzziness: 4,
     fill: "#f096d9ff",
     line: "#ffdcef80",
     weight: 4,
@@ -285,6 +289,8 @@ function startButtonApparition (){
 function moveFly() {
     // Move the fly
     fly.x += fly.speed;
+    fly.x += random(-fly.buzziness,fly.buzziness);
+    fly.y += random(-fly.buzziness,fly.buzziness);
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly();
@@ -405,12 +411,14 @@ function checkTongueFlyOverlap() {
     const eaten = (d < frog.tongue.size/2 + fly.size/2);
     
     if (eaten) {
+        //make a mlem sound 
+        mlem.soundEffect.play();
         // Reset the fly
         resetFly();
         // Bring back the tongue
         frog.tongue.state = "inbound";
-        
         score += 1;
+        
     }
 }
 
