@@ -43,7 +43,7 @@ let fairyScreen = {
         
     },
     wings:{
-        fill: "#aaf39cff",
+        fill: "#daffd3ff",
         stoke: "#ffdcef80",
         weight: 20,
         bigL:{
@@ -138,8 +138,8 @@ const frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
-        y: 510,
-        size: 150
+        y: 410,
+        size: 100
     },
     // The frog's tongue has a position, size, speed, and state
     tongue: {
@@ -151,6 +151,18 @@ const frog = {
         state: "idle" // State can be: idle, outbound, inbound
     }
 };
+let water ={
+    fill: "#5287e9ff",
+    x: 0,
+    y: 460,
+    h: 40,
+    w: 640,
+    lily:{
+        fill: "#48cf97ff",
+        h: 10,
+        w: 100,
+    }
+}
 
 // Our fly
 // Has a position, size, and speed of horizontal movement
@@ -196,7 +208,7 @@ function setup() {
 
 function draw() {
     angleMode(DEGREES);
-    background("#98d2ebff");
+    background("#cbedfbff");
     fairyTitleScreen();
     buttonStart();
     startGame();
@@ -204,7 +216,9 @@ function draw() {
     drawFly();
     moveFrog();
     moveTongue();
+    drawPond();
     drawFrog();
+
     checkTongueFlyOverlap();
     checkTongueButtonOverlap();
     // Only increase the score if the game is not over
@@ -408,6 +422,20 @@ function drawFrog() {
     fill("#00ff00");
     noStroke();
     ellipse(frog.body.x, frog.body.y, frog.body.size);
+    pop();
+}
+function drawPond(){
+    //add water (pond)
+    push();
+    noStroke();
+    fill(water.fill);
+    rect(water.x, water.y, water.w, water.h,)
+    pop();
+    //add waterlily
+    push();
+    noStroke();
+    fill(water.lily.fill);
+    ellipse(frog.body.x, frog.body.y +50, water.lily.w, water.lily.h)
     pop();
 }
 
