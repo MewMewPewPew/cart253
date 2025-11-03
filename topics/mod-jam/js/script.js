@@ -30,6 +30,10 @@ let game = false;
 // Is the game over? 
 let gameOver = false;
 
+const mlem ={
+soundEffect: undefined,
+delay: 0,
+}
 //Title screen
 let fairyScreen = {
      body:{
@@ -100,10 +104,7 @@ let fairyScreen = {
     
    }
 }
-const mlem ={
-soundEffect: undefined,
-delay: 0,
-}
+
 
 //Start button
 const button ={
@@ -129,15 +130,44 @@ const button ={
         size: 35,
         
     },
-    delay: 5000,
-  
-
+    
 }
 //ad a sound for when the frog eats the fly/fairy
 function preload() {
     mlem.soundEffect = loadSound("assets/sounds/Yoshi mlem.wav");
 }
+//pollution bar
+let pollutionBar = {
+    stroke:"#000000",
+    
+    fills:{
+        empty: "#00961902",
+        full: "#000000ff",
+        text: "#555555ff"
+    },
+    x:250,
+    y:10,
+    h:8,
+    w:40,
+    ww:150,
+    text:"Pollution:",
 
+}
+//health bar
+let healthBar = {
+    stroke:"#000000",
+    
+    fills:{
+        empty: "#00961902",
+        full: "#13e400ff",
+    },
+    
+    y:472,
+    h:5,
+    w:100,
+    ww:100,
+
+}
 // Our frog
 let frog = {
     // The frog's body has a position and size
@@ -196,6 +226,7 @@ let frog = {
     
    
 };
+
 let water ={
     fill: "#5287e9ff",
     x: 0,
@@ -218,6 +249,7 @@ const fly = {
     x: 0,
     y: 200, // Will be random
     size: 8,
+    speed: 5,
   //?it's somehow not working?  speed: 50,
     buzziness:{
         body: 4,
@@ -239,12 +271,16 @@ const fly = {
         y: 200, 
         size: 5,
     },
+
+};
 //fairy 
-    fairy:{  
+const fairy={  
     x:0,  
     y:200,   
     size: 10,
-    speed: 5,
+    speed:8,
+    delay: 5000,
+    
     buzziness:{
         body: 4,
         wing: 2,
@@ -265,7 +301,6 @@ const fly = {
     },            
         
     }
-};
 
 //add two circle shaking as wings 
 
@@ -277,9 +312,9 @@ function setup() {
     angleMode(DEGREES);
     setTimeout(changeSpeech, fairyScreen.text.delay);
     setTimeout(startButtonApparition, button.delay);
-    setTimeout(checkTongueButtonOverlap, mlem.delay);
     // Give the fly its first random position
     resetFly();
+    resetFairy();
 }
 
 function draw() {
@@ -288,18 +323,25 @@ function draw() {
     fairyTitleScreen();
     buttonStart();
     startGame();
-    moveFly();
-    moveFairy();
     drawFly();
     drawFairy();
+    moveFly();
+    moveFairy();
     moveFrog();
     moveTongue();
     drawPond();
     drawFrog();
     frog.tongue.y = constrain(frog.tongue.y, 0, 430),
+    drawHeatlhBar();
+    drawPollutionBar();
+    pollutionBar.w = constrain(pollutionBar.w, 0, 150),
 
+    noHealth();
+    yesPollution();
     checkTongueFlyOverlap();
+    checkTongueFairyOverlap();
     checkTongueButtonOverlap();
+    
     // Only increase the score if the game is not over
    // scoreTotal();
     displayScore();
@@ -386,12 +428,13 @@ function startButtonApparition (){
  */
 function moveFly() {
     // Move the fly
-    fly.x += 5; //the speed
+    fly.x += fly.speed; //the speed
     fly.x += random(-fly.buzziness.body,fly.buzziness.body);
     fly.y += random(-fly.buzziness.body,fly.buzziness.body);
    // Handle the fly going off the canvas
    if (fly.x > width) {
        resetFly();
+       pollutionBar.w += 20;
     }
     //relate the fly to its wings
     fly.wing1.x = fly.x -2;
@@ -406,23 +449,23 @@ function moveFly() {
 }
 function moveFairy() {
     // Move the fly
-    fly.fairy.x += 8; //the speed
-    fly.fairy.x += random(-fly.fairy.buzziness.body,fly.fairy.buzziness.body);
-    fly.fairy.y += random(-fly.fairy.buzziness.body,fly.fairy.buzziness.body);
+    fairy.x += fairy.speed; //the speed
+    fairy.x += random(-fairy.buzziness.body,fairy.buzziness.body);
+    fairy.y += random(-fairy.buzziness.body,fairy.buzziness.body);
    // Handle the fly going off the canvas
-   if (fly.fairy.x > width) {
-       resetFly();
+   if (fairy.x > width) {
+       resetFairy();
     }
     //relate the fly to its wings
-    fly.fairy.wing1.x = fly.fairy.x -2;
-    fly.fairy.wing1.y = fly.fairy.y -5;
-    fly.fairy.wing2.x = fly.fairy.x -5;
-    fly.fairy.wing2.y = fly.fairy.y -5;
+    fairy.wing1.x = fairy.x -2;
+    fairy.wing1.y = fairy.y -5;
+    fairy.wing2.x = fairy.x -5;
+    fairy.wing2.y = fairy.y -5;
     //give the wings even more buzzing 
-    fly.fairy.wing1.x += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);
-    fly.fairy.wing1.y += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);
-    fly.fairy.wing2.x += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);
-    fly.fairy.wing2.y += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);   
+    fairy.wing1.x += random(-fairy.buzziness.wing,fairy.buzziness.wing);
+    fairy.wing1.y += random(-fairy.buzziness.wing,fairy.buzziness.wing);
+    fairy.wing2.x += random(-fairy.buzziness.wing,fairy.buzziness.wing);
+    fairy.wing2.y += random(-fairy.buzziness.wing,fairy.buzziness.wing);   
 }
 
 /**function MoveWings(){
@@ -457,22 +500,22 @@ function drawFly() {
 }
 function drawFairy() {
     push();
-    stroke(fly.fairy.line);
+    stroke(fairy.line);
     strokeWeight(fly.weight);
-    fill(fly.fairy.fill);
-    ellipse(fly.fairy.x, fly.fairy.y, fly.fairy.size);
+    fill(fairy.fill);
+    ellipse(fairy.x, fairy.y, fairy.size);
     pop();
 //wings of the fly attributes
     push();
-    noStroke(fly.fairy.wing1.line);
-    fill(fly.fairy.wing1.fill);
-    ellipse(fly.fairy.wing1.x, fly.fairy.wing1.y, fly.fairy.wing1.size);
+    noStroke(fairy.wing1.line);
+    fill(fairy.wing1.fill);
+    ellipse(fairy.wing1.x, fairy.wing1.y, fairy.wing1.size);
     pop();
     push();
-    stroke(fly.fairy.wing1.line);
-    strokeWeight(fly.fairy.wing1.weight);
-    fill(fly.fairy.wing1.fill);
-    ellipse(fly.fairy.wing2.x, fly.fairy.wing2.y, fly.fairy.wing2.size);
+    stroke(fairy.wing1.line);
+    strokeWeight(fairy.wing1.weight);
+    fill(fairy.wing1.fill);
+    ellipse(fairy.wing2.x, fairy.wing2.y, fairy.wing2.size);
     pop();
  
 }
@@ -482,9 +525,12 @@ function drawFairy() {
  */
 function resetFly() {
     fly.x = 0;
-    fly.y = random(0, 300);
-    fly.fairy.x = 0;
-    fly.fairy.y = random(0, 300);
+    fly.y = random(20, 300);
+ 
+}
+function resetFairy(){
+    fairy.x = -3000;
+    fairy.y = random(20, 300);
 }
 
 /**
@@ -522,7 +568,42 @@ function moveTongue() {
         }
     }
 }
-
+//pollution bar
+function drawPollutionBar(){
+    //empty box
+    push();
+    stroke(pollutionBar.stroke);
+    fill(pollutionBar.fills.empty);
+    rect(pollutionBar.x, pollutionBar.y, pollutionBar.ww, pollutionBar.h, );
+    pop();
+    //pollution
+    push();
+    noStroke();
+    fill(pollutionBar.fills.text);
+    textSize(12)
+    text(pollutionBar.text, pollutionBar.x-52, pollutionBar.y+8,);
+    pop();
+    push();
+    noStroke();
+    fill(pollutionBar.fills.full);
+    rect(pollutionBar.x, pollutionBar.y, pollutionBar.w, pollutionBar.h, );
+    pop();
+}
+//Health bar
+function drawHeatlhBar(){
+    //empty box
+    push();
+    stroke(healthBar.stroke);
+    fill(healthBar.fills.empty);
+    rect(frog.body.x -50, healthBar.y, healthBar.ww, healthBar.h, );
+    pop();
+    //health
+    push();
+    noStroke();
+    fill(healthBar.fills.full);
+    rect(frog.body.x -50, healthBar.y, healthBar.w, healthBar.h, );
+    pop();
+}
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
  */
@@ -643,7 +724,7 @@ function drawPond(){
 
 /**
  * Handles the tongue overlapping the fly
- */
+ */ 
 function checkTongueFlyOverlap() {
     // Get distance from tongue to fly
     const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
@@ -658,22 +739,28 @@ function checkTongueFlyOverlap() {
         // Bring back the tongue
         frog.tongue.state = "inbound";
         score.number += 1;
+        healthBar.w -= 5;
+        pollutionBar.w -= 20;
       }
+    
 }
+
 function checkTongueFairyOverlap() {
     // Get distance from tongue to fly
-    const d2 = dist(frog.tongue.x, frog.tongue.y, fly.fairy.x, fly.fairy.y);
+    const di = dist(frog.tongue.x, frog.tongue.y, fairy.x, fairy.y);
     // Check if it's an overlap
-    const eaten = (d2 < frog.tongue.size/2 + fly.fairy.size/2);
+    const eatenFairy = (di < frog.tongue.size/2 + fairy.size/2);
     
-    if (eaten) {
+    if (eatenFairy) {
         //make a mlem sound 
         mlem.soundEffect.play();
         // Reset the fly
-        resetFly();
+        resetFairy();
         // Bring back the tongue
         frog.tongue.state = "inbound";
         score.number += 1;
+        healthBar.w += 10;
+        //pollutionBar.w += 5;
       }
 }
 
@@ -720,31 +807,20 @@ function mousePressed() {
         frog.tongue.state = "outbound";
     }
 }
-/** 
-function scoreTotal() {
-    score
 
-If gameOver 
-    if (!gameOver){
-    // Score increases relatively slowly
-    score += 1;
-  }
-
-
-}
- */
 function startGame(){
 //stops flies from flying before the start button is pressed
     if (game === false){
        fly.speed = 0; 
        fly.y = -10 ;
-       fly.fairy.speed = 0; 
-       fly.fairy.y = -10 ;
+       fairy.speed = 0; 
+       fairy.y = -10 ;
     }
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
         // gives time between start and first fly   
-        fly.speed = 3;
+        fly.speed = 4;
+        fairy.speed = 8;
         // make the instruction screen disappear
         button.y = -1000;
         fairyScreen.light.fill = "#00000000";
@@ -760,20 +836,33 @@ function startGame(){
     }
     
 }
-
 //event-challenge*
 function lose() {
   
       gameOver = true
 
 }
+
+//ways to lose
+function noHealth(){
+    if (healthBar.w <= 0){
+        lose();
+
+    };
+}
+function yesPollution(){
+    if(pollutionBar.w >=150){
+        lose();
+    };
+}
+
 function displayGameover() {
-  if (gameOver) {
+  if (gameOver === true ) {
     push();
     textSize(48);
     textStyle(BOLD);
     textAlign(CENTER, CENTER);
-    text("You lose!", width/2, height/3);
+    text("You lose!", 100, 100);
     pop();
   }
   
