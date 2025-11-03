@@ -19,7 +19,12 @@
 // Current score
 /** s
  */
-let score = 0
+let score = {
+    number:0,
+    x: 20,
+    y: 40,
+    fill:"#ffffff0c",
+}
 let game = false;
 
 // Is the game over? 
@@ -134,22 +139,62 @@ function preload() {
 }
 
 // Our frog
-const frog = {
+let frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
-        y: 410,
-        size: 100
+        y: 440,
+        size: 40,
     },
-    // The frog's tongue has a position, size, speed, and state
+    fingers:{
+        y:435,
+        h:4,
+        w:7,
+    },
+    legs:{
+        y:450,
+        h:20,
+        w:25,
+    },
+    toes:{
+        y:461,
+        h:8,
+        w:4,
+    },
+     // The frog's tongue has a position, size, speed, and state
     tongue: {
         x: undefined,
-        y: 480,
+        y:430,
         size: 20,
         speed: 20,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
-    }
+    },
+    face:{
+        
+        y:414,
+        h:40,
+        w:46,
+        tl: 10,
+    },
+    eyes:{
+    y: 415,
+        l:{
+            size:15,
+        },
+        r:{   
+            size:15,
+        },
+        irisL:{ 
+            size:6,
+        },
+        irisR:{
+            size:6,
+        },
+      
+    },
+    
+   
 };
 let water ={
     fill: "#5287e9ff",
@@ -158,7 +203,9 @@ let water ={
     h: 40,
     w: 640,
     lily:{
-        fill: "#48cf97ff",
+        fill: "#99db89ff",
+        stroke: "#64a778ff",
+        y: 460,
         h: 10,
         w: 100,
     }
@@ -199,6 +246,7 @@ const fly = {
  */
 function setup() {
     createCanvas(640, 480);
+    angleMode(DEGREES);
     setTimeout(changeSpeech, fairyScreen.text.delay);
     setTimeout(startButtonApparition, button.delay);
     setTimeout(checkTongueButtonOverlap, mlem.delay);
@@ -207,7 +255,7 @@ function setup() {
 }
 
 function draw() {
-    angleMode(DEGREES);
+    
     background("#cbedfbff");
     fairyTitleScreen();
     buttonStart();
@@ -218,6 +266,7 @@ function draw() {
     moveTongue();
     drawPond();
     drawFrog();
+    frog.tongue.y = constrain(frog.tongue.y, 0, 430),
 
     checkTongueFlyOverlap();
     checkTongueButtonOverlap();
@@ -384,6 +433,7 @@ function moveTongue() {
     // If the tongue is outbound, it moves up
     else if (frog.tongue.state === "outbound") {
         frog.tongue.y += -frog.tongue.speed;
+        
         // The tongue bounces back if it hits the top
         if (frog.tongue.y <= 0) {
             frog.tongue.state = "inbound";
@@ -393,7 +443,7 @@ function moveTongue() {
     else if (frog.tongue.state === "inbound") {
         frog.tongue.y += frog.tongue.speed;
         // The tongue stops if it hits the bottom
-        if (frog.tongue.y >= height) {
+        if (frog.tongue.y >= 430) {
             frog.tongue.state = "idle";
         }
     }
@@ -403,7 +453,64 @@ function moveTongue() {
  * Displays the tongue (tip and line connection) and the frog (body)
  */
 function drawFrog() {
+// Draw the frog
+//eyes
+    //eyelids
+    push();
+    fill("#5f9715ff");
+    noStroke();
+    ellipse(frog.body.x-20, frog.eyes.y, frog.eyes.l.size +3);
+    ellipse(frog.body.x+20, frog.eyes.y, frog.eyes.r.size +3);
+    pop();
+    //white eye
+    push();
+    fill("#ffffffff");
+    noStroke();
+    ellipse(frog.body.x-20, frog.eyes.y, frog.eyes.l.size);
+    ellipse(frog.body.x+20, frog.eyes.y, frog.eyes.r.size);
+    pop();
+    //iris
+    push();
+    fill("#000000ff");
+    noStroke();
+        //left
+    ellipse(frog.body.x-20, frog.eyes.y -2, frog.eyes.irisL.size+1);
+    ellipse(frog.body.x-23, frog.eyes.y -3, frog.eyes.irisL.size);
+    ellipse(frog.body.x-17, frog.eyes.y -3, frog.eyes.irisL.size);
+        //right
+    ellipse(frog.body.x+20, frog.eyes.y -2, frog.eyes.irisR.size+1);
+    ellipse(frog.body.x+23, frog.eyes.y -3, frog.eyes.irisR.size);
+    ellipse(frog.body.x+17, frog.eyes.y -3, frog.eyes.irisR.size);
+    pop();
+//legs
+    push();
+    fill("#5f9715ff");
+    noStroke();
+    ellipse(frog.body.x-25,frog.legs.y,frog.legs.w, frog.legs.h)
+    ellipse(frog.body.x+25,frog.legs.y,frog.legs.w, frog.legs.h)
+    pop();
+    //toes
+    push();
+    fill("#5f9715ff");
+    noStroke();
+        //left
+    ellipse(frog.body.x-20,frog.toes.y-1,frog.toes.w, frog.toes.h)
+    ellipse(frog.body.x-25,frog.toes.y,frog.toes.w, frog.toes.h)
+    ellipse(frog.body.x-30,frog.toes.y,frog.toes.w, frog.toes.h)
+        //right
+    ellipse(frog.body.x+20,frog.toes.y-1,frog.toes.w, frog.toes.h)
+    ellipse(frog.body.x+25,frog.toes.y,frog.toes.w, frog.toes.h)
+    ellipse(frog.body.x+30,frog.toes.y,frog.toes.w, frog.toes.h)
+    pop();
+//face 
+    push();
+    fill("#5f9715ff");
+    noStroke();
+    rect(frog.body.x-23, frog.face.y, frog.face.w, frog.face.h, frog.face.tl);
+    pop();
+//tongue
     // Draw the tongue tip
+    
     push();
     fill("#ff0000");
     noStroke();
@@ -415,14 +522,35 @@ function drawFrog() {
     stroke("#ff0000");
     strokeWeight(frog.tongue.size);
     line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
+    
     pop();
-
-    // Draw the frog's body
+//mouth
     push();
-    fill("#00ff00");
+    fill("#cef081ff");
+    noStroke();
+    rect(frog.body.x-20, frog.face.y+3, frog.face.w-6, frog.face.h, frog.face.tl);
+    pop();
+//body
+    //belly
+    push();
+    fill("#cef081ff");
     noStroke();
     ellipse(frog.body.x, frog.body.y, frog.body.size);
     pop();
+    //fingers
+    push();
+    fill("#5f9715ff");
+    noStroke();
+        //left
+    ellipse(frog.body.x-19,frog.fingers.y,frog.fingers.w, frog.fingers.h)
+    ellipse(frog.body.x-18,frog.fingers.y+5,frog.fingers.w, frog.fingers.h)
+    ellipse(frog.body.x-19,frog.fingers.y+10,frog.fingers.w, frog.fingers.h)
+        //right
+    ellipse(frog.body.x+19,frog.fingers.y,frog.fingers.w, frog.fingers.h)
+    ellipse(frog.body.x+21,frog.fingers.y+10,frog.fingers.w, frog.fingers.h)
+    ellipse(frog.body.x+20,frog.fingers.y+5,frog.fingers.w, frog.fingers.h)
+    pop();
+
 }
 function drawPond(){
     //add water (pond)
@@ -433,9 +561,9 @@ function drawPond(){
     pop();
     //add waterlily
     push();
-    noStroke();
+    stroke(water.lily.stroke);
     fill(water.lily.fill);
-    ellipse(frog.body.x, frog.body.y +50, water.lily.w, water.lily.h)
+    ellipse(frog.body.x, water.lily.y, water.lily.w+15, water.lily.h+10)
     pop();
 }
 
@@ -455,7 +583,7 @@ function checkTongueFlyOverlap() {
         resetFly();
         // Bring back the tongue
         frog.tongue.state = "inbound";
-        score += 1;
+        score.number += 1;
         
     }
 }
@@ -524,8 +652,9 @@ function startGame(){
     }
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
-        fly.speed = 3;
         // gives time between start and first fly   
+        fly.speed = 3;
+        // make the instruction screen disappear
         button.y = -1000;
         fairyScreen.light.fill = "#00000000";
         fairyScreen.wings.fill = "#00000000";
@@ -534,7 +663,8 @@ function startGame(){
         fairyScreen.text.fill = "#00000000";
         button.text.fill = "#00000000";
         fairyScreen.text.title.fill ="#00000000";
-
+        //make the score appear
+        score.fill= "#000000ff";
 
     }
     
@@ -565,8 +695,8 @@ function displayScore() {
   push();
   textSize(30);
   textStyle(BOLD);
-  fill("#000000");
-  text(score, frog.body.x - 10, 475);
+  fill(score.fill);
+  text(score.number, score.x, score.y);
   pop();
   /** 
   if(score < 100){
