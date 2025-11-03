@@ -82,11 +82,11 @@ let fairyScreen = {
     y: 240,
     fill:"#000000ff",
     title:{
-        x: 30,
+        x: 140,
         y: 60,
         size: 50,
-        str: "Radioactive Fairy Sacrifice",
-        fill:"#810202ff",
+        str: "Hero Frog Killer",
+        fill:"#000000ff",
     } ,
     strs:{
         hey: "Hey! Listen! ",
@@ -213,23 +213,24 @@ let water ={
 
 // Our fly
 // Has a position, size, and speed of horizontal movement
+
 const fly = {
     x: 0,
     y: 200, // Will be random
-    size: 10,
-    speed: 3,
+    size: 8,
+  //?it's somehow not working?  speed: 50,
     buzziness:{
         body: 4,
         wing: 2,
     }, 
-    fill: "#f096d9ff",
-    line: "#ffdcef80",
+    fill: "#000000ff",
+    line: "#00000080",
     weight: 4,
     wing1:{
-        fill: "#aaf39cff",
+        fill: "#ffffffe7",
         line: "#ffdcef80",
         weight: 2,
-        x: -10,
+        x: -5,
         y: 200, 
         size: 5,
     },
@@ -238,7 +239,34 @@ const fly = {
         y: 200, 
         size: 5,
     },
+//fairy 
+    fairy:{  
+    x:0,  
+    y:200,   
+    size: 10,
+    speed: 5,
+    buzziness:{
+        body: 4,
+        wing: 2,
+    }, 
+    fill: "#f096d9ff",
+    line: "#ffdcef80",
+    wing1:{
+        fill: "#aaf39cff",
+        line: "#ffdcef80",
+        x: -5,
+        y: 200, 
+        size: 5,
+    },
+    wing2:{
+        x: -5,
+        y: 200, 
+        size: 5,
+    },            
+        
+    }
 };
+
 //add two circle shaking as wings 
 
 /**
@@ -261,7 +289,9 @@ function draw() {
     buttonStart();
     startGame();
     moveFly();
+    moveFairy();
     drawFly();
+    drawFairy();
     moveFrog();
     moveTongue();
     drawPond();
@@ -356,7 +386,7 @@ function startButtonApparition (){
  */
 function moveFly() {
     // Move the fly
-    fly.x += fly.speed;
+    fly.x += 5; //the speed
     fly.x += random(-fly.buzziness.body,fly.buzziness.body);
     fly.y += random(-fly.buzziness.body,fly.buzziness.body);
    // Handle the fly going off the canvas
@@ -372,8 +402,29 @@ function moveFly() {
     fly.wing1.x += random(-fly.buzziness.wing,fly.buzziness.wing);
     fly.wing1.y += random(-fly.buzziness.wing,fly.buzziness.wing);
     fly.wing2.x += random(-fly.buzziness.wing,fly.buzziness.wing);
-    fly.wing2.y += random(-fly.buzziness.wing,fly.buzziness.wing);
+    fly.wing2.y += random(-fly.buzziness.wing,fly.buzziness.wing);   
 }
+function moveFairy() {
+    // Move the fly
+    fly.fairy.x += 8; //the speed
+    fly.fairy.x += random(-fly.fairy.buzziness.body,fly.fairy.buzziness.body);
+    fly.fairy.y += random(-fly.fairy.buzziness.body,fly.fairy.buzziness.body);
+   // Handle the fly going off the canvas
+   if (fly.fairy.x > width) {
+       resetFly();
+    }
+    //relate the fly to its wings
+    fly.fairy.wing1.x = fly.fairy.x -2;
+    fly.fairy.wing1.y = fly.fairy.y -5;
+    fly.fairy.wing2.x = fly.fairy.x -5;
+    fly.fairy.wing2.y = fly.fairy.y -5;
+    //give the wings even more buzzing 
+    fly.fairy.wing1.x += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);
+    fly.fairy.wing1.y += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);
+    fly.fairy.wing2.x += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);
+    fly.fairy.wing2.y += random(-fly.fairy.buzziness.wing,fly.fairy.buzziness.wing);   
+}
+
 /**function MoveWings(){
     //make the wings shake and follow the fly position
     position([fly.x], [fly.y])
@@ -404,6 +455,27 @@ function drawFly() {
     pop();
  
 }
+function drawFairy() {
+    push();
+    stroke(fly.fairy.line);
+    strokeWeight(fly.weight);
+    fill(fly.fairy.fill);
+    ellipse(fly.fairy.x, fly.fairy.y, fly.fairy.size);
+    pop();
+//wings of the fly attributes
+    push();
+    noStroke(fly.fairy.wing1.line);
+    fill(fly.fairy.wing1.fill);
+    ellipse(fly.fairy.wing1.x, fly.fairy.wing1.y, fly.fairy.wing1.size);
+    pop();
+    push();
+    stroke(fly.fairy.wing1.line);
+    strokeWeight(fly.fairy.wing1.weight);
+    fill(fly.fairy.wing1.fill);
+    ellipse(fly.fairy.wing2.x, fly.fairy.wing2.y, fly.fairy.wing2.size);
+    pop();
+ 
+}
 
 /**
  * Resets the fly to the left with a random y
@@ -411,6 +483,8 @@ function drawFly() {
 function resetFly() {
     fly.x = 0;
     fly.y = random(0, 300);
+    fly.fairy.x = 0;
+    fly.fairy.y = random(0, 300);
 }
 
 /**
@@ -584,8 +658,23 @@ function checkTongueFlyOverlap() {
         // Bring back the tongue
         frog.tongue.state = "inbound";
         score.number += 1;
-        
-    }
+      }
+}
+function checkTongueFairyOverlap() {
+    // Get distance from tongue to fly
+    const d2 = dist(frog.tongue.x, frog.tongue.y, fly.fairy.x, fly.fairy.y);
+    // Check if it's an overlap
+    const eaten = (d2 < frog.tongue.size/2 + fly.fairy.size/2);
+    
+    if (eaten) {
+        //make a mlem sound 
+        mlem.soundEffect.play();
+        // Reset the fly
+        resetFly();
+        // Bring back the tongue
+        frog.tongue.state = "inbound";
+        score.number += 1;
+      }
 }
 
 function checkTongueButtonOverlap() {
@@ -649,6 +738,8 @@ function startGame(){
     if (game === false){
        fly.speed = 0; 
        fly.y = -10 ;
+       fly.fairy.speed = 0; 
+       fly.fairy.y = -10 ;
     }
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
