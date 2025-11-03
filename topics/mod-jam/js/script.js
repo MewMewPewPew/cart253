@@ -19,11 +19,20 @@
 // Current score
 /** s
  */
-let score = {
+let flyScore= {
     number:0,
     x: 20,
     y: 40,
+    size: 30,
     fill:"#ffffff0c",
+}
+let fairyScore ={
+    number: 0,
+    x: 270,
+    y: 255,
+    size: 12,
+    fill:"#ffffff0c",
+
 }
 let game = false;
 
@@ -104,8 +113,79 @@ let fairyScreen = {
     
    }
 }
-
-
+//Game over screen
+let gameOverScreen ={
+      body:{
+        x: 320,
+        y: 240,
+        size: 280,
+        fill: "#000000ff",
+        
+    },
+    //light "emenating" from the body
+    light:{
+        x: 320,
+        y: 240,
+        size: 320,
+        fill: "#00000080",
+        
+    },
+    wings:{
+        fill: "#ffffffff",
+        stoke: "#ffdcdc80",
+        weight: 20,
+        bigL:{
+            x: 170,
+            y: 120,
+            width: 220,
+            height: 90,
+        },
+        bigR:{
+            x: 428,
+            y: 335,
+            width: 220,
+            height: 90,
+        },
+        smallL:{
+            x: 120,
+            y: 370,
+            width: 120,
+            height: 50,
+        },
+        smallR:{
+            x: 507,
+            y: 260,
+            width: 130,
+            height: 50,
+            
+        },
+    },
+   text:{
+    x: 220,
+    y: 240,
+    fill:"#ff7979ff",
+    title:{
+        x: 190,
+        y: 60,
+        size: 50,
+        str: "Game Over",
+        fill:"#000000ff",
+    } ,
+    title2:{
+        str: "You couldn't save the pond \n\n\n\n                Death:",
+        size: 20,
+        x: 200,
+        y: 78,
+    },
+    flyeaten:{
+        str:" Flies: \n Fairies: \n Frog: 1",
+        size: 12,
+        x: 220,
+        y: 240,
+    }
+    
+   }
+}
 //Start button
 const button ={
     fill: "#ffffffe5",
@@ -138,12 +218,12 @@ function preload() {
 }
 //pollution bar
 let pollutionBar = {
-    stroke:"#000000",
+    stroke:"#00961902",
     
     fills:{
         empty: "#00961902",
-        full: "#000000ff",
-        text: "#555555ff"
+        full: "#00961902",
+        text: "#00961902"
     },
     x:250,
     y:10,
@@ -209,6 +289,11 @@ let frog = {
     },
     eyes:{
     y: 415,
+    text:"x       x ",
+        fills: {
+            dead:"#ffffff02",
+            iris:"#000000ff",
+    },
         l:{
             size:15,
         },
@@ -228,7 +313,7 @@ let frog = {
 };
 
 let water ={
-    fill: "#5287e9ff",
+    fill:"rgb(82, 135, 233)", 
     x: 0,
     y: 460,
     h: 40,
@@ -333,6 +418,7 @@ function draw() {
     drawFrog();
     frog.tongue.y = constrain(frog.tongue.y, 0, 430),
     drawHeatlhBar();
+    healthBar.w = constrain(healthBar.w, 0, 100),
     drawPollutionBar();
     pollutionBar.w = constrain(pollutionBar.w, 0, 150),
 
@@ -344,8 +430,8 @@ function draw() {
     
     // Only increase the score if the game is not over
    // scoreTotal();
-    displayScore();
-    displayGameover();
+   displayGameover();
+   displayScore();
 }
 //titlescreen
 function fairyTitleScreen (){
@@ -411,6 +497,7 @@ function fairyTitleScreen (){
     pop();
     
 }
+
 function changeSpeech(){
     fairyScreen.text.strs.hey = fairyScreen.text.strs.instruction;
     fairyScreen.text.strs.size = 20;
@@ -525,12 +612,12 @@ function drawFairy() {
  */
 function resetFly() {
     fly.x = 0;
-    fly.y = random(20, 300);
+    fly.y = random(50, 350);
  
 }
 function resetFairy(){
     fairy.x = -3000;
-    fairy.y = random(20, 300);
+    fairy.y = random(50, 350);
 }
 
 /**
@@ -626,7 +713,7 @@ function drawFrog() {
     pop();
     //iris
     push();
-    fill("#000000ff");
+    fill(frog.eyes.fills.iris);
     noStroke();
         //left
     ellipse(frog.body.x-20, frog.eyes.y -2, frog.eyes.irisL.size+1);
@@ -636,6 +723,12 @@ function drawFrog() {
     ellipse(frog.body.x+20, frog.eyes.y -2, frog.eyes.irisR.size+1);
     ellipse(frog.body.x+23, frog.eyes.y -3, frog.eyes.irisR.size);
     ellipse(frog.body.x+17, frog.eyes.y -3, frog.eyes.irisR.size);
+    pop();
+    //iris when dead
+    push();
+    fill(frog.eyes.fills.dead);
+    textSize(16);
+    text(frog.eyes.text, frog.body.x-24, frog.eyes.y+2)
     pop();
 //legs
     push();
@@ -712,14 +805,30 @@ function drawPond(){
     push();
     noStroke();
     fill(water.fill);
-    rect(water.x, water.y, water.w, water.h,)
+    rect(water.x, water.y, water.w, water.h,);
     pop();
     //add waterlily
     push();
     stroke(water.lily.stroke);
     fill(water.lily.fill);
-    ellipse(frog.body.x, water.lily.y, water.lily.w+15, water.lily.h+10)
+    ellipse(frog.body.x, water.lily.y, water.lily.w+15, water.lily.h+10);
     pop();
+    //making the water and waterlily change color due to pollution
+    if (pollutionBar.w >=70){
+        water.fill = "rgba(72, 82, 170, 1)";
+        water.lily.fill = "#a0db89ff";
+        water.lily.stroke = "#63925dff";
+    }
+    if (pollutionBar.w >= 115){
+        water.fill = "rgba(75, 62, 124, 1)";
+        water.lily.fill = "#c9db89ff";
+        water.lily.stroke = "#709458ff";
+    }
+    if (pollutionBar.w >= 150){
+        water.fill = "rgba(35, 22, 41, 1)"
+        water.lily.fill = "#dbc589ff";
+        water.lily.stroke = "#726a3bff";
+    }
 }
 
 /**
@@ -738,9 +847,9 @@ function checkTongueFlyOverlap() {
         resetFly();
         // Bring back the tongue
         frog.tongue.state = "inbound";
-        score.number += 1;
+        flyScore.number += 1;
         healthBar.w -= 5;
-        pollutionBar.w -= 20;
+        pollutionBar.w -= 10;
       }
     
 }
@@ -758,7 +867,7 @@ function checkTongueFairyOverlap() {
         resetFairy();
         // Bring back the tongue
         frog.tongue.state = "inbound";
-        score.number += 1;
+        fairyScore.number += 1;
         healthBar.w += 10;
         //pollutionBar.w += 5;
       }
@@ -815,6 +924,7 @@ function startGame(){
        fly.y = -10 ;
        fairy.speed = 0; 
        fairy.y = -10 ;
+        
     }
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
@@ -831,7 +941,10 @@ function startGame(){
         button.text.fill = "#00000000";
         fairyScreen.text.title.fill ="#00000000";
         //make the score appear
-        score.fill= "#000000ff";
+        flyScore.fill= "#000000ff";
+        pollutionBar.stroke = "#000000ff";
+        pollutionBar.fills.full = "#000000ff";
+        pollutionBar.fills.text = "#000000ff";
 
     }
     
@@ -840,6 +953,9 @@ function startGame(){
 function lose() {
   
       gameOver = true
+      game = false
+
+      
 
 }
 
@@ -847,43 +963,118 @@ function lose() {
 function noHealth(){
     if (healthBar.w <= 0){
         lose();
+        frog.eyes.fills.iris = "#ffffffff";
+        frog.eyes.fills.dead = "#000000";
+        frog.tongue.y = 400;
+        healthBar.fills.full = healthBar.fills.empty;
 
     };
 }
 function yesPollution(){
     if(pollutionBar.w >=150){
         lose();
+        healthBar.w -=2
+
     };
 }
 
 function displayGameover() {
   if (gameOver === true ) {
+    //gameover screen 
+//fairy light
     push();
-    textSize(48);
-    textStyle(BOLD);
-    textAlign(CENTER, CENTER);
-    text("You lose!", 100, 100);
+    noStroke();
+    fill(gameOverScreen.light.fill);
+    ellipse(gameOverScreen.light.x, gameOverScreen.light.y, gameOverScreen.light.size);
     pop();
-  }
-  
+//wings 
+    //big-left
+    push();
+    stroke(gameOverScreen.wings.stoke);
+    strokeWeight(gameOverScreen.wings.weight);
+    rotate(20);
+    fill(gameOverScreen.wings.fill);
+    ellipse(gameOverScreen.wings.bigL.x, gameOverScreen.wings.bigL.y,gameOverScreen.wings.bigL.width, gameOverScreen.wings.bigL.height );
+    pop();
+    //small-Left
+    push();
+    stroke(gameOverScreen.wings.stoke);
+    strokeWeight(gameOverScreen.wings.weight);
+    rotate(-10);
+    fill(gameOverScreen.wings.fill);
+    ellipse(gameOverScreen.wings.smallL.x, gameOverScreen.wings.smallL.y, gameOverScreen.wings.smallL.width, gameOverScreen.wings.smallL.height );
+    pop();
+    //big-right
+    push();
+    stroke(gameOverScreen.wings.stoke);
+    strokeWeight(gameOverScreen.wings.weight);
+    rotate(-20);
+    fill(gameOverScreen.wings.fill);
+    ellipse(gameOverScreen.wings.bigR.x, gameOverScreen.wings.bigR.y, gameOverScreen.wings.bigR.width, gameOverScreen.wings.bigR.height );
+    pop();
+    //small-right
+    push();
+    stroke(gameOverScreen.wings.stoke);
+    strokeWeight(gameOverScreen.wings.weight);
+    rotate(10);
+    fill(gameOverScreen.wings.fill);
+    ellipse(gameOverScreen.wings.smallR.x, gameOverScreen.wings.smallR.y, gameOverScreen.wings.smallR.width, gameOverScreen.wings.smallR.height );
+    pop();
+
+//fairy body
+    push();
+    noStroke();
+    fill(gameOverScreen.body.fill);
+    ellipse(gameOverScreen.body.x, gameOverScreen.body.y, gameOverScreen.body.size);
+    pop();
+//title 2 and number of death text
+    push();
+    noStroke();
+    fill(gameOverScreen.text.fill);
+    textSize(gameOverScreen.text.title2.size);
+    text(gameOverScreen.text.title2.str, gameOverScreen.text.title2.x, gameOverScreen.text.title2.y);   
+    pop();
+    push();
+    noStroke();
+    fill(gameOverScreen.text.fill);
+    textSize(gameOverScreen.text.flyeaten.size);
+    text(gameOverScreen.text.flyeaten.str, gameOverScreen.text.flyeaten.x, gameOverScreen.text.flyeaten.y);   
+    pop();
+//Title
+    push();
+    noStroke();
+    fill(gameOverScreen.text.title.fill);
+    textSize(gameOverScreen.text.title.size);
+    text(gameOverScreen.text.title.str, gameOverScreen.text.title.x, gameOverScreen.text.title.y);
+    pop();
+
 }
+}
+  
 
 /**
  * Display the score
  */
 function displayScore() {
   push();
-  textSize(30);
+  textSize(flyScore.size);
   textStyle(BOLD);
-  fill(score.fill);
-  text(score.number, score.x, score.y);
+  fill(flyScore.fill);
+  text(flyScore.number, flyScore.x, flyScore.y);
   pop();
-  /** 
-  if(score < 100){
-    text(score, frog.body.x - 10, 475) =  text(score, 100, 475) 
-    textSize(40);
-    fill("#ff6ff3ff");
-  }
-  */
+  push()
+  textSize(fairyScore.size);
+  textStyle(BOLD);
+  fill(fairyScore.fill);
+  text(fairyScore.number, fairyScore.x, fairyScore.y);
+  pop();
+ if (gameOver === true ) {
+    flyScore.size = 12;
+    flyScore.x = 260;
+    flyScore.y = 240;
+    flyScore.fill = "#ffffffff";
+    fairyScore.fill = "#ffffffff";
+    
+ }
 }
 //
