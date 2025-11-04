@@ -39,9 +39,12 @@ let game = false;
 // Is the game over? 
 let gameOver = false;
 
+//make the sounds undefined
 const mlem ={
 soundEffect: undefined,
-
+}
+const owow ={
+soundEffect: undefined,
 }
 //Title screen
 let fairyScreen = {
@@ -218,6 +221,7 @@ const button ={
 //ad a sound for when the frog eats the fly/fairy
 function preload() {
     mlem.soundEffect = loadSound("assets/sounds/Yoshi mlem.wav");
+    owow.soundEffect = loadSound("assets/sounds/Yoshi Owowow.mp3");  
 }
 //pollution bar
 let pollutionBar = {
@@ -831,6 +835,11 @@ function drawPond(){
     ellipse(frog.body.x, water.lily.y, water.lily.w+15, water.lily.h+10);
     pop();
     //making the water and waterlily change color due to pollution
+    if (pollutionBar.w <=70){
+        water.fill = "rgb(82, 135, 233)";
+        water.lily.fill = "#99db89ff";
+        water.lily.stroke = "#64a778ff";
+    }
     if (pollutionBar.w >=70){
         water.fill = "rgba(72, 82, 170, 1)";
         water.lily.fill = "#a0db89ff";
@@ -941,7 +950,7 @@ function startGame(){
        fly.y = -10 ;
        fairy.speed = 0; 
        fairy.y = -10 ;
-        
+        //owow.soundEffect.play();
     }
 //If start button is pressed, the game starts and the title + Instruction disappears
     else if (game === true){
@@ -970,6 +979,7 @@ function startGame(){
 function lose() {  
       gameOver = true
       game = false
+      
 }
 
 //ways to lose
@@ -980,6 +990,7 @@ function noHealth(){
         frog.eyes.fills.dead = "#000000";
         frog.tongue.y = 400;
         healthBar.fills.full = healthBar.fills.empty;
+        
     };
 }
 function yesPollution(){
@@ -992,6 +1003,7 @@ function yesPollution(){
 
 function displayGameover() {
   if (gameOver === true ) {
+   // owow.soundEffect.play(); I wanted to add sound when dying but it does it every second which is terrible, i need to do it only once.
     //gameover screen 
 //fairy light
     push();
