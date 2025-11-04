@@ -41,7 +41,7 @@ let gameOver = false;
 
 const mlem ={
 soundEffect: undefined,
-delay: 0,
+
 }
 //Title screen
 let fairyScreen = {
@@ -91,22 +91,25 @@ let fairyScreen = {
         },
     },
    text:{
-    x: 220,
+    x: 215,
     y: 240,
     fill:"#000000ff",
     title:{
-        x: 140,
-        y: 60,
+        x: 95,
+        y: 55,
         size: 50,
-        str: "Hero Frog Killer",
+        str: "Save the pond, Frog",
         fill:"#000000ff",
     } ,
     strs:{
         hey: "Hey! Listen! ",
-        instruction:"instruction instruction \ninstruction \ninstruction instruction\ninstruction\ninstruction\ninstruction\ninstruction",
+        instruction1:"   Invasive toxic \nflies are invading \n    the pond ! ...",
+        instruction2:"       Eat flies to save \n  the pond from pollution. \n\n   But don't forget about \n    your health, flies are \n     killing you slowly...",
+        instruction3:"  Eat fairies to gain health.\n\n   But doing so pollutes \n       the pond slowly.",
         size: 40,
-        x: 220,
-        y: 180,
+        x: 210,
+        y: 200,
+        delay: 5000,
 
     },
     delay: 2000,
@@ -210,7 +213,7 @@ const button ={
         size: 35,
         
     },
-    
+    delay: 10000,
 }
 //ad a sound for when the frog eats the fly/fairy
 function preload() {
@@ -396,6 +399,8 @@ function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES);
     setTimeout(changeSpeech, fairyScreen.text.delay);
+    setTimeout(changeSpeech2, fairyScreen.text.strs.delay);
+    setTimeout(changeSpeech3, fairyScreen.text.strs.delay+8000);
     setTimeout(startButtonApparition, button.delay);
     // Give the fly its first random position
     resetFly();
@@ -404,7 +409,7 @@ function setup() {
 
 function draw() {
     
-    background("#cbedfbff");
+    background("#a1e1faff");
     fairyTitleScreen();
     buttonStart();
     startGame();
@@ -499,12 +504,24 @@ function fairyTitleScreen (){
 }
 
 function changeSpeech(){
-    fairyScreen.text.strs.hey = fairyScreen.text.strs.instruction;
-    fairyScreen.text.strs.size = 20;
+    fairyScreen.text.strs.hey = fairyScreen.text.strs.instruction1;
+    fairyScreen.text.strs.size = 30;
     fairyScreen.text.x = fairyScreen.text.strs.x;
     fairyScreen.text.y= fairyScreen.text.strs.y;
-    
 }
+
+function changeSpeech2(){
+     if(fairyScreen.text.strs.hey = fairyScreen.text.strs.instruction1){
+        fairyScreen.text.strs.hey = fairyScreen.text.strs.instruction2;
+        fairyScreen.text.strs.size = 20;
+    }
+}
+function changeSpeech3(){
+    if(fairyScreen.text.strs.hey =fairyScreen.text.strs.instruction2){
+        fairyScreen.text.strs.hey =fairyScreen.text.strs.instruction3;
+    }
+} 
+
 function startButtonApparition (){
     button.y = 110;
     button.text.y = 120;
@@ -612,12 +629,12 @@ function drawFairy() {
  */
 function resetFly() {
     fly.x = 0;
-    fly.y = random(50, 350);
+    fly.y = random(30, 400);
  
 }
 function resetFairy(){
     fairy.x = -3000;
-    fairy.y = random(50, 350);
+    fairy.y = random(30, 400);
 }
 
 /**
@@ -795,8 +812,8 @@ function drawFrog() {
     ellipse(frog.body.x-19,frog.fingers.y+10,frog.fingers.w, frog.fingers.h)
         //right
     ellipse(frog.body.x+19,frog.fingers.y,frog.fingers.w, frog.fingers.h)
-    ellipse(frog.body.x+21,frog.fingers.y+10,frog.fingers.w, frog.fingers.h)
-    ellipse(frog.body.x+20,frog.fingers.y+5,frog.fingers.w, frog.fingers.h)
+    ellipse(frog.body.x+19,frog.fingers.y+10,frog.fingers.w, frog.fingers.h)
+    ellipse(frog.body.x+18,frog.fingers.y+5,frog.fingers.w, frog.fingers.h)
     pop();
 
 }
@@ -950,13 +967,9 @@ function startGame(){
     
 }
 //event-challenge*
-function lose() {
-  
+function lose() {  
       gameOver = true
       game = false
-
-      
-
 }
 
 //ways to lose
@@ -967,7 +980,6 @@ function noHealth(){
         frog.eyes.fills.dead = "#000000";
         frog.tongue.y = 400;
         healthBar.fills.full = healthBar.fills.empty;
-
     };
 }
 function yesPollution(){
