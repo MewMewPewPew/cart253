@@ -235,7 +235,8 @@ const button = {
     },
     delay: 10000,
 }
-//Button to be able to eat on mobile 
+//Button to be able to eat on mobile (did not work)
+/*
 const buttonSlurp = {
     fill: "#ffffff98",
     line: "#ffffff3a",
@@ -259,7 +260,7 @@ const buttonSlurp = {
         size: 20,
 
     },
-}
+}*/
 //ad a sound for when the frog eats the fly/fairy
 let fontFancy;
 let fontNormal;
@@ -478,7 +479,7 @@ function draw() {
     moveFrog();
     moveTongue();
     drawPond();
-    buttonEat();
+    //buttonEat();
     drawFrog();
     frog.tongue.y = constrain(frog.tongue.y, 0, 430),
         drawHeatlhBar();
@@ -490,7 +491,7 @@ function draw() {
     checkTongueFlyOverlap();
     checkTongueFairyOverlap();
     checkTongueButtonOverlap();
-    touchStarted();
+    //touchStarted();
     
 
     // Only increase the score if the game is not over
@@ -744,7 +745,8 @@ function moveTongue() {
         }
     }
 }
-//Adding a control ! adding a button for phones -jump
+//Adding a control ! adding a button for phones -jump (did not work)
+/*
 function buttonEat(){
     push();
     strokeWeight(buttonSlurp.outline);
@@ -762,7 +764,7 @@ function buttonEat(){
     text(buttonSlurp.text.str, buttonSlurp.text.x, buttonSlurp.text.y)
     pop();
 }
-        
+        */
    
 
 

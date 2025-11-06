@@ -16,7 +16,7 @@ Ash Oest O'Leary
 
 Save the world, Frog is a game about a frog who's under a lot of pressure. His pond is invaded by invasive toxic flies that threatened his ecosystem. Luckily Frog is hungry and sets a goal to eat all of the flies to protect his home from being polluted. 
 
-One thing thought, is that the flies are also a bit toxic to Frog. He needs to be careful not to poison himself and die. Fairies have healing propreties when eaten, but they are important to the ecosystem and eaten them pollutes aswell. 
+One thing thought, is that the flies are also a bit toxic to Frog. He needs to be careful not to poison himself and die. Fairies have healing propreties when eaten, but they are important to the ecosystem and eating them pollutes aswell. 
 
 Instructions:
 Move the frog with your mouse
@@ -24,6 +24,18 @@ Click to launch the tongue
 Catch flies to keep the pollution low, but be careful because they poison you aswell (slowly)
 Catch fairies to heal, but eating them cause a bit of pollution
 Keep your health high and pollution low to survive
+
+Features:
+The game includes these following features;
+- A title and instructions screen : pretty instruction that change over time with a button to start the game
+- An Ending :Game Over* 
+- A scoring system : Flies population & death scoring at the game over screen
+- New kinds of fly movements :lots of random movement
+- New visuals and audio effects : Fonts, new frog visual on a lilypad on some water(pond), Navi's (from Zelda) iconic "hey listen" added at the begining of the instructions/game, yoshi's iconic "mlem" sound when the frog eats and a background silly music
+
+-other features : Frog health bar and the pond's pollution bar that help determine the whole game and also changes the color of the water and lilypad the more "polluted it is". The health bar also changes color when it's low. 
+
+*I intended to include a "possible" win ending if one miracoulously managed to eat all flies.
 
 ## Screenshot(s)
 
