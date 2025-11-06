@@ -1,4 +1,4 @@
-## Save the world, Forg
+## Save the world, Frog
 
 [Play it!](https://mewmewpewpew.github.io/cart253/topics/mod-jam/)
 
