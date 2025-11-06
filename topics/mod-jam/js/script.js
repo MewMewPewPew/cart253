@@ -490,6 +490,7 @@ function draw() {
     checkTongueFlyOverlap();
     checkTongueFairyOverlap();
     checkTongueButtonOverlap();
+    touchStarted();
     
 
     // Only increase the score if the game is not over
