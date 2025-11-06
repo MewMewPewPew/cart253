@@ -1,17 +1,3 @@
-/**
- * Save the world, Forg
- * Ash Oest O'Leary
- * 
- * A game about balancing the ecosystem of your pond as frog when toxic flies are trying to invade it. Luckily there's fairy around to help. 
- * 
- * 
- * Instructions:
- * - Move the frog with your mouse
- * - Click to launch the tongue
- * - Catch flies to keep the pollution low, but be careful because they poison you aswell (slowly)
- * - Catch fairies to heal, but eating them cause a bit of pollution
- * - Keep your health high and pollution low to survive
- * 
 ## Save the world, Forg
 
 [Play it!](https://mewmewpewpew.github.io/cart253/topics/mod-jam/)
@@ -41,7 +27,7 @@ Keep your health high and pollution low to survive
 
 ## Screenshot(s)
 
-This bit should have some images of the program running so that the reader has a sense of what it looks like. 
+Here's what the program should look like 
 
 > ![Image](./assets/images/Instructions.png)
 > ![Image](./assets/images/in-game.png)
