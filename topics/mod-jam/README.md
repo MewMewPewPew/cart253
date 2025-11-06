@@ -1,44 +1,61 @@
-# TITLE OF PROJECT
-# Frogfrogfrog
+/**
+ * Save the world, Forg
+ * Ash Oest O'Leary
+ * 
+ * A game about balancing the ecosystem of your pond as frog when toxic flies are trying to invade it. Luckily there's fairy around to help. 
+ * 
+ * 
+ * Instructions:
+ * - Move the frog with your mouse
+ * - Click to launch the tongue
+ * - Catch flies to keep the pollution low, but be careful because they poison you aswell (slowly)
+ * - Catch fairies to heal, but eating them cause a bit of pollution
+ * - Keep your health high and pollution low to survive
+ * 
+## Save the world, Forg
 
-A game about catching flies.
+[Play it!](https://mewmewpewpew.github.io/cart253/topics/mod-jam/)
 
-[Play it!](https://pippinbarr.github.io/cart253-examples/topics/making/frogfrogfrog/index.html)
-
+(I plan mostly on paper)
 - [Ideas](./ideas.md)
 - [Planning](./planning.md)
 - [Pseudocode](./pseudocode.md)
+- [Brainstorm](./brainstorm.md)
 
-AUTHOR NAME
+Ash Oest O'Leary
 
-[View this project online](URL_FOR_THE_RUNNING_PROJECT)
+[View this project online](https://mewmewpewpew.github.io/cart253/topics/mod-jam/)
 
 ## Description
 
-This description should help the reader understand what the program is, anything they should know to be able to experience it (controls, special features, etc.), and what the desired user experience is. For example:
+Save the world, Frog is a game about a frog who's under a lot of pressure. His pond is invaded by invasive toxic flies that threatened his ecosystem. Luckily Frog is hungry and sets a goal to eat all of the flies to protect his home from being polluted. 
 
-> *The Mayor of Clown Town* is a simulator experience that allows the user to control a small town populated entirely by clowns.
+One thing thought, is that the flies are also a bit toxic to Frog. He needs to be careful not to poison himself and die. Fairies have healing propreties when eaten, but they are important to the ecosystem and eaten them pollutes aswell. 
 
-> The experience is controlled via the mouse, with left click selecting a clown and bringing up a menu of options such as "slip of banana peel" or "get into impossible capacious clown-car."
-
-> The project is meant to give the user a sense of what it would be the mayor of a town of clowns, eventually getting the sense that clowns are not taking their civic duties seriously.
+Instructions:
+Move the frog with your mouse
+Click to launch the tongue
+Catch flies to keep the pollution low, but be careful because they poison you aswell (slowly)
+Catch fairies to heal, but eating them cause a bit of pollution
+Keep your health high and pollution low to survive
 
 ## Screenshot(s)
 
-This bit should have some images of the program running so that the reader has a sense of what it looks like. For example:
+This bit should have some images of the program running so that the reader has a sense of what it looks like. 
 
-> ![Image of a clown face](./assets/images/clown.png)
+> ![Image](./assets/images/Instructions.png)
+> ![Image](./assets/images/in-game.png)
+> ![Image](./assets/images/death.png)
 
 ## Attribution
 
-This bit should attribute any code, assets or other elements used taken from other sources. For example:
+I used elements learn from Pippin Barr's class, as well as his sketch (https://editor.p5js.org/pippinbarr/sketches/UmfzbWYRt). I used information from flanniganable's youtube video (https://www.youtube.com/watch?v=uHNgkQsHLXQ). 
 
 > - This project uses [p5.js](https://p5js.org).
-> - The clown image is a capture of the clown from the Apple emoji character set.
-> - The barking sound effect is "single dog bark 1" by crazymonke9 from freesound.org: https://freesound.org/people/crazymonke9/sounds/418107/
+> - The Music background is called "Touch the sky" by Dazegxd
+> - Sound effect "mlem" is from the character Yoshi from Nintento (Mario bros)
+> - Sound effect "hey listen" is from te character Navi from Nintendo (Zelda)
 
 ## License
 
-This bit should include the license you want to apply to your work. For example:
-
-> This project is licensed under a Creative Commons Attribution ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)) license with the exception of libraries and other components with their own licenses.
+> This project is licensed under a Creative Commons Attribution ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)) license with the exception of libraries and other components with their own licenses. I do not claim to own any music or sound effects used.

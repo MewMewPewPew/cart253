@@ -1,13 +1,16 @@
 /**
- * Frogfrogfrog
- * Pippin Barr
+ * Save the world, Frog
+ * Ash Oest O'Leary
  * 
- * A game of catching flies with your frog-tongue
+ * A game about balancing the ecosystem of your pond as frog when toxic flies are trying to invade it. Luckily there's fairy around to help. 
+ * 
  * 
  * Instructions:
  * - Move the frog with your mouse
  * - Click to launch the tongue
- * - Catch flies
+ * - Catch flies to keep the pollution low, but be careful because they poison you aswell (slowly)
+ * - Catch fairies to heal, but eating them cause a bit of pollution
+ * - Keep your health high and pollution low to survive
  * 
  * Made with p5
  * https://p5js.org/
@@ -493,7 +496,7 @@ function draw() {
     // scoreTotal();
     displayGameover();
     displayScore();
-    //deadSound();
+   // deadSound();
     
 }
 //Hey, Listen Sound at the beggining 
@@ -1056,16 +1059,17 @@ function buttonStart() {
  * Launch the tongue on click (if it's not launched yet)
  */
 function mousePressed() {
-    const dd = dist(mouseX, mouseY, buttonSlurp.x, buttonSlurp.y);
-  const overlapped = (dd < buttonSlurp.size/2);
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
-    } else if (overlapped && frog.tongue.state === "idle") {
-    
-        frog.tongue.state = "outbound";
+    }
+}
+function touchStarted(){
+    const d = dist(mouseX, mouseY, button.x, button.y);
+  const overlap = (d < button.size/2);
+  if (overlap && frog.tongue.state === "idle") {
+    frog.tongue.state = "outbound";
   }
 }
-
 
 function startGame() {
     //stops flies from flying before the start button is pressed
@@ -1124,9 +1128,6 @@ function noHealth() {
         frog.eyes.fills.dead = "#000000";
         frog.tongue.y = 400;
         healthBar.fills.full = healthBar.fills.empty;
-        //owow.soundEffect.play();
-        //owow.soundEffect.setLoop(false);
-        
         
 
     };
@@ -1143,7 +1144,7 @@ function deadSound(){
     const deathSound = (healthBar.w<=0);
     if (deathSound){
         owow.soundEffect.play();
-        cycleSounds.setLoop(false);
+       
     }
 }*/
 function yesPollution() {
