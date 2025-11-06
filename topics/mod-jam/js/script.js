@@ -19,12 +19,18 @@
 // Current score
 /** s
  */
-
+let flyPopulation = {
+    x: 10,
+    y: 20,
+    size: 12,
+    text: "Fly's population:",
+    fill:"#a1e1faff",
+}
 let flyScore = {
     number: 0,
-    x: 20,
-    y: 40,
-    size: 30,
+    x: 100,
+    y: 20,
+    size: 15,
     fill: "#ffffff0c",
 }
 let fairyScore = {
@@ -47,8 +53,14 @@ const mlem = {
 const owow = {
     soundEffect: undefined,
 }
+const heyListen = {
+    soundEffect: undefined,
+}
+const music = {
+    soundEffect: undefined,
+}
 
-//Title screen
+//Title screen, is a fairy like in zelda
 let fairyScreen = {
     body: {
         x: 320,
@@ -57,7 +69,7 @@ let fairyScreen = {
         fill: "#f096d9ff",
 
     },
-    //light "emenating" from the bodu
+    
     light: {
         x: 320,
         y: 240,
@@ -224,10 +236,15 @@ const button = {
 let fontFancy;
 let fontNormal;
 function preload() {
+    //Fonts
     fontFancy = loadFont("assets/fonts/Jacquard12-Regular.otf");
     fontNormal = loadFont("assets/fonts/VT323-Regular.otf");
+    //Sound Effects
     mlem.soundEffect = loadSound("assets/sounds/Yoshi mlem.wav");
     owow.soundEffect = loadSound("assets/sounds/Yoshi Owowow.mp3");
+    heyListen.soundEffect = loadSound("assets/sounds/Navi _Hey listen_.mp3");
+    //Music
+    music.soundEffect = loadSound("assets/sounds/touch the sky.mp3");
 }
 //pollution bar
 let pollutionBar = {
@@ -252,7 +269,7 @@ let healthBar = {
 
     fills: {
         empty: "#00961902",
-        full: "#13e400ff",
+        full: "#5f9715ff",
     },
 
     y: 472,
@@ -415,6 +432,9 @@ function setup() {
     // Give the fly its first random position
     resetFly();
     resetFairy();
+    sound();
+    
+    //
 }
 
 function draw() {
@@ -447,7 +467,17 @@ function draw() {
     // scoreTotal();
     displayGameover();
     displayScore();
+    deadSound();
+    
 }
+//Hey, Listen Sound at the beggining 
+function sound(){
+    heyListen.soundEffect.play();
+    userStartAudio();
+    
+}
+
+    
 //titlescreen
 function fairyTitleScreen() {
     //fairy light
@@ -550,7 +580,7 @@ function moveFly() {
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly();
-        pollutionBar.w += 18;
+        pollutionBar.w += 20;
     }
     //relate the fly to its wings
     fly.wing1.x = fly.x - 2;
@@ -641,12 +671,12 @@ function drawFairy() {
  */
 function resetFly() {
     fly.x = 0;
-    fly.y = random(30, 400);
+    fly.y = random(30, 380);
 
 }
 function resetFairy() {
-    fairy.x = -3000;
-    fairy.y = random(30, 400);
+    fairy.x = -2000;
+    fairy.y = random(30, 380);
 }
 
 /**
@@ -684,6 +714,7 @@ function moveTongue() {
         }
     }
 }
+
 //pollution bar
 function drawPollutionBar() {
     //empty box
@@ -910,7 +941,7 @@ function checkTongueFlyOverlap() {
         // Bring back the tongue
         frog.tongue.state = "inbound";
         flyScore.number += 1;
-        healthBar.w -= 5;
+        healthBar.w -= 10;
         pollutionBar.w -= 10;
     }
 
@@ -930,8 +961,8 @@ function checkTongueFairyOverlap() {
         // Bring back the tongue
         frog.tongue.state = "inbound";
         fairyScore.number += 1;
-        healthBar.w += 20;
-        //pollutionBar.w += 5;
+        healthBar.w += 25;
+        pollutionBar.w += 5;
     }
 }
 
@@ -944,6 +975,9 @@ function checkTongueButtonOverlap() {
     if (started) {
         //make a mlem sound 
         mlem.soundEffect.play();
+        music.soundEffect.play();
+        music.soundEffect.loop();
+        music.soundEffect.setVolume(0.4);
         game = true;
         // Bring back the tongue
         frog.tongue.state = "inbound";
@@ -993,7 +1027,7 @@ function startGame() {
     else if (game === true) {
         // gives time between start and first fly   
         fly.speed = 4;
-        fairy.speed = 7;
+        fairy.speed = 6;
         // make the instruction screen disappear
         button.y = -1000;
         fairyScreen.light.fill = "#00000000";
@@ -1004,7 +1038,8 @@ function startGame() {
         button.text.fill = "#00000000";
         fairyScreen.text.title.fill = "#00000000";
         //make the score appear
-        flyScore.fill = "#000000ff";
+  //    flyScore.fill = "#000000ff";
+        flyPopulation.fill = "#000000ff";
         pollutionBar.stroke = "#000000ff";
         pollutionBar.fills.full = "#000000ff";
         pollutionBar.fills.text = "#000000ff";
@@ -1022,7 +1057,7 @@ function lose() {
 //ways to lose
 function noHealth() {
     if (healthBar.w >= 40) {
-        healthBar.fills.full = "#13e400ff";
+        healthBar.fills.full = "#5f9715ff";
     };
     if (healthBar.w <= 40) {
         healthBar.fills.full = "#f9ed4eff";
@@ -1036,13 +1071,29 @@ function noHealth() {
         frog.eyes.fills.dead = "#000000";
         frog.tongue.y = 400;
         healthBar.fills.full = healthBar.fills.empty;
+        
 
     };
+}
+/* - really tried to make the owowow sound when dying :( It keeps looping ? 
+function deathSound(){
+    if (healthBar.w <= 0){
+        owow.soundEffect.play();
+        //userStartAudio();
+    };
+}
+*/
+function deadSound(){
+    const deathSound = (healthBar.w<=0);
+    if (deathSound){
+        owow.soundEffect.play();
+        cycleSounds.setLoop(false);
+    }
 }
 function yesPollution() {
     if (pollutionBar.w >= 150) {
         lose();
-        healthBar.w -= 2
+        healthBar.w -= 3;
 
     };
 }
@@ -1129,6 +1180,23 @@ function displayGameover() {
  * Display the score
  */
 function displayScore() {
+    //fly's population score
+    const flyPopulationOutcome = (1000000 - flyScore.number);
+    push();
+    textSize(flyPopulation.size);
+    textFont(fontNormal);
+    textStyle(BOLD);
+    fill(flyPopulation.fill);
+    text(flyPopulation.text, flyPopulation.x, flyPopulation.y);
+    pop();
+    push();
+    textSize(flyScore.size);
+    textFont(fontNormal);
+    textStyle(BOLD);
+    fill(flyPopulation.fill);
+    text(flyPopulationOutcome, flyScore.x, flyScore.y);
+    pop();
+    //fly score (end)
     push();
     textSize(flyScore.size);
     textFont(fontNormal);
@@ -1136,6 +1204,7 @@ function displayScore() {
     fill(flyScore.fill);
     text(flyScore.number, flyScore.x, flyScore.y);
     pop();
+    //fairy score (end)
     push()
     textSize(fairyScore.size);
     textFont(fontNormal);
@@ -1149,7 +1218,14 @@ function displayScore() {
         flyScore.y = 240;
         flyScore.fill = "#ffffffff";
         fairyScore.fill = "#ff7979ff";
+        flyPopulation.fill = "rgba(0,0,0,0)";
 
     }
 }
-//
+//Background Music !]
+/*function backgroundMusic() {
+    if (started){
+        music.soundEffect.play();
+    };
+
+}*/
