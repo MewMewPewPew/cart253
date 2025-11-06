@@ -232,6 +232,31 @@ const button = {
     },
     delay: 10000,
 }
+//Button to be able to eat on mobile 
+const buttonSlurp = {
+    fill: "#ffffff98",
+    line: "#ffffff3a",
+    x: 50,
+    y: 430,
+    w: 60,
+    h: 40,
+    outline: 10,
+    //tr: 10,
+    fills: {
+        unpressed: "#ffffff",
+        pressed: "#dd878eff"
+
+    },
+    text: {
+
+        str: "eat",
+        fill: "#5f9715ff",
+        x: 36,
+        y: 435,
+        size: 20,
+
+    },
+}
 //ad a sound for when the frog eats the fly/fairy
 let fontFancy;
 let fontNormal;
@@ -450,24 +475,25 @@ function draw() {
     moveFrog();
     moveTongue();
     drawPond();
+    buttonEat();
     drawFrog();
     frog.tongue.y = constrain(frog.tongue.y, 0, 430),
         drawHeatlhBar();
     healthBar.w = constrain(healthBar.w, 0, 100),
         drawPollutionBar();
     pollutionBar.w = constrain(pollutionBar.w, 0, 150),
-
         noHealth();
     yesPollution();
     checkTongueFlyOverlap();
     checkTongueFairyOverlap();
     checkTongueButtonOverlap();
+    
 
     // Only increase the score if the game is not over
     // scoreTotal();
     displayGameover();
     displayScore();
-    deadSound();
+    //deadSound();
     
 }
 //Hey, Listen Sound at the beggining 
@@ -714,6 +740,27 @@ function moveTongue() {
         }
     }
 }
+//Adding a control ! adding a button for phones -jump
+function buttonEat(){
+    push();
+    strokeWeight(buttonSlurp.outline);
+    stroke(buttonSlurp.line);
+    fill(buttonSlurp.fill);
+    ellipse(buttonSlurp.x, buttonSlurp.y, buttonSlurp.w, buttonSlurp.h)
+    
+    pop();
+    //text
+    push();
+    noStroke();
+    textSize(buttonSlurp.text.size);
+    fill(buttonSlurp.text.fill);
+    textFont(fontFancy);
+    text(buttonSlurp.text.str, buttonSlurp.text.x, buttonSlurp.text.y)
+    pop();
+}
+        
+   
+
 
 //pollution bar
 function drawPollutionBar() {
@@ -1009,10 +1056,16 @@ function buttonStart() {
  * Launch the tongue on click (if it's not launched yet)
  */
 function mousePressed() {
+    const dd = dist(mouseX, mouseY, buttonSlurp.x, buttonSlurp.y);
+  const overlapped = (dd < buttonSlurp.size/2);
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
-    }
+    } else if (overlapped && frog.tongue.state === "idle") {
+    
+        frog.tongue.state = "outbound";
+  }
 }
+
 
 function startGame() {
     //stops flies from flying before the start button is pressed
@@ -1071,6 +1124,9 @@ function noHealth() {
         frog.eyes.fills.dead = "#000000";
         frog.tongue.y = 400;
         healthBar.fills.full = healthBar.fills.empty;
+        //owow.soundEffect.play();
+        //owow.soundEffect.setLoop(false);
+        
         
 
     };
@@ -1082,14 +1138,14 @@ function deathSound(){
         //userStartAudio();
     };
 }
-*/
+
 function deadSound(){
     const deathSound = (healthBar.w<=0);
     if (deathSound){
         owow.soundEffect.play();
         cycleSounds.setLoop(false);
     }
-}
+}*/
 function yesPollution() {
     if (pollutionBar.w >= 150) {
         lose();
