@@ -1,12 +1,15 @@
 /**
- * Terrible New Car
- * Pippin Barr
+ * Interesting Dinosaurs
+ * Ima & Ash
  * 
- * A program to generate new car model names using dinosaurs.
+ * A program to generate new interesting dinosaurs names with emoji.
  * 
  * Uses:
  * Darius Kazemi's corpora repository
  * https://github.com/dariusk/corpora/tree/master
+ * & Chalda Pnuzig's repository
+ * https://github.com/chalda-pnuzig/emojis.json/blob/dc21ce13ee03c26e0f51cedd995bbd22bfc199b6/dist/array.min.json
+ * 
  */
 
 "use strict";
@@ -16,10 +19,11 @@ let dinosaurData = undefined;
 let emojiData = undefined;
 
 let langData = undefined;
-let lang = "fr";
+
 
 // Starts with the instruction
-let dinosaurName = "Click to generate a dinosaur name";
+
+let dinosaurName = undefined;
 let descriptionsName = undefined;
 let emoji = undefined;
 
@@ -31,6 +35,7 @@ function preload() {
 descriptionsData = loadJSON("assets/data/descriptions.json");
 dinosaurData = loadJSON("assets/data/dinosaurs.json");
 emojiData = loadJSON("assets/data/emoji.json");
+langData = loadJSON("assets/data/lang.json");
 }
 
 /**
@@ -45,19 +50,29 @@ function setup() {
 */
 function draw() {
     background(0);
-    
+    //instruction
+const lang = (langData.instruction[1]);
+    push();
+    fill("pink");
+    textAlign(CENTER, BOTTOM);
+    textSize(22);
+    text(lang, width / 2, 100);
+    pop();
+    //description
     push();
     fill("pink");
     textAlign(CENTER, BOTTOM);
     textSize(32);
     text(descriptionsName, width / 2, 190);
     pop();
+    //dino name
     push();
     fill("pink");
     textAlign(CENTER, TOP);
     textSize(32);
     text(dinosaurName, width / 2, height / 2);
     pop();
+    //emoji
     push();
     fill("pink");
     textAlign(CENTER, TOP);

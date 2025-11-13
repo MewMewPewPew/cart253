@@ -1,0 +1,8 @@
+{
+    "description":"To have both english and french instructions",
+    "instruction": 
+    [
+        "click to generate an interesting dinosaur name",
+        "cliquer pour générer un nom de dinosaure intéressant"
+    ]     
+}
