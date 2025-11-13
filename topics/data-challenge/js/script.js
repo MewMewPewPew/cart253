@@ -13,18 +13,24 @@
 
 let descriptionsData = undefined;
 let dinosaurData = undefined;
+let emojiData = undefined;
+
 let langData = undefined;
 let lang = "fr";
 
 // Starts with the instruction
-let carName = "Click to generate a car name.";
+let dinosaurName = "Click to generate a dinosaur name";
+let descriptionsName = undefined;
+let emoji = undefined;
+
 
 /**
- * Load the car and dinosaur data
+ * Load the description and dinosaur data
  */
 function preload() {
 descriptionsData = loadJSON("assets/data/descriptions.json");
 dinosaurData = loadJSON("assets/data/dinosaurs.json");
+emojiData = loadJSON("assets/data/emoji.json");
 }
 
 /**
@@ -39,18 +45,34 @@ function setup() {
 */
 function draw() {
     background(0);
-
+    
     push();
     fill("pink");
-    textAlign(CENTER, CENTER);
+    textAlign(CENTER, BOTTOM);
     textSize(32);
-    text(carName, width / 2, height / 2);
+    text(descriptionsName, width / 2, 190);
     pop();
+    push();
+    fill("pink");
+    textAlign(CENTER, TOP);
+    textSize(32);
+    text(dinosaurName, width / 2, height / 2);
+    pop();
+    push();
+    fill("pink");
+    textAlign(CENTER, TOP);
+    textSize(32);
+    text(emoji, width / 2, 120);
+    pop();
+    
+    
 }
 
 /**
- * Generate a new car name
- */
+ * Generate a new description name
+*/
 function mousePressed() {
-
+    dinosaurName = random (dinosaurData.dinosaurs);
+    descriptionsName = random (descriptionsData.descriptions);
+    emoji = random (emojiData.emojis);
 }
