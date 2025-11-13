@@ -11,7 +11,7 @@
 
 "use strict";
 
-let carData = undefined;
+let descriptionsData = undefined;
 let dinosaurData = undefined;
 let langData = undefined;
 let lang = "fr";
@@ -23,7 +23,8 @@ let carName = "Click to generate a car name.";
  * Load the car and dinosaur data
  */
 function preload() {
-
+descriptionsData = loadJSON("assets/data/descriptions.json");
+dinosaurData = loadJSON("assets/data/dinosaurs.json");
 }
 
 /**
