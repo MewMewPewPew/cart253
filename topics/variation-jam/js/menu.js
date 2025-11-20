@@ -8,8 +8,9 @@ const menuText = `
 CHESS * 3 \n\n\n
 REVOLUTION CHESS (R)
 PANDEMIC CHESS (P)
-MUSIC CHESS (M)` 
-// add author+context text
+MUSIC CHESS (M)
+BaseMemoryGame (B)` 
+// add author + context text
 
 
 
@@ -45,6 +46,11 @@ function menuKeyPressed(event) {
         case 77:
             state = "music-variation";
             musicSetup();
+            break;
+
+        case 66:
+            state = "BaseMemoryGame";
+            baseSetup();
             break;
     }
 }

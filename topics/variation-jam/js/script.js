@@ -36,6 +36,9 @@ function draw() {
         case "music-variation":
             musicDraw();
             break;
+        case "BaseMemoryGame":
+            baseDraw();
+            break;
     }
 }
 
@@ -57,6 +60,9 @@ function mousePressed() {
         case "music-variation":
             musicMousePressed();
             break;
+        case "BaseMemoryGame":
+            baseMousePressed();
+            break;
     }
 }
 
@@ -77,6 +83,9 @@ function keyPressed(event) {
             break;
         case "music-variation":
             musicKeyPressed(event);
+            break;
+        case "BaseMemoryGame":
+            baseKeyPressed(event);
             break;
     }
 }

@@ -20,9 +20,10 @@ https://github.com/pippinbarr/chesses
 
     Style is exemplary of the style guide : https://pippinbarr.com/cart253/guides/style-guide.html
 
-# IDEAS variations
+# IDEAS variations 1
 Start with normal/simple chess + add at least 3 :
-
+    https://editor.p5js.org/D_Snyder/sketches/CIZyBpf9k
+    
 - Revolution chess: 
     Where the pawns don't want to die for the cause and rebel. The form an union against the bourgeoisie, the goal for them is to kill both kings. Goal for the bourgeoisie is to kill all pawns (and traitor?).
     All the pawns (and fou/bishop?) start in the middle. Is it even possible to win ? 
@@ -58,9 +59,22 @@ Start with normal/simple chess + add at least 3 :
 
     - 
 
+# Figured doing a chess game would be too complicated with only 2 weeks 
+    back to square one :3
+    What game should I start off with ? option: 
+        - pac man
+        - mario game
+        - pong game
+        - cross the road game
+        - easy jumping game
+        - whack a mole
+        - tetris
+        - space invvaders
+        - 123 soleil / Red light Green Light 
+            https://makecode.microbit.org/projects/red-light-green-light
+            
+        - card game ? (magic/pokemon style)
+        - memory card game
+            https://editor.p5js.org/smitharaoaluri/sketches/chgs4aavq
+            https://www.youtube.com/watch?v=xWdkt6KSirw
 
-
-# Chosen variations
-- make de menu first 
-
-## Revolution Chess
