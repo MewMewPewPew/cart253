@@ -60,4 +60,7 @@ Start with normal/simple chess + add at least 3 :
 
 
 
+# Chosen variations
+- make de menu first 
 
+## Revolution Chess
