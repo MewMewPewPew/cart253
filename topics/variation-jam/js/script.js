@@ -27,14 +27,14 @@ function draw() {
         case "menu":
             menuDraw();
             break;
-        case "red-variation":
-            redDraw();
+        case "revolution-variation":
+            revolutionDraw();
             break
-        case "green-variation":
-            greenDraw();
+        case "pandemic-variation":
+            pandemicDraw();
             break;
-        case "blue-variation":
-            blueDraw();
+        case "music-variation":
+            musicDraw();
             break;
     }
 }
@@ -48,14 +48,14 @@ function mousePressed() {
         case "menu":
             menuMousePressed();
             break;
-        case "red-variation":
-            redMousePressed();
+        case "revolution-variation":
+            revolutionMousePressed();
             break
-        case "green-variation":
-            greenMousePressed();
+        case "pandemic-variation":
+            pandemicMousePressed();
             break;
-        case "blue-variation":
-            blueMousePressed();
+        case "music-variation":
+            musicMousePressed();
             break;
     }
 }
@@ -69,14 +69,14 @@ function keyPressed(event) {
         case "menu":
             menuKeyPressed(event);
             break;
-        case "red-variation":
-            redKeyPressed(event);
+        case "revolution-variation":
+            revolutionKeyPressed(event);
             break
-        case "green-variation":
-            greenKeyPressed(event);
+        case "pandemic-variation":
+            pandemicKeyPressed(event);
             break;
-        case "blue-variation":
-            blueKeyPressed(event);
+        case "music-variation":
+            musicKeyPressed(event);
             break;
     }
 }

@@ -5,9 +5,11 @@
  */
 
 const menuText = `
-(R) Red variation
-(G) Green variation
-(B) Blue variation`
+CHESS * 3 \n\n\n
+REVOLUTION CHESS (R)
+PANDEMIC CHESS (P)
+MUSIC CHESS (M)` 
+// add author+context text
 
 
 
@@ -31,18 +33,18 @@ function menuDraw() {
 function menuKeyPressed(event) {
     switch (event.keyCode) {
         case 82:
-            state = "red-variation";
-            redSetup();
+            state = "revolution-variation";
+            revolutionSetup();
             break;
 
-        case 71:
-            state = "green-variation";
-            greenSetup();
+        case 80:
+            state = "pandemic-variation";
+            pandemicSetup();
             break;
 
-        case 66:
-            state = "blue-variation";
-            blueSetup();
+        case 77:
+            state = "music-variation";
+            musicSetup();
             break;
     }
 }
