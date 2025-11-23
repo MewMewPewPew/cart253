@@ -9,6 +9,10 @@
  */
 function musicSetup() {
 
+  ChessBoard("board", "start");
+  document.getElementById("board").style.display = "block";
+  document.querySelector("canvas").style.display = "none";
+
 }
 
 /**

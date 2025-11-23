@@ -11,11 +11,15 @@
 //Start witht the menu screen
 let state = "menu";
 
+//ChessBoard("board", "start");
+
 /**
  * Create the canvas
 */
 function setup() {
+
     createCanvas(500, 500);
+
 }
 
 
