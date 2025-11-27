@@ -1,5 +1,7 @@
 "use strict";
 
+const tarot = (function (){
+
 let cards;
 let card;
 var colNum = 4;
@@ -15,27 +17,27 @@ let hover = false;
 let numFlipped = 0;
 let timer = -1;
 let matchBool;
+//hoverBool ?
 let delay = 60;
 let set = 0;
 let match = false;
 let matchedCards = [];
 let confetti = [];
-/**
- * This will be called just before the base variation starts
- */
-function preload() {
-  img1 = loadImage("assets/images/clown.png");
-  img2 = loadImage("assets/images/clown.png");
-  img3 = loadImage("assets/images/clown.png");
-  img4 = loadImage("assets/images/clown.png");
-  img5 = loadImage("assets/images/clown.png");
-  img6 = loadImage("assets/images/clown.png");
-  img7 = loadImage("assets/images/clown.png");
-  img8 = loadImage("assets/images/clown.png");
 
+function preload() {
+  img1 = loadImage("assets/images/cards/basic/star.png");
+  img2 = loadImage("assets/images/cards/basic/triangle.png");
+  img3 = loadImage("assets/images/cards/basic/spiral.png");
+  img4 = loadImage("assets/images/cards/basic/circle.png");
+  img5 = loadImage("assets/images/cards/basic/heart.png");
+  img6 = loadImage("assets/images/cards/basic/diamond.png");
+  img7 = loadImage("assets/images/cards/basic/spade.png");
+  img8 = loadImage("assets/images/cards/basic/trefle.png");
   // faceCards = [img1, img2, img3, img4, img5, img6, img7, img8];
 }
-function baseSetup() {
+
+
+function tarotSetup() {
   createCanvas(600, 400);
   // background(220)
   // rectMode(CENTER)
@@ -78,86 +80,119 @@ function baseSetup() {
     }
   }
 
-  for (i = 0; i < 50; i++) {
+  for (let i = 0; i < 50; i++) {
     confetti[i] = new Confetti();
   }
-
 }
+/**
+ * This will be called every frame when the music variation is active
+ */
+function tarotDraw() {
+  background(220);
 
-  /**
-   * This will be called every frame when the base variation is active
-  */
- function baseDraw() {
-   
-   background(220);
-   
-   // shuffling(selected);
-   if (!match) {
-     if (frameCount - timer > delay && timer != -1) {
-       for (let i = 0; i < cards.length; i++) {
-         if (!cards[i].set) {
-           cards[i].isFaceUp = false;
-         }
-         numFlipped = 0;
-         timer = -1;
-         set = 0;
-       }
-     }
-   }
-   
-   if (match) {
-     for (let i = 0; i < set; i++) {
-       // flippedCards[i].isFaceUp = true;
-       console.log("set is " + set);
-       numFlipped = 0;
-       timer = -1;
-       // match=false
-       // flippedCardsCopy[i].set=false
-       // matchedCards.push(card[i])
-       // cards[i].matched()
-       // cards[i].isFaceUp = true;
-     }
-   }
-   
-   // checking to see display of card distribution
-   for (let i = 0; i < cards.length; i++) {
-     // cards[i].isFaceUp = true;
-     cards[i].body();
-   
-     cards[i].hover();
-   
-     cards[i].display();
-   }
-   
-   // if(match){
-   //  for(i=0;i<flippedCards.length;i++)
-   //  flippedCards[i].display()
-   // }
-   
-   // // if (set == 8) {
-   //   for (let i = 0; i < 100; i++) {
-   //     confetti[i].body();
-   //     confetti[i].fall();
-   //   // }
-   // }
-   background("blue");
-  }
-  /**
-   * This will be called whenever a key is pressed while the base variation is active
-  */
-function baseKeyPressed(event) {
-  
-    if (event.keyCode === 27) {
-        state = "menu";
+  // shuffling(selected);
+  if (!match) {
+    if (frameCount - timer > delay && timer != -1) {
+      for (let i = 0; i < cards.length; i++) {
+        if (!cards[i].set) {
+          cards[i].isFaceUp = false;
+        }
+        numFlipped = 0;
+        timer = -1;
+        set = 0;
+      }
     }
   }
-/**
- * This will be called whenever the mouse is pressed while the base variation is active
- */
-function baseMousePressed() {
 
+  if (match) {
+    for (let i = 0; i < set; i++) {
+      // flippedCards[i].isFaceUp = true;
+      console.log("set is " + set);
+      numFlipped = 0;
+      timer = -1;
+      // match=false
+      // flippedCardsCopy[i].set=false
+      // matchedCards.push(card[i])
+      // cards[i].matched()
+      // cards[i].isFaceUp = true;
+    }
+  }
+
+  // checking to see display of card distribution
+  for (let i = 0; i < cards.length; i++) {
+    // cards[i].isFaceUp = true;
+    cards[i].body();
+
+    cards[i].hover();
+
+    cards[i].display();
+  }
+
+  // if(match){
+  //  for(i=0;i<flippedCards.length;i++)
+  //  flippedCards[i].display()
+  // }
+
+  // // if (set == 8) {
+  //   for (let i = 0; i < 100; i++) {
+  //     confetti[i].body();
+  //     confetti[i].fall();
+  //   // }
+  // }
 }
 
+class Card {
+  constructor(x, y, w, h, picked) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.col = color(200);
+    this.picked = picked;
+    this.isFaceUp = false;
+    this.set = false;
+  }
+
+  body() {
+    rectMode(CENTER);
+    fill(this.col);
+    rect(this.x, this.y, this.w, this.h, 10);
+  }
+
+  hover() {
+    if (
+      mouseX > this.x - this.w / 2 &&
+      mouseX < this.x + this.w / 2 &&
+      mouseY < this.y + this.h / 2 &&
+      mouseY > this.y - this.h / 2
+    ) {
+      this.col = color(160);
+      // rect(this.x,this.y,this.w,this.h,10)
+      this.hoverBool = true;
+    } else {
+      this.col = color(200);
+      this.hoverBool = false;
+    }
+  }
+
+  display() {
+    // rectMode(CENTER)
+    if (this.isFaceUp) {
+      imageMode(CENTER);
+      image(this.picked, this.x, this.y, this.w, this.h);
+    }
+    // else {
+    //   stroke("yellow");
+    //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
+    // }
+  }
+
+  matched() {
+    if (match) {
+      this.display();
+    }
+  }
+}
 
 // fisher yates shuffle as a function
 function shuffling(array) {
@@ -275,4 +310,34 @@ class Confetti {
     //   this.y=0
     // }
   }
+}
+/**
+ * This will be called whenever a key is pressed while the music variation is active
+ */
+
+
+/**
+ * This will be called whenever the mouse is pressed while the music variation is active
+ */
+function tarotMousePressed() {
+
+}
+
+return {
+  preload,
+  tarotSetup,
+  tarotDraw,
+  shuffling,
+  //myShuffle,
+  mouseClicked,
+  tarotMousePressed,
+  
+
+}
+}) ()
+
+function tarotKeyPressed(event) {
+    if (event.keyCode === 27) {
+        state = "menu";
+    }
 }

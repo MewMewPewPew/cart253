@@ -5,7 +5,8 @@
  */
 
 const menuText = `
-CHESS * 3 \n\n\n
+CHESS * 3 \n\n
+Tarot memory card (T)
 REVOLUTION CHESS (R)
 PANDEMIC CHESS (P)
 MUSIC CHESS (M)
@@ -33,6 +34,10 @@ function menuDraw() {
  */
 function menuKeyPressed(event) {
     switch (event.keyCode) {
+        case 84 :
+            state = "tarotMemory-variation";
+            tarot.tarotSetup();
+            break;
         case 82:
             state = "revolution-variation";
             revolutionSetup();
@@ -50,7 +55,7 @@ function menuKeyPressed(event) {
 
         case 66:
             state = "BaseMemoryGame";
-            baseSetup();
+            base.baseSetup();
             break;
     }
 }
