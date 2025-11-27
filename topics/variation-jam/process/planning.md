@@ -1,6 +1,11 @@
 # Planning !
 ## memory card game variations 
 
+
+## general planning
+
+1. add 4 pairs of imgs in basic memory game
+
 ## Starting with the Tarot variation
 
 1. Add the tarot json for inspo (and futur telling stuff that could be added)
@@ -24,7 +29,7 @@
     - Death(13)= losing + Keeps magician objects if there
     
             Ideas :
-    - instead of having 1 pair of hermits, have 1 hermit + 1      Wheel of fortune(10) = randomly either win or lose 
+    - instead of having 1 pair of hermits, have 1 hermit + 1      Wheel of fortune(10) = randomly either win or lose s
 
                 The Chariot = winning fast ! go go go
                 Tower = losing - magician objects if there
