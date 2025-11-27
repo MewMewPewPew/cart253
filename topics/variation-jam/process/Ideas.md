@@ -78,3 +78,17 @@ Start with normal/simple chess + add at least 3 :
             https://editor.p5js.org/smitharaoaluri/sketches/chgs4aavq
             https://www.youtube.com/watch?v=xWdkt6KSirw
 
+## Memory Card Game
+ variations ideas: 
+
+    - Anti-memory game : where you need to NOT pick the same card (not super original)
+
+- Tarot memory game : a mix of memory game & tarot
+        where you need to find the fortune you want to happend (Good fortune or the sun = good hapiness, winning. As opposed to death = cycle end, beggining of a new one (restart lol). Other card could have different outcome. The goal to win is to find the pair of suns, the goal to have fun is to discover what each pairs does. It would be fun to add little fortune telling quote (json))
+
+- Music memory game : Turn it into Simon says typa game ? 
+        or match the same tone (or + difficult match the sound and not the tone)
+
+
+    - guess who ? so the cards are all reveiled* and theres a random description (json)    
+        then the user need to pick the right one based on that (where's the memory part?)
