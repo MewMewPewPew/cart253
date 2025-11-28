@@ -1,4 +1,5 @@
 "use strict";
+
 let cards;
 let card;
 var colNum = 4;
@@ -21,6 +22,7 @@ let matchedCards = [];
 let confetti = [];
 
 function preload() {
+  console.log("hey");
   img1 = loadImage("assets/images/cards/basic/star.png");
   img2 = loadImage("assets/images/cards/basic/triangle.png");
   img3 = loadImage("assets/images/cards/basic/spiral.png");
@@ -83,6 +85,7 @@ function baseSetup() {
 /**
  * This will be called every frame when the music variation is active
  */
+
 function baseDraw() {
   background(220);
 
@@ -113,7 +116,7 @@ function baseDraw() {
       // cards[i].isFaceUp = true;
     }
   }
-
+  
   // checking to see display of card distribution
   for (let i = 0; i < cards.length; i++) {
     // cards[i].isFaceUp = true;

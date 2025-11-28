@@ -22,7 +22,7 @@ let setT = 0;
 let matchT = false;
 let matchedCardsT = [];
 let confettiT = [];
-let length;
+
 
 function preload() {
   sun = loadImage("assets/images/cards/tarot/theSun.png");
@@ -219,6 +219,7 @@ function myShuffle() {
   //   // console.log(faceCards)
   // console.log(faceCards2)
 
+ // console.log(faceCardsT);
   for (let i = 0; i < 16; i++) {
     // randomly picking one card from the array of face cards
     randomIndexT = floor(random(0, faceCardsT.length));
