@@ -36,7 +36,7 @@ function menuKeyPressed(event) {
     switch (event.keyCode) {
         case 84 :
             state = "tarotMemory-variation";
-            tarot.tarotSetup();
+            tarotSetup();
             break;
         case 82:
             state = "revolution-variation";
@@ -55,7 +55,7 @@ function menuKeyPressed(event) {
 
         case 66:
             state = "BaseMemoryGame";
-            base.baseSetup();
+            baseSetup();
             break;
     }
 }

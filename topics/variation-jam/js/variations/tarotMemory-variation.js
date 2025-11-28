@@ -1,87 +1,87 @@
 "use strict";
 
-const tarot = (function (){
 
-let cards;
-let card;
-var colNum = 4;
-var rowNum = 4;
-let selected = [];
-let flippedCards = [];
-let myFont;
-let picked;
-let img1, img2, img3, img4, img5, img6, img7, img8;
-let faceCards, faceCardsCopy;
-let randomIndex;
-let hover = false;
-let numFlipped = 0;
-let timer = -1;
-let matchBool;
+let cardsT;
+let cardT;
+var colNumT = 4;
+var rowNumT = 4;
+let selectedT = [];
+let flippedCardsT = [];
+let myFontT;
+let pickedT;
+let sun, death, magician, fortune, chariot, lovers, tower, hermit;
+let faceCardsT, faceCardsCopyT;
+let randomIndexT;
+let hoverT = false;
+let numFlippedT = 0;
+let timerT = -1;
+let matchBoolT;
 //hoverBool ?
-let delay = 60;
-let set = 0;
-let match = false;
-let matchedCards = [];
-let confetti = [];
+let delayT = 60;
+let setT = 0;
+let matchT = false;
+let matchedCardsT = [];
+let confettiT = [];
+let length;
 
 function preload() {
-  img1 = loadImage("assets/images/cards/basic/star.png");
-  img2 = loadImage("assets/images/cards/basic/triangle.png");
-  img3 = loadImage("assets/images/cards/basic/spiral.png");
-  img4 = loadImage("assets/images/cards/basic/circle.png");
-  img5 = loadImage("assets/images/cards/basic/heart.png");
-  img6 = loadImage("assets/images/cards/basic/diamond.png");
-  img7 = loadImage("assets/images/cards/basic/spade.png");
-  img8 = loadImage("assets/images/cards/basic/trefle.png");
+  sun = loadImage("assets/images/cards/tarot/theSun.png");
+  death = loadImage("assets/images/cards/tarot/death.png");
+  magician = loadImage("assets/images/cards/tarot/theMagician.png");
+  fortune = loadImage("assets/images/cards/tarot/fortune.png");
+  chariot = loadImage("assets/images/cards/tarot/theChariot.png");
+  lovers = loadImage("assets/images/cards/tarot/theLovers.png");
+  tower = loadImage("assets/images/cards/tarot/theTower.png");
+  hermit = loadImage("assets/images/cards/tarot/theHermit.png");
   // faceCards = [img1, img2, img3, img4, img5, img6, img7, img8];
 }
 
 
 function tarotSetup() {
-  createCanvas(600, 400);
+  createCanvas(1200, 800);
   // background(220)
   // rectMode(CENTER)
 
-  faceCards = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
+  faceCardsT = [
+    sun,
+    death,
+    magician,
+    fortune,
+    chariot,
+    lovers,
+    tower,
+    hermit,
+    sun,
+    death,
+    magician,
+    fortune,
+    chariot,
+    lovers,
+    tower,
+    hermit,
   ];
 
-  faceCardsCopy = [];
+  faceCardsCopyT = [];
 
   myShuffle();
 
-  cards = [];
+  cardsT = [];
 
-  //   calling class card
-  for (let i = 0; i < colNum; i++) {
-    for (let j = 0; j < rowNum; j++) {
-      var cardX = 190 + i * 70;
-      var cardY = j * 70 + 90;
+  //   calling class card + position of row
+  for (let i = 0; i < colNumT; i++) {
+    for (let j = 0; j < rowNumT; j++) {
+      var cardX = 360 + i * 150;
+      var cardY = j * 200 + 100;
       // cards.push(new Card(cardX, cardY,50,50));
 
-      var cardFace = selected.pop();
-      card = new Card(cardX, cardY, 50, 50, cardFace);
-      cards.push(card);
+      var cardFaceT = selectedT.pop();
+      cardT = new CardT(cardX, cardY, 100, 170, cardFaceT);
+      cardsT.push(cardT);
     }
   }
 
   for (let i = 0; i < 50; i++) {
-    confetti[i] = new Confetti();
+    confettiT[i] = new ConfettiT();
   }
 }
 /**
@@ -91,25 +91,25 @@ function tarotDraw() {
   background(220);
 
   // shuffling(selected);
-  if (!match) {
-    if (frameCount - timer > delay && timer != -1) {
-      for (let i = 0; i < cards.length; i++) {
-        if (!cards[i].set) {
-          cards[i].isFaceUp = false;
+  if (!matchT) {
+    if (frameCount - timerT > delayT && timerT != -1) {
+      for (let i = 0; i < cardsT.length; i++) {
+        if (!cardsT[i].setT) {
+          cardsT[i].isFaceUp = false;
         }
-        numFlipped = 0;
-        timer = -1;
-        set = 0;
+        numFlippedT = 0;
+        timerT = -1;
+        setT = 0;
       }
     }
   }
 
-  if (match) {
-    for (let i = 0; i < set; i++) {
+  if (matchT) {
+    for (let i = 0; i < setT; i++) {
       // flippedCards[i].isFaceUp = true;
-      console.log("set is " + set);
-      numFlipped = 0;
-      timer = -1;
+      console.log("set is " + setT);
+      numFlippedT = 0;
+      timerT = -1;
       // match=false
       // flippedCardsCopy[i].set=false
       // matchedCards.push(card[i])
@@ -119,13 +119,13 @@ function tarotDraw() {
   }
 
   // checking to see display of card distribution
-  for (let i = 0; i < cards.length; i++) {
+  for (let i = 0; i < cardsT.length; i++) {
     // cards[i].isFaceUp = true;
-    cards[i].body();
+    cardsT[i].body();
 
-    cards[i].hover();
+    cardsT[i].hover();
 
-    cards[i].display();
+    cardsT[i].display();
   }
 
   // if(match){
@@ -141,7 +141,7 @@ function tarotDraw() {
   // }
 }
 
-class Card {
+class CardT {
   constructor(x, y, w, h, picked) {
     this.x = x;
     this.y = y;
@@ -188,7 +188,7 @@ class Card {
   }
 
   matched() {
-    if (match) {
+    if (matchT) {
       this.display();
     }
   }
@@ -221,68 +221,68 @@ function myShuffle() {
 
   for (let i = 0; i < 16; i++) {
     // randomly picking one card from the array of face cards
-    randomIndex = floor(random(0, faceCards.length));
-    picked = faceCards[randomIndex];
+    randomIndexT = floor(random(0, faceCardsT.length));
+    picked = faceCardsT[randomIndexT];
 
     // push 2 copies onto array since there are two of each
-    selected.push(picked);
+    selectedT.push(picked);
     // selected.push(picked);
     // remove card from faces array so we don't re-pick the same cards
-    faceCards.splice(randomIndex, 1);
-    faceCardsCopy.unshift(picked);
+    faceCardsT.splice(randomIndexT, 1);
+    faceCardsCopyT.unshift(picked);
   }
 }
 
 function mouseClicked() {
   // console.log("clicked");
-  for (let i = 0; i < cards.length; i++) {
-    if (cards[i].hoverBool) {
-      if (numFlipped < 2) {
-        cards[i].isFaceUp = true;
-        numFlipped++;
+  for (let i = 0; i < cardsT.length; i++) {
+    if (cardsT[i].hoverBool) {
+      if (numFlippedT < 2) {
+        cardsT[i].isFaceUp = true;
+        numFlippedT++;
 
         // console.log(faceCardsCopy[i]);
-        flippedCards.unshift(faceCardsCopy[i]);
+        flippedCardsT.unshift(faceCardsCopyT[i]);
         // console.log(flippedCards);
-        console.log(numFlipped);
+        console.log(numFlippedT);
 
-        if (flippedCards[0] == flippedCards[1]) {
-          flippedCards[0].set = true;
-          flippedCards[1].set = true;
-          match = true;
+        if (flippedCardsT[0] == flippedCardsT[1]) {
+          flippedCardsT[0].setT = true;
+          flippedCardsT[1].setT = true;
+          matchT = true;
           console.log("match");
-          matchedCards.unshift(faceCardsCopy[i]);
+          matchedCardsT.unshift(faceCardsCopyT[i]);
 
-          numFlipped = 0;
-          set++;
+          numFlippedT = 0;
+          setT++;
 
           // console.log(set)
         } else {
-          match = false;
+          matchT = false;
         }
       }
-      if (numFlipped == 2) {
-        timer = frameCount;
-        console.log(flippedCards);
-        flippedCards.pop();
-        flippedCards.pop();
+      if (numFlippedT == 2) {
+        timerT = frameCount;
+        console.log(flippedCardsT);
+        flippedCardsT.pop();
+        flippedCardsT.pop();
       }
 
-      if (numFlipped > 2) {
-        if (match) {
+      if (numFlippedT > 2) {
+        if (matchT) {
           // cards[i].isFaceUp = true;
           console.log(" match");
-          timer = frameCount;
-          numFlipped = 0;
+          timerT = frameCount;
+          numFlippedT = 0;
 
-          console.log(flippedCards);
-          cards[i].set = true;
-        } else if (!match) {
+          console.log(flippedCardsT);
+          cardsT[i].setT = true;
+        } else if (!matchT) {
           // cards[i].isFaceUp = false;
           console.log("no match");
 
-          console.log(flippedCards);
-          cards[i].set = false;
+          console.log(flippedCardsT);
+          cardsT[i].setT = false;
         }
       }
     }
@@ -290,7 +290,7 @@ function mouseClicked() {
   // }
 }
 
-class Confetti {
+class ConfettiT {
   constructor() {
     this.x = random(width);
     this.y = 0;
@@ -311,30 +311,11 @@ class Confetti {
     // }
   }
 }
-/**
- * This will be called whenever a key is pressed while the music variation is active
- */
 
 
-/**
- * This will be called whenever the mouse is pressed while the music variation is active
- */
 function tarotMousePressed() {
 
 }
-
-return {
-  preload,
-  tarotSetup,
-  tarotDraw,
-  shuffling,
-  //myShuffle,
-  mouseClicked,
-  tarotMousePressed,
-  
-
-}
-}) ()
 
 function tarotKeyPressed(event) {
     if (event.keyCode === 27) {

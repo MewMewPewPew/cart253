@@ -32,24 +32,24 @@
             Gaining 4 objects (sword, wand, cup, coin/pentacle)... why not? The game does not end
     - The hermit(9) = The game does not end,
             Chooses to be alone, maybe disappears on a pelrinage after beging pick up and gives advice to user
-    - Death(13)= losing + Keeps magician objects if there
-    ## Since I need 8 pairs -_- lol
+    - Death(13)= losing or True restart ! anew cycles beggings
+    
     - Wheel of fortune(10) = randomly either win or lose 
             OR MORE ?
-    - The Chariot = winnin, fast!!? gogogo
-    - The lovers = loves win ! 
+    - The Chariot(7) = win, OR you just leave the game, with style !
+    - The lovers(6) = loves win ! 
             once paired they are finally reunited ! YAY
-    - The Tower = losing, 
-            but also losing everying you built, (if built) : objects aquired, hermit never left, lovers are seperated :<  
+    - The Tower(16) = losing, everything crashes because the foundation where never safe & sound to begin with
+
             Ideas :
-    - instead of having 1 pair of hermits, have 1 hermit + 1      Wheel of fortune(10) = randomly either win or lose s
+    - instead of having 1 pair of hermits, have 1 hermit + 1 Wheel of fortune(10) = randomly either win or lose s
 
                 The Chariot = winning fast ! go go go
                 Tower = losing - magician objects if there
                 Strengh = gain the power to :hover and see the card? or smt else ?
                 The lovers = ? 
                 The Devil = ? temptation
-                The Moon = ? anxious
+                The Moon = ? anxious, because you only see one side of the moon, gain the power to see 1 card?
 
     *number represent where they are situated in the major arcana
      

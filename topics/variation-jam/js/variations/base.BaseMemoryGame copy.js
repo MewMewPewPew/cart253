@@ -1,4 +1,6 @@
 "use strict";
+
+const base = (function() {
 let cards;
 let card;
 var colNum = 4;
@@ -14,6 +16,7 @@ let hover = false;
 let numFlipped = 0;
 let timer = -1;
 let matchBool;
+//hoverBool ?
 let delay = 60;
 let set = 0;
 let match = false;
@@ -136,14 +139,8 @@ function baseDraw() {
   //   // }
   // }
 }
-/**
- * This will be called whenever a key is pressed while the music variation is active
- */
-function baseKeyPressed(event) {
-    if (event.keyCode === 27) {
-        state = "menu";
-    }
-}
+
+
 class Card {
   constructor(x, y, w, h, picked) {
     this.x = x;
@@ -198,31 +195,31 @@ class Card {
 }
 
 // fisher yates shuffle as a function
-function shuffling(array) {
-  let counter = array.length;
+  function shuffling(array) {
+    let counter = array.length;
 
   // while there are still elements in the array
-  while (counter > 0) {
+    while (counter > 0) {
     // picks a random index number of the array
-    var randomIndex = Math.floor(Math.random() * counter);
+      var randomIndex = Math.floor(Math.random() * counter);
     // decreases counter by 1
-    counter--;
+      counter--;
     // swaps the last element with the counter
-    var tempSwap = array[counter];
-    array[counter] = array[randomIndex];
-    array[randomIndex] = tempSwap;
+      var tempSwap = array[counter];
+      array[counter] = array[randomIndex];
+      array[randomIndex] = tempSwap;
   }
 }
 
-function myShuffle() {
-  // console.log(faceCards)
+  function myShuffle() {
+  console.log(faceCards)
 
   //   faceCards = faceCards.concat(faceCards)
   //   faceCards2=faceCards
   //   // console.log(faceCards)
   // console.log(faceCards2)
 
-  for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 16; i++) {
     // randomly picking one card from the array of face cards
     randomIndex = floor(random(0, faceCards.length));
     picked = faceCards[randomIndex];
@@ -236,20 +233,20 @@ function myShuffle() {
   }
 }
 
-function mouseClicked() {
-   //console.log("clicked");
-  for (let i = 0; i < cards.length; i++) {
-    if (cards[i].hoverBool) {
-      if (numFlipped < 2) {
-        cards[i].isFaceUp = true;
-        numFlipped++;
+  function mouseClicked() {
+  // console.log("clicked");
+    for (let i = 0; i < cards.length; i++) {
+      if (cards[i].hoverBool) {
+        if (numFlipped < 2) {
+          cards[i].isFaceUp = true;
+          numFlipped++;
 
         // console.log(faceCardsCopy[i]);
-        flippedCards.unshift(faceCardsCopy[i]);
+          flippedCards.unshift(faceCardsCopy[i]);
         // console.log(flippedCards);
-        console.log(numFlipped);
+          console.log(numFlipped);
 
-        if (flippedCards[0] == flippedCards[1]) {
+          if (flippedCards[0] == flippedCards[1]) {
           flippedCards[0].set = true;
           flippedCards[1].set = true;
           match = true;
@@ -260,32 +257,32 @@ function mouseClicked() {
           set++;
 
           // console.log(set)
-        } else {
-          match = false;
+        }   else {
+            match = false;
         }
       }
-      if (numFlipped == 2) {
+        if (numFlipped == 2) {
         timer = frameCount;
         console.log(flippedCards);
         flippedCards.pop();
         flippedCards.pop();
       }
 
-      if (numFlipped > 2) {
-        if (match) {
+        if (numFlipped > 2) {
+          if (match) {
           // cards[i].isFaceUp = true;
-          console.log(" match");
-          timer = frameCount;
-          numFlipped = 0;
+            console.log(" match");
+            timer = frameCount;
+            numFlipped = 0;
 
-          console.log(flippedCards);
-          cards[i].set = true;
-        } else if (!match) {
+            console.log(flippedCards);
+            cards[i].set = true;
+        }   else if (!match) {
           // cards[i].isFaceUp = false;
-          console.log("no match");
+            console.log("no match");
 
-          console.log(flippedCards);
-          cards[i].set = false;
+            console.log(flippedCards);
+            cards[i].set = false;
         }
       }
     }
@@ -293,8 +290,8 @@ function mouseClicked() {
   // }
 }
 
-class Confetti {
-  constructor() {
+  class Confetti {
+    constructor() {
     this.x = random(width);
     this.y = 0;
     this.w = 10;
@@ -302,12 +299,12 @@ class Confetti {
     this.speed = random(1, 5);
   }
 
-  body() {
+    body() {
     fill(this.col);
     circle(this.x, this.y, this.w);
   }
 
-  fall() {
+    fall() {
     this.y += this.speed;
     // if(this.y>height){
     //   this.y=0
@@ -315,13 +312,26 @@ class Confetti {
   }
 }
 
+
 /**
  * This will be called whenever the mouse is pressed while the music variation is active
  */
-function baseMousePressed() {
+  function baseMousePressed() {
 
 }
 
+return {
+  preload,
+  baseSetup,
+  baseDraw,
+  shuffling,
+  //myShuffle,
+  mouseClicked,
+  //baseMousePressed,
+  
+  
+}
+})()
 /**
  * This will be called whenever a key is pressed while the music variation is active
  */

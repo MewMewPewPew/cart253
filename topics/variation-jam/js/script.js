@@ -21,8 +21,10 @@ function setup() {
     createCanvas(500, 500);
 
 }
+/*
 function preload(){
 //base preload
+
     base.preload();
     base.baseSetup();
     base.baseDraw();
@@ -44,7 +46,7 @@ function preload(){
 
     
 }
-
+*/
 /**
  * Display the menu of chess variations
 */
@@ -54,7 +56,7 @@ function draw() {
             menuDraw();
             break;
         case "tarotMemory-variation":
-            tarot.tarotDraw();
+            tarotDraw();
             break
         case "revolution-variation":
             revolutionDraw();
@@ -66,7 +68,7 @@ function draw() {
             musicDraw();
             break;
         case "BaseMemoryGame":
-            base.baseDraw();
+            baseDraw();
             break;
     }
 }
@@ -80,9 +82,9 @@ function mousePressed() {
         case "menu":
             menuMousePressed();
             break;
-        //case "tarotMemory-variation":
-        //   tarot.tarotMousePressed();
-        //    break
+        case "tarotMemory-variation":
+            tarotMousePressed();
+            break
         case "revolution-variation":
             revolutionMousePressed();
             break
@@ -92,9 +94,9 @@ function mousePressed() {
         case "music-variation":
             musicMousePressed();
             break;
-        //case "BaseMemoryGame":
-        //    base.baseMousePressed();
-        //    break;
+        case "BaseMemoryGame":
+            baseMousePressed();
+            break;
     }
 }
 
