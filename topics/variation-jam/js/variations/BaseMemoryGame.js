@@ -21,6 +21,7 @@ let match = false;
 let matchedCards = [];
 let confetti = [];
 
+/* -put in script js preload
 function preload() {
   console.log("hey");
   img1 = loadImage("assets/images/cards/basic/star.png");
@@ -33,7 +34,7 @@ function preload() {
   img8 = loadImage("assets/images/cards/basic/trefle.png");
   // faceCards = [img1, img2, img3, img4, img5, img6, img7, img8];
 }
-
+*/
 
 function baseSetup() {
   createCanvas(600, 400);
@@ -238,7 +239,7 @@ function myShuffle() {
     faceCardsCopy.unshift(picked);
   }
 }
-
+/* - copied in mousePressedBase
 function mouseClicked() {
    //console.log("clicked");
   for (let i = 0; i < cards.length; i++) {
@@ -295,7 +296,7 @@ function mouseClicked() {
   }
   // }
 }
-
+*/
 class Confetti {
   constructor() {
     this.x = random(width);
@@ -323,6 +324,59 @@ class Confetti {
  */
 function baseMousePressed() {
 
+   //console.log("clicked");
+  for (let i = 0; i < cards.length; i++) {
+    if (cards[i].hoverBool) {
+      if (numFlipped < 2) {
+        cards[i].isFaceUp = true;
+        numFlipped++;
+
+        // console.log(faceCardsCopy[i]);
+        flippedCards.unshift(faceCardsCopy[i]);
+        // console.log(flippedCards);
+        console.log(numFlipped);
+
+        if (flippedCards[0] == flippedCards[1]) {
+          flippedCards[0].set = true;
+          flippedCards[1].set = true;
+          match = true;
+          console.log("match");
+          matchedCards.unshift(faceCardsCopy[i]);
+
+          numFlipped = 0;
+          set++;
+
+          // console.log(set)
+        } else {
+          match = false;
+        }
+      }
+      if (numFlipped == 2) {
+        timer = frameCount;
+        console.log(flippedCards);
+        flippedCards.pop();
+        flippedCards.pop();
+      }
+
+      if (numFlipped > 2) {
+        if (match) {
+          // cards[i].isFaceUp = true;
+          console.log(" match");
+          timer = frameCount;
+          numFlipped = 0;
+
+          console.log(flippedCards);
+          cards[i].set = true;
+        } else if (!match) {
+          // cards[i].isFaceUp = false;
+          console.log("no match");
+
+          console.log(flippedCards);
+          cards[i].set = false;
+        }
+      }
+    }
+  }
 }
 
 /**

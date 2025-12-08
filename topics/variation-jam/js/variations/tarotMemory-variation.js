@@ -23,7 +23,7 @@ let matchT = false;
 let matchedCardsT = [];
 let confettiT = [];
 
-
+/* -put in script js preload
 function preload() {
   sun = loadImage("assets/images/cards/tarot/theSun.png");
   death = loadImage("assets/images/cards/tarot/death.png");
@@ -35,6 +35,7 @@ function preload() {
   hermit = loadImage("assets/images/cards/tarot/theHermit.png");
   // faceCards = [img1, img2, img3, img4, img5, img6, img7, img8];
 }
+  */ 
 
 
 function tarotSetup() {
@@ -63,7 +64,7 @@ function tarotSetup() {
 
   faceCardsCopyT = [];
 
-  myShuffle();
+  myShuffleT();
 
   cardsT = [];
 
@@ -195,7 +196,7 @@ class CardT {
 }
 
 // fisher yates shuffle as a function
-function shuffling(array) {
+function shufflingT(array) {
   let counter = array.length;
 
   // while there are still elements in the array
@@ -211,7 +212,7 @@ function shuffling(array) {
   }
 }
 
-function myShuffle() {
+function myShuffleT() {
   // console.log(faceCards)
 
   //   faceCards = faceCards.concat(faceCards)
@@ -233,8 +234,8 @@ function myShuffle() {
     faceCardsCopyT.unshift(picked);
   }
 }
-
-function mouseClicked() {
+/* - copied in mousePressedtarot
+function mouseClickedT() {
   // console.log("clicked");
   for (let i = 0; i < cardsT.length; i++) {
     if (cardsT[i].hoverBool) {
@@ -290,7 +291,7 @@ function mouseClicked() {
   }
   // }
 }
-
+*/
 class ConfettiT {
   constructor() {
     this.x = random(width);
@@ -315,6 +316,59 @@ class ConfettiT {
 
 
 function tarotMousePressed() {
+  // console.log("clicked");
+  for (let i = 0; i < cardsT.length; i++) {
+    if (cardsT[i].hoverBool) {
+      if (numFlippedT < 2) {
+        cardsT[i].isFaceUp = true;
+        numFlippedT++;
+
+        // console.log(faceCardsCopy[i]);
+        flippedCardsT.unshift(faceCardsCopyT[i]);
+        // console.log(flippedCards);
+        console.log(numFlippedT);
+
+        if (flippedCardsT[0] == flippedCardsT[1]) {
+          flippedCardsT[0].setT = true;
+          flippedCardsT[1].setT = true;
+          matchT = true;
+          console.log("match");
+          matchedCardsT.unshift(faceCardsCopyT[i]);
+
+          numFlippedT = 0;
+          setT++;
+
+          // console.log(set)
+        } else {
+          matchT = false;
+        }
+      }
+      if (numFlippedT == 2) {
+        timerT = frameCount;
+        console.log(flippedCardsT);
+        flippedCardsT.pop();
+        flippedCardsT.pop();
+      }
+
+      if (numFlippedT > 2) {
+        if (matchT) {
+          // cards[i].isFaceUp = true;
+          console.log(" match");
+          timerT = frameCount;
+          numFlippedT = 0;
+
+          console.log(flippedCardsT);
+          cardsT[i].setT = true;
+        } else if (!matchT) {
+          // cards[i].isFaceUp = false;
+          console.log("no match");
+
+          console.log(flippedCardsT);
+          cardsT[i].setT = false;
+        }
+      }
+    }
+  }
 
 }
 

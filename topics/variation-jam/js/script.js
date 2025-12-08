@@ -21,6 +21,28 @@ function setup() {
     createCanvas(500, 500);
 
 }
+function preload(){
+    //base memory card img
+    console.log("hey");
+  img1 = loadImage("assets/images/cards/basic/star.png");
+  img2 = loadImage("assets/images/cards/basic/triangle.png");
+  img3 = loadImage("assets/images/cards/basic/spiral.png");
+  img4 = loadImage("assets/images/cards/basic/circle.png");
+  img5 = loadImage("assets/images/cards/basic/heart.png");
+  img6 = loadImage("assets/images/cards/basic/diamond.png");
+  img7 = loadImage("assets/images/cards/basic/spade.png");
+  img8 = loadImage("assets/images/cards/basic/trefle.png");
+  //tarot memory card img
+  sun = loadImage("assets/images/cards/tarot/theSun.png");
+  death = loadImage("assets/images/cards/tarot/death.png");
+  magician = loadImage("assets/images/cards/tarot/theMagician.png");
+  fortune = loadImage("assets/images/cards/tarot/fortune.png");
+  chariot = loadImage("assets/images/cards/tarot/theChariot.png");
+  lovers = loadImage("assets/images/cards/tarot/theLovers.png");
+  tower = loadImage("assets/images/cards/tarot/theTower.png");
+  hermit = loadImage("assets/images/cards/tarot/theHermit.png");
+
+}
 /*
 function preload(){
 //base preload
