@@ -143,13 +143,13 @@ function tarotDraw() {
 }
 
 class CardT {
-  constructor(x, y, w, h, picked) {
+  constructor(x, y, w, h, pickedT) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.col = color(200);
-    this.picked = picked;
+    this.pickedT = pickedT;
     this.isFaceUp = false;
     this.set = false;
   }
@@ -180,7 +180,7 @@ class CardT {
     // rectMode(CENTER)
     if (this.isFaceUp) {
       imageMode(CENTER);
-      image(this.picked, this.x, this.y, this.w, this.h);
+      image(this.pickedT, this.x, this.y, this.w, this.h);
     }
     // else {
     //   stroke("yellow");
@@ -224,14 +224,14 @@ function myShuffleT() {
   for (let i = 0; i < 16; i++) {
     // randomly picking one card from the array of face cards
     randomIndexT = floor(random(0, faceCardsT.length));
-    picked = faceCardsT[randomIndexT];
+    pickedT = faceCardsT[randomIndexT];
 
     // push 2 copies onto array since there are two of each
-    selectedT.push(picked);
+    selectedT.push(pickedT);
     // selected.push(picked);
     // remove card from faces array so we don't re-pick the same cards
     faceCardsT.splice(randomIndexT, 1);
-    faceCardsCopyT.unshift(picked);
+    faceCardsCopyT.unshift(pickedT);
   }
 }
 /* - copied in mousePressedtarot

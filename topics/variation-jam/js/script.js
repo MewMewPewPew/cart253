@@ -41,7 +41,24 @@ function preload(){
   lovers = loadImage("assets/images/cards/tarot/theLovers.png");
   tower = loadImage("assets/images/cards/tarot/theTower.png");
   hermit = loadImage("assets/images/cards/tarot/theHermit.png");
-
+    // music memory card img + sound
+  backgroundImage = loadImage('assets/images/sound_background.jpg');
+  img1M = loadImage("assets/images/music-note.png");
+  img2M = loadImage("assets/images/music-note.png");
+  img3M = loadImage("assets/images/music-note.png");
+  img4M = loadImage("assets/images/music-note.png");
+  img5M = loadImage("assets/images/music-note.png");
+  img6M = loadImage("assets/images/music-note.png");
+  img7M = loadImage("assets/images/music-note.png");
+  img8M = loadImage("assets/images/music-note.png");
+  sound1 = loadSound("assets/sounds/sound1.mp3");
+  sound2 = loadSound("assets/sounds/sound2.mp3");
+  sound3 = loadSound("assets/sounds/sound3.mp3");
+  sound4 = loadSound("assets/sounds/sound4.mp3");
+  sound5 = loadSound("assets/sounds/sound5.mp3");
+  sound6 = loadSound("assets/sounds/sound6.mp3");
+  sound7 = loadSound("assets/sounds/sound7.mp3");
+  sound8 = loadSound("assets/sounds/sound8.mp3");
 }
 /*
 function preload(){

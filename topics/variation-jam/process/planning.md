@@ -53,3 +53,11 @@
 
     *number represent where they are situated in the major arcana
      
+     ## music variation 
+
+     add same image for all cards
+     add different sound for each pairs (8)
+        sound 4- https://www.youtube.com/watch?v=HfrOSJRCsfM&t=46s 
+     Yay! 
+     dark theme - with instruction to listen & use memory
+     add resonance interactive with sound thing ??
