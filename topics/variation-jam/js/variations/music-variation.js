@@ -14,8 +14,9 @@ let selectedM = [];
 let flippedCardsM = [];
 let myFontM;
 let pickedM;
+let cardFaceM;
 //Images
-let backgroundImage;
+let backgroundImageM;
 let img1M, img2M, img3M, img4M, img5M, img6M, img7M, img8M;
 //Sounds
 let sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8;
@@ -25,7 +26,7 @@ let hoverM = false;
 let numFlippedM = 0;
 let timerM = -1;
 let matchBoolM;
-//hoverBool ?
+
 let delayM = 60;
 let setM = 0;
 let matchM = false;
@@ -36,7 +37,8 @@ let confettiM = [];
  */
 function musicSetup() {
     createCanvas(500, 500);
-    background(backgroundImage);
+    background(0);
+    background(backgroundImageM);
 //soundChecked();
   // background(220)
   // rectMode(CENTER)
@@ -59,7 +61,8 @@ function musicSetup() {
     img7M,
     img8M,
   ];
-
+console.log(img1);
+ 
   faceCardsCopyM = [];
 
   myShuffleM();
@@ -220,7 +223,7 @@ function shufflingM(array) {
 }
 
 function myShuffleM() {
-  // console.log(faceCards)
+    
 
   //   faceCards = faceCards.concat(faceCards)
   //   faceCards2=faceCards
@@ -240,6 +243,7 @@ function myShuffleM() {
     faceCardsM.splice(randomIndexM, 1);
     faceCardsCopyM.unshift(pickedM);
   }
+  
 }
 
 class ConfettiM {
@@ -308,75 +312,106 @@ function soundChecked(){
     else if (img8M){
         sound8.play();
     }
+         if (flippedCardsM.indexOf(1)){
+         console.log("1check");
+        sound1.play();
+        }
+        else if (flippedCardsM ==[1]){
+            console.log("2check");
+        sound2.play();
+        }
+        else if (flippedCardsM ==[2]){
+         console.log("3check");
+        sound3.play();
+        }
+        else if (flippedCardsM ==[3]){
+         console.log("4check");
+        sound4.play();
+        }
+        else if (flippedCardsM ==[4]){
+         console.log("5check");
+        sound5.play();
+        }
+        else if (flippedCardsM ==[5]){
+         console.log("6check");
+        sound6.play();
+        }
+        else if (flippedCardsM ==[6]){
+         console.log("7check");
+        sound7.play();
+        }
+        else if (flippedCardsM ==[7]){
+         console.log("8check");
+        sound8.play();
+        }
 }*/
 /**
  * This will be called whenever the mouse is pressed while the music variation is active
  */
 function musicMousePressed() {
-    
   // console.log("clicked");
+        
   for (let i = 0; i < cardsM.length; i++) {
     if (cardsM[i].hoverBool) {
-        
-        // making the sound play if the one of the pair is pressed
-        
-        
-        if (i === 0  ){
+        if (cardsM[0].isFaceUp){
          console.log("1check");
         sound1.play();
         }
-        else if (i=== 1){
-            console.log("2check");
+        else if (cardsM[1].isFaceUp){
+         console.log("2check");
         sound2.play();
         }
-        else if (i === 2  ){
+        else if (cardsM[2].isFaceUp){
          console.log("3check");
         sound3.play();
         }
-        else if (i === 3  ){
+        else if (cardsM[3].isFaceUp){
          console.log("4check");
         sound4.play();
         }
-        else if (i === 4 || i === 5 ){
+        else if (cardsM[4].isFaceUp){
          console.log("5check");
         sound5.play();
         }
-        else if (i === 8  ){
+        else if (cardsM[5].isFaceUp){
          console.log("6check");
         sound6.play();
         }
-        else if (i === 6  ){
+        else if (cardsM[6].isFaceUp){
          console.log("7check");
         sound7.play();
         }
-        else if (i === 7  ){
+        else if (cardsM[7].isFaceUp){
          console.log("8check");
         sound8.play();
         }
-      if (numFlippedM < 2) {
-        cardsM[i].isFaceUp = true;
-        numFlippedM++;
 
-        // console.log(faceCardsCopy[i]);
-        flippedCardsM.unshift(faceCardsCopyM[i]);
-        // console.log(flippedCards);
-        console.log(numFlippedM);
-
-        if (flippedCardsM[0] == flippedCardsM[1]) {
-          flippedCardsM[0].setM = true;
-          flippedCardsM[1].setM = true;
-          matchM = true;
-          console.log("match");
-          matchedCardsM.unshift(faceCardsCopyM[i]);
-
-          numFlippedM = 0;
-          setM++;
-
-          // console.log(set)
-        } else {
+        if (numFlippedM < 2) {
+            cardsM[i].isFaceUp = true;
+            numFlippedM++;
+            
+            // console.log(faceCardsCopy[i]);
+            flippedCardsM.unshift(faceCardsCopyM[i]);
+            // console.log(flippedCards);
+            console.log(numFlippedM);
+            
+            if (flippedCardsM[0] == flippedCardsM[1]) {
+                flippedCardsM[0].setM = true;
+                flippedCardsM[1].setM = true;
+                matchM = true;
+                console.log("match");
+                matchedCardsM.unshift(faceCardsCopyM[i]);
+                
+                numFlippedM = 0;
+                setM++;
+                
+                // console.log(set)
+            } else {
           matchM = false;
         }
-      }
+    }
+    
+    
       if (numFlippedM == 2) {
         timerM = frameCount;
         console.log(flippedCardsM);

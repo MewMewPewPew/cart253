@@ -5,12 +5,11 @@
  */
 
 const menuText = `
-CHESS * 3 \n\n
-Tarot memory card (T)
-REVOLUTION CHESS (R)
-PANDEMIC CHESS (P)
-MUSIC CHESS (M)
-BaseMemoryGame (B)` 
+Do you remember games ? \n
+press specific key to start\n \n
+(T)Tarot memory
+(S)Sound memory
+(B)Basic memory` 
 // add author + context text
 
 
@@ -19,6 +18,7 @@ BaseMemoryGame (B)`
  * Display the main menu
  */
 function menuDraw() {
+    createCanvas(500, 500);
     background(0);
 
     push();
@@ -48,7 +48,7 @@ function menuKeyPressed(event) {
             pandemicSetup();
             break;
 
-        case 77:
+        case 83:
             state = "music-variation";
             musicSetup();
             break;

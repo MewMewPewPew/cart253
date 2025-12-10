@@ -9,6 +9,10 @@ let selectedT = [];
 let flippedCardsT = [];
 let myFontT;
 let pickedT;
+//images 
+let coverCard;
+let coverCardH;
+let backgroundImageT;
 let sun, death, magician, fortune, chariot, lovers, tower, hermit;
 let faceCardsT, faceCardsCopyT;
 let randomIndexT;
@@ -16,7 +20,7 @@ let hoverT = false;
 let numFlippedT = 0;
 let timerT = -1;
 let matchBoolT;
-//hoverBool ?
+
 let delayT = 60;
 let setT = 0;
 let matchT = false;
@@ -39,7 +43,10 @@ function preload() {
 
 
 function tarotSetup() {
-  createCanvas(1200, 800);
+  
+  createCanvas(1165, 800);
+  background(225);
+  background(backgroundImageT);
   // background(220)
   // rectMode(CENTER)
 
@@ -72,7 +79,7 @@ function tarotSetup() {
   for (let i = 0; i < colNumT; i++) {
     for (let j = 0; j < rowNumT; j++) {
       var cardX = 360 + i * 150;
-      var cardY = j * 200 + 100;
+      var cardY = j * 180 + 120;
       // cards.push(new Card(cardX, cardY,50,50));
 
       var cardFaceT = selectedT.pop();
@@ -89,7 +96,7 @@ function tarotSetup() {
  * This will be called every frame when the music variation is active
  */
 function tarotDraw() {
-  background(220);
+  
 
   // shuffling(selected);
   if (!matchT) {
@@ -149,9 +156,11 @@ class CardT {
     this.w = w;
     this.h = h;
     this.col = color(200);
+    this.coverCard = coverCard;
+    this.coverCardH = coverCardH;
     this.pickedT = pickedT;
     this.isFaceUp = false;
-    this.set = false;
+    this.setT = false;
   }
 
   body() {
@@ -170,17 +179,19 @@ class CardT {
       this.col = color(160);
       // rect(this.x,this.y,this.w,this.h,10)
       this.hoverBool = true;
+      image(this.coverCardH, this.x -50, this.y -85, this.w, this.h);
     } else {
       this.col = color(200);
       this.hoverBool = false;
+      image(this.coverCard, this.x -50, this.y -85, this.w, this.h);
     }
   }
 
   display() {
     // rectMode(CENTER)
     if (this.isFaceUp) {
-      imageMode(CENTER);
-      image(this.pickedT, this.x, this.y, this.w, this.h);
+      imageMode(CORNER);
+      image(this.pickedT, this.x -50, this.y -85, this.w, this.h);
     }
     // else {
     //   stroke("yellow");

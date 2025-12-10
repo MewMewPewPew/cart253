@@ -11,6 +11,7 @@
 
 - make a fun win end 
 - add instruction in keyPressed (if keycode I)
+- fix the images (corners)
 
 ## Starting with the Tarot variation
 - create the variation file
@@ -22,11 +23,13 @@
 6. add futur telling text when one pair is revealed with json
 7. Add Instruction/explanation before the game is launched
 
-
     2. deciding what card should be use, then choose temporary pictures to represent them:
         ## CARD BY BELOVED AYA TAKANO <3 
+        + background : image_2025_07_03_aya-takano-perrotin-los-angeles-how-deep-how-far-we-can-go-exhibition-announcement 
+
             with Shinto & tarot(christianism/paganism) Symbolism
             full story here : https://en.gallery-kaikaikiki.com/2021/08/aya-takano-tarot-card/
+        - i should add a lil note to say the art is hers !
     - The sun(19*) = winning, 
     - The magician(1) = The game does not end,
             Gaining 4 objects (sword, wand, cup, coin/pentacle)... why not? The game does not end
@@ -57,7 +60,12 @@
 
      add same image for all cards
      add different sound for each pairs (8)
-        sound 4- https://www.youtube.com/watch?v=HfrOSJRCsfM&t=46s 
+        sound 7- https://www.youtube.com/watch?v=HfrOSJRCsfM&t=46s 
+        !! 
      Yay! 
      dark theme - with instruction to listen & use memory
      add resonance interactive with sound thing ??
+
+## basic variation 
+        make the card appear for like 3 second, 
+        then player has to play normaly or has like 3 chances or smt ? (maybe too hard)

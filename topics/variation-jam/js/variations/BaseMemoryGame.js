@@ -37,6 +37,7 @@ function preload() {
 */
 
 function baseSetup() {
+  
   createCanvas(600, 400);
   // background(220)
   // rectMode(CENTER)
@@ -185,8 +186,8 @@ class Card {
   display() {
     // rectMode(CENTER)
     if (this.isFaceUp) {
-      imageMode(CENTER);
-      image(this.picked, this.x, this.y, this.w, this.h);
+      imageMode(CORNER);
+      image(this.picked, this.x -25, this.y-25, this.w, this.h);
     }
     // else {
     //   stroke("yellow");
@@ -239,7 +240,7 @@ function myShuffle() {
     faceCardsCopy.unshift(picked);
   }
 }
-/* - copied in mousePressedBase
+/*--coppied in mousepressed
 function mouseClicked() {
    //console.log("clicked");
   for (let i = 0; i < cards.length; i++) {
@@ -327,6 +328,38 @@ function baseMousePressed() {
    //console.log("clicked");
   for (let i = 0; i < cards.length; i++) {
     if (cards[i].hoverBool) {
+      if (Card.picked === 0){
+         console.log("1check");
+        sound1.play();
+        }
+        else if (Card.picked === 1){
+         console.log("2check");
+        sound2.play();
+        }
+        else if (Card.picked === 2){
+         console.log("3check");
+        sound3.play();
+        }
+        else if (picked = 3){
+         console.log("4check");
+        sound4.play();
+        }
+        else if (picked = 4){
+         console.log("5check");
+        sound5.play();
+        }
+        else if (picked = 5){
+         console.log("6check");
+        sound6.play();
+        }
+        else if (picked = 6){
+         console.log("7check");
+        sound7.play();
+        }
+        else if (picked = 7){
+         console.log("8check");
+        sound8.play();
+        }
       if (numFlipped < 2) {
         cards[i].isFaceUp = true;
         numFlipped++;

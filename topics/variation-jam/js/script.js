@@ -33,6 +33,9 @@ function preload(){
   img7 = loadImage("assets/images/cards/basic/spade.png");
   img8 = loadImage("assets/images/cards/basic/trefle.png");
   //tarot memory card img
+  backgroundImageT = loadImage("assets/images/ayaT_bg.avif")
+  coverCard = loadImage("assets/images/cards/tarot/cover-tarot.png");
+  coverCardH = loadImage("assets/images/cards/tarot/cover-tarotH.png");
   sun = loadImage("assets/images/cards/tarot/theSun.png");
   death = loadImage("assets/images/cards/tarot/death.png");
   magician = loadImage("assets/images/cards/tarot/theMagician.png");
@@ -42,7 +45,7 @@ function preload(){
   tower = loadImage("assets/images/cards/tarot/theTower.png");
   hermit = loadImage("assets/images/cards/tarot/theHermit.png");
     // music memory card img + sound
-  backgroundImage = loadImage('assets/images/sound_background.jpg');
+  backgroundImageM = loadImage('assets/images/sound_background.jpg');
   img1M = loadImage("assets/images/music-note.png");
   img2M = loadImage("assets/images/music-note.png");
   img3M = loadImage("assets/images/music-note.png");
@@ -96,13 +99,13 @@ function draw() {
             break;
         case "tarotMemory-variation":
             tarotDraw();
-            break
+            break/*
         case "revolution-variation":
             revolutionDraw();
             break
         case "pandemic-variation":
             pandemicDraw();
-            break;
+            break;*/
         case "music-variation":
             musicDraw();
             break;
@@ -123,13 +126,13 @@ function mousePressed() {
             break;
         case "tarotMemory-variation":
             tarotMousePressed();
-            break
+            break/*
         case "revolution-variation":
             revolutionMousePressed();
             break
         case "pandemic-variation":
             pandemicMousePressed();
-            break;
+            break;*/
         case "music-variation":
             musicMousePressed();
             break;
@@ -150,13 +153,13 @@ function keyPressed(event) {
             break;
         case "tarotMemory-variation":
             tarotKeyPressed(event);
-            break
+            break;/*
         case "revolution-variation":
             revolutionKeyPressed(event);
             break
         case "pandemic-variation":
             pandemicKeyPressed(event);
-            break;
+            break;*/
         case "music-variation":
             musicKeyPressed(event);
             break;
