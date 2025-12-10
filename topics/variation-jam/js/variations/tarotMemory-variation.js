@@ -7,13 +7,15 @@ var colNumT = 4;
 var rowNumT = 4;
 let selectedT = [];
 let flippedCardsT = [];
-let myFontT;
 let pickedT;
+let fontDot;
 //images 
 let coverCard;
 let coverCardH;
 let backgroundImageT;
 let sun, death, magician, fortune, chariot, lovers, tower, hermit;
+let bigCard;
+
 let faceCardsT, faceCardsCopyT;
 let randomIndexT;
 let hoverT = false;
@@ -44,7 +46,7 @@ function preload() {
 
 function tarotSetup() {
   
-  createCanvas(1165, 800);
+  createCanvas(1465, 800);
   background(225);
   background(backgroundImageT);
   // background(220)
@@ -78,7 +80,7 @@ function tarotSetup() {
   //   calling class card + position of row
   for (let i = 0; i < colNumT; i++) {
     for (let j = 0; j < rowNumT; j++) {
-      var cardX = 360 + i * 150;
+      var cardX = 510 + i * 150;
       var cardY = j * 180 + 120;
       // cards.push(new Card(cardX, cardY,50,50));
 
@@ -88,16 +90,12 @@ function tarotSetup() {
     }
   }
 
-  for (let i = 0; i < 50; i++) {
-    confettiT[i] = new ConfettiT();
-  }
 }
 /**
  * This will be called every frame when the music variation is active
  */
 function tarotDraw() {
   
-
   // shuffling(selected);
   if (!matchT) {
     if (frameCount - timerT > delayT && timerT != -1) {
@@ -141,13 +139,14 @@ function tarotDraw() {
   //  flippedCards[i].display()
   // }
 
-  // // if (set == 8) {
-  //   for (let i = 0; i < 100; i++) {
-  //     confetti[i].body();
-  //     confetti[i].fall();
-  //   // }
-  // }
+  if (setT == 8) {
+    console.log("hello");
+    
+      
+      
+   }
 }
+
 
 class CardT {
   constructor(x, y, w, h, pickedT) {
@@ -155,6 +154,7 @@ class CardT {
     this.y = y;
     this.w = w;
     this.h = h;
+    this.stroke =color(255);
     this.col = color(200);
     this.coverCard = coverCard;
     this.coverCardH = coverCardH;
@@ -165,8 +165,9 @@ class CardT {
 
   body() {
     rectMode(CENTER);
+    stroke(this.stroke);
     fill(this.col);
-    rect(this.x, this.y, this.w, this.h, 10);
+    rect(this.x, this.y, this.w, this.h);
   }
 
   hover() {
@@ -191,8 +192,20 @@ class CardT {
     // rectMode(CENTER)
     if (this.isFaceUp) {
       imageMode(CORNER);
+      
       image(this.pickedT, this.x -50, this.y -85, this.w, this.h);
+      //making a replica of the card (to give a fortune)
+      bigCard = image(this.pickedT, 0, 150, 260, 442);
+      bigCard + 2;
+      //if (this.pickedT[0]){
+      //  console.log("hey<3")
+      //}
+      }
+      else if (bigCard == 2){
+      bigCard = image(this.pickedT, 500, 150, 260, 442);
+    
     }
+    
     // else {
     //   stroke("yellow");
     //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
@@ -303,27 +316,6 @@ function mouseClickedT() {
   // }
 }
 */
-class ConfettiT {
-  constructor() {
-    this.x = random(width);
-    this.y = 0;
-    this.w = 10;
-    this.col = random(255);
-    this.speed = random(1, 5);
-  }
-
-  body() {
-    fill(this.col);
-    circle(this.x, this.y, this.w);
-  }
-
-  fall() {
-    this.y += this.speed;
-    // if(this.y>height){
-    //   this.y=0
-    // }
-  }
-}
 
 
 function tarotMousePressed() {

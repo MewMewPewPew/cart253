@@ -23,7 +23,6 @@ function setup() {
 }
 function preload(){
     //base memory card img
-    console.log("hey");
   img1 = loadImage("assets/images/cards/basic/star.png");
   img2 = loadImage("assets/images/cards/basic/triangle.png");
   img3 = loadImage("assets/images/cards/basic/spiral.png");
@@ -32,8 +31,9 @@ function preload(){
   img6 = loadImage("assets/images/cards/basic/diamond.png");
   img7 = loadImage("assets/images/cards/basic/spade.png");
   img8 = loadImage("assets/images/cards/basic/trefle.png");
-  //tarot memory card img
-  backgroundImageT = loadImage("assets/images/ayaT_bg.avif")
+  //tarot memory card img + font
+  fontDot = loadFont("assets/images/cards/tarot/BitcountPropSingle-Regular.ttf")
+  backgroundImageT = loadImage("assets/images/tarot-Aya-T-bg.png")
   coverCard = loadImage("assets/images/cards/tarot/cover-tarot.png");
   coverCardH = loadImage("assets/images/cards/tarot/cover-tarotH.png");
   sun = loadImage("assets/images/cards/tarot/theSun.png");
@@ -45,15 +45,19 @@ function preload(){
   tower = loadImage("assets/images/cards/tarot/theTower.png");
   hermit = loadImage("assets/images/cards/tarot/theHermit.png");
     // music memory card img + sound
-  backgroundImageM = loadImage('assets/images/sound_background.jpg');
-  img1M = loadImage("assets/images/music-note.png");
-  img2M = loadImage("assets/images/music-note.png");
-  img3M = loadImage("assets/images/music-note.png");
-  img4M = loadImage("assets/images/music-note.png");
-  img5M = loadImage("assets/images/music-note.png");
-  img6M = loadImage("assets/images/music-note.png");
-  img7M = loadImage("assets/images/music-note.png");
-  img8M = loadImage("assets/images/music-note.png");
+  backgroundImageM = loadImage('assets/images/sound_bg.png');
+  soundButtonWin = loadImage("assets/images/button_win.png");
+  soundButtonOff = loadImage("assets/images/button_off.PNG");
+  soundButtonOffH = loadImage("assets/images/button_offH.png");
+  img1M = loadImage("assets/images/button_on.PNG");
+  img2M = loadImage("assets/images/button_on.PNG");
+  img3M = loadImage("assets/images/button_on.PNG");
+  img4M = loadImage("assets/images/button_on.PNG");
+  img5M = loadImage("assets/images/button_on.PNG");
+  img6M = loadImage("assets/images/button_on.PNG");
+  img7M = loadImage("assets/images/button_on.PNG");
+  img8M = loadImage("assets/images/button_on.PNG");
+  soundWin = loadSound("assets/sounds/youWin_pvz.mp3")
   sound1 = loadSound("assets/sounds/sound1.mp3");
   sound2 = loadSound("assets/sounds/sound2.mp3");
   sound3 = loadSound("assets/sounds/sound3.mp3");

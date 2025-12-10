@@ -17,9 +17,12 @@ let pickedM;
 let cardFaceM;
 //Images
 let backgroundImageM;
+let soundButtonOff, soundButtonOffH, soundButtonWin;
 let img1M, img2M, img3M, img4M, img5M, img6M, img7M, img8M;
 //Sounds
+let soundWin;
 let sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8;
+let playOnce = true;
 let faceCardsM, faceCardsCopyM;
 let randomIndexM;
 let hoverM = false;
@@ -73,8 +76,8 @@ console.log(img1);
   //   calling class card + position of row
   for (let i = 0; i < colNumM; i++) {
     for (let j = 0; j < rowNumM; j++) {
-      var cardX = 190 + i * 70;
-      var cardY = j * 70 + 90;
+      var cardX = 220 + i * 70;
+      var cardY = j * 70 + 110;
       // cards.push(new Card(cardX, cardY,50,50));
 
       var cardFaceM = selectedM.pop();
@@ -83,9 +86,9 @@ console.log(img1);
     }
   }
 
-  for (let i = 0; i < 50; i++) {
-    confettiM[i] = new ConfettiM();
-  }
+  //for (let i = 0; i < 50; i++) {
+    //confettiM[i] = new ConfettiM();
+  //}
 
 }
 
@@ -133,6 +136,10 @@ function musicDraw() {
     cardsM[i].hover();
 
     cardsM[i].display();
+    if (setM == 8){
+        cardsM[i].winDisplay();
+        
+    }
   }
 
   // if(match){
@@ -140,11 +147,9 @@ function musicDraw() {
   //  flippedCards[i].display()
   // }
 
-  if (setM == 8) {
-  for (let i = 0; i < 100; i++) {
-   confettiM[i].body();
-   confettiM[i].fall();
-   }
+  if (setM == 8 && playOnce === true) {
+  musicGameWin();
+  
    }
 }
 
@@ -156,6 +161,9 @@ class CardM {
     this.h = h;
     this.stroke = color(255);
     this.col = color(225);
+    this.soundButtonOff = soundButtonOff;
+    this.soundButtonOffH = soundButtonOffH;
+    this.soundButtonWin =soundButtonWin;
     this.pickedM = pickedM;
     this.isFaceUp = false;
     this.set = false;
@@ -164,7 +172,7 @@ class CardM {
   body() {
     rectMode(CENTER);
     fill(this.col);
-    rect(this.x, this.y, this.w, this.h, 10);
+    rect(this.x, this.y, this.w, this.h);
   }
 
   hover() {
@@ -178,25 +186,30 @@ class CardM {
       this.stroke = color(255);
       // rect(this.x,this.y,this.w,this.h,10)
       this.hoverBool = true;
+      image(this.soundButtonOffH, this.x -25 , this.y -25 , this.w, this.h);
     } else {
       this.col = color("#ffffff1a");
       this.stroke = color(255);
       this.hoverBool = false;
+      image(this.soundButtonOff, this.x -25, this.y -25, this.w, this.h);
     }
   }
 
   display() {
     // rectMode(CENTER)
     if (this.isFaceUp) {
-      imageMode(CENTER);
-      image(this.pickedM, this.x, this.y, this.w, this.h);
+      imageMode(CORNER);
+      image(this.pickedM, this.x-25, this.y-25, this.w, this.h);
     }
     // else {
     //   stroke("yellow");
     //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
     // }
   }
-
+  winDisplay(){
+imageMode(CORNER);
+      image(this.soundButtonWin, this.x-25, this.y-25, this.w, this.h);
+  }
   matched() {
     if (matchM) {
       this.display();
@@ -246,27 +259,6 @@ function myShuffleM() {
   
 }
 
-class ConfettiM {
-  constructor() {
-    this.x = random(width);
-    this.y = 0;
-    this.w = 10;
-    this.col = random(255);
-    this.speed = random(1, 5);
-  }
-
-  body() {
-    fill(this.col);
-    circle(this.x, this.y, this.w);
-  }
-
-  fall() {
-    this.y += this.speed;
-    // if(this.y>height){
-    //   this.y=0
-    // }
-  }
-}
 /**
  * This will be called whenever a key is pressed while the music variation is active
  */
@@ -344,7 +336,12 @@ function soundChecked(){
          console.log("8check");
         sound8.play();
         }
+        
 }*/
+function musicGameWin(){
+        soundWin.play();
+        playOnce = false;
+        }
 /**
  * This will be called whenever the mouse is pressed while the music variation is active
  */
