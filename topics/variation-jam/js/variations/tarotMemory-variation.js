@@ -5,7 +5,7 @@ let cardsT;
 let cardT;
 var colNumT = 4;
 var rowNumT = 4;
-let selectedT = [];
+
 let flippedCardsT = [];
 let pickedT;
 let fontDot;
@@ -42,7 +42,22 @@ function preload() {
   // faceCards = [img1, img2, img3, img4, img5, img6, img7, img8];
 }
   */ 
+// copied from : https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
+function shuffle(array) {
+  let currentIndex = array.length;
 
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+}
 
 function tarotSetup() {
   
@@ -51,30 +66,74 @@ function tarotSetup() {
   // background(220)
   // rectMode(CENTER)
 
-  faceCardsT = [
-    sun,
-    death,
-    magician,
-    fortune,
-    chariot,
-    lovers,
-    tower,
-    hermit,
-    sun,
-    death,
-    magician,
-    fortune,
-    chariot,
-    lovers,
-    tower,
-    hermit,
-  ];
-
-  faceCardsCopyT = [];
-
-  myShuffleT();
-
-  cardsT = [];
+  let cardsToShuffle = [
+    {
+      image: sun,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: death,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: magician,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: sun,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: sun,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: sun,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: sun,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+    {
+      image: sun,
+      prophecies: [
+        "yolo",
+        "yay",
+        "youpi",
+      ]
+    },
+  ]
+  let selectedT = cardsToShuffle + cardsToShuffle;
+  shuffle(selectedT);
   
   //   calling class card + position of row
   for (let i = 0; i < colNumT; i++) {
@@ -84,7 +143,8 @@ function tarotSetup() {
       // cards.push(new Card(cardX, cardY,50,50));
 
       var cardFaceT = selectedT.pop();
-      cardT = new CardT(cardX, cardY, 100, 170, cardFaceT);
+      cardT = new CardT(cardX, cardY, 100, 170, cardFaceT.image, cardFaceT.prophecies[0]);
+      // https://stackoverflow.com/questions/5915096/get-a-random-item-from-a-javascript-array
       cardsT.push(cardT);
     }
   }
@@ -153,7 +213,7 @@ function tarotDraw() {
 
 
 class CardT {
-  constructor(x, y, w, h, pickedT) {
+  constructor(x, y, w, h, pickedT, text) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -165,6 +225,7 @@ class CardT {
     this.pickedT = pickedT;
     this.isFaceUp = false;
     this.setT = false;
+    this.text = text;
   }
 
   body() {
