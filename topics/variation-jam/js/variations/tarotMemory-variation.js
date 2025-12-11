@@ -14,8 +14,8 @@ let coverCard;
 let coverCardH;
 let backgroundImageT;
 let sun, death, magician, fortune, chariot, lovers, tower, hermit;
-let bigCard;
-
+let bigCard1, bigCard2;
+let imgCard;
 let faceCardsT, faceCardsCopyT;
 let randomIndexT;
 let hoverT = false;
@@ -47,8 +47,7 @@ function preload() {
 function tarotSetup() {
   
   createCanvas(1465, 800);
-  background(225);
-  background(backgroundImageT);
+  
   // background(220)
   // rectMode(CENTER)
 
@@ -76,7 +75,7 @@ function tarotSetup() {
   myShuffleT();
 
   cardsT = [];
-
+  
   //   calling class card + position of row
   for (let i = 0; i < colNumT; i++) {
     for (let j = 0; j < rowNumT; j++) {
@@ -95,6 +94,9 @@ function tarotSetup() {
  * This will be called every frame when the music variation is active
  */
 function tarotDraw() {
+  background(225);
+  background(backgroundImageT);
+
   
   // shuffling(selected);
   if (!matchT) {
@@ -132,6 +134,8 @@ function tarotDraw() {
     cardsT[i].hover();
 
     cardsT[i].display();
+
+    cardsT[i].bigDisplay();
   }
 
   // if(match){
@@ -193,23 +197,47 @@ class CardT {
     if (this.isFaceUp) {
       imageMode(CORNER);
       
-      image(this.pickedT, this.x -50, this.y -85, this.w, this.h);
-      //making a replica of the card (to give a fortune)
-      bigCard = image(this.pickedT, 0, 150, 260, 442);
-      bigCard + 2;
+      
+      imgCard = image(this.pickedT, this.x -50, this.y -85, this.w, this.h);
+      
+      
       //if (this.pickedT[0]){
       //  console.log("hey<3")
       //}
-      }
-      else if (bigCard == 2){
-      bigCard = image(this.pickedT, 500, 150, 260, 442);
-    
+ 
     }
-    
+    else if (this.isFaceUp && numFlippedT<= 1) {
+      imageMode(CORNER);
+      console.log("heyheyehey");
+    //making a replica of the card (to give a fortune)
+      bigCard1 = image(this.pickedT, 0, 150, 260, 442);  
+
+    }
     // else {
     //   stroke("yellow");
     //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
     // }
+  }
+  bigDisplay(){
+    //if (this.isFaceUp && numFlippedT<= 1) {
+      //imageMode(CORNER);
+      //console.log("heyheyehey");
+    //making a replica of the card (to give a fortune)
+      //bigCard1 = image(this.pickedT, 0, 150, 260, 442);  
+
+    //}
+    //else 
+      if  (this.isFaceUp && numFlippedT>=2) {
+      console.log("yoyoyo");
+      imageMode(CORNER);
+    //making a replica of the card (to give a fortune)
+      //bigCard1 = hide();
+      //bigCard1 = image(this.pickedT, -100, 150, 260, 442); 
+      //hiddingCard1();
+      bigCard1 = image(this.pickedT, -100, 150, 260, 442); 
+      bigCard2 = image(this.pickedT, 0, 150, 260, 442);  
+      
+    }
   }
 
   matched() {
@@ -218,7 +246,9 @@ class CardT {
     }
   }
 }
-
+function hiddingCard1(){
+  bigCard1.hide();
+}
 // fisher yates shuffle as a function
 function shufflingT(array) {
   let counter = array.length;
