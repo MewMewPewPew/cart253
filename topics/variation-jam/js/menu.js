@@ -5,11 +5,11 @@
  */
 
 const menuText = `
-Do you remember games ? \n
-press specific key to start\n \n
-(T)Tarot memory
-(S)Sound memory
-(B)Basic memory` 
+Memory games \n
+press any following key to start\n \n
+(T) Tarot memory
+(S) Sound memory
+(B) Basic memory` 
 // add author + context text
 
 
@@ -27,6 +27,8 @@ function menuDraw() {
     textAlign(CENTER, CENTER);
     text(menuText, width / 2, height / 2);
     pop();
+    //easiest debbuging solution
+    hiddingTarotElements();
 }
 
 /**
@@ -65,4 +67,11 @@ function menuKeyPressed(event) {
  */
 function menuMousePressed() {
 
+}
+
+function hiddingTarotElements(){
+    if (magic === false || love === false){
+        starsGif.hide();
+        heartsGif.hide();
+    }
 }

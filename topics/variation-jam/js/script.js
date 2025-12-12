@@ -39,11 +39,18 @@ function preload(){
   sun = loadImage("assets/images/cards/tarot/theSun.png");
   death = loadImage("assets/images/cards/tarot/death.png");
   magician = loadImage("assets/images/cards/tarot/theMagician.png");
+  wand = loadImage("assets/images/cards/tarot/wand2.png");
+  swordCoin = loadImage("assets/images/cards/tarot/swordCoin.png");
+  cup = loadImage("assets/images/cards/tarot/cup.png");
+  starsGif = createImg("assets/images/cards/tarot/stars.gif");
+  heartsGif = createImg("assets/images/cards/tarot/hearts.gif");
   fortune = loadImage("assets/images/cards/tarot/fortune.png");
   chariot = loadImage("assets/images/cards/tarot/theChariot.png");
   lovers = loadImage("assets/images/cards/tarot/theLovers.png");
   tower = loadImage("assets/images/cards/tarot/theTower.png");
   hermit = loadImage("assets/images/cards/tarot/theHermit.png");
+  imgWin = loadImage("assets/images/cards/tarot/win.png");
+  imgLose = loadImage("assets/images/cards/tarot/lose.png");
     // music memory card img + sound
   backgroundImageM = loadImage('assets/images/sound_bg.png');
   soundButtonWin = loadImage("assets/images/button_win.png");
@@ -157,7 +164,8 @@ function keyPressed(event) {
             break;
         case "tarotMemory-variation":
             tarotKeyPressed(event);
-            break;/*
+            break;
+            /*
         case "revolution-variation":
             revolutionKeyPressed(event);
             break

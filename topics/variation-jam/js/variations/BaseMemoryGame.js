@@ -364,7 +364,7 @@ function baseMousePressed() {
         cards[i].isFaceUp = true;
         numFlipped++;
 
-        // console.log(faceCardsCopy[i]);
+         console.log(faceCardsCopy[i]);
         flippedCards.unshift(faceCardsCopy[i]);
         // console.log(flippedCards);
         console.log(numFlipped);

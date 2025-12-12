@@ -21,7 +21,7 @@
 4. attribute proprieties to each like "gameWin" or "gameOver"
 5. make a restart button ?
 6. add futur telling text when one pair is revealed with json
-7. Add Instruction/explanation before the game is launched
+7. make starting screen... 
 
     2. deciding what card should be use, then choose temporary pictures to represent them:
         ## CARD BY BELOVED AYA TAKANO <3 
@@ -55,6 +55,25 @@
                 The Moon = ? anxious, because you only see one side of the moon, gain the power to see 1 card?
 
     *number represent where they are situated in the major arcana
+
+        If matched (in cardShuffle.outcome:)
+                sun - sunWin
+                        Win: happy img (with text "you win"), flips all cards up + restart button ? 
+                death - deathCycle
+                        fake restart: flips all cards down (ex: setT = 0)?
+                magician - magicianMagic
+                        fun: add 4 images (wand,coin/pentacle, sword, cup) + sparkles(gif)?
+                fortune - fortuneLuck
+                        Ending: random,floor 1/2 to either win or lose (ideally with a spinning wheel visual)
+                lovers -loversHeart
+                        fun: add 1 image of a heart (or gif of heart pumping) ?
+                tower - towerGameOver
+                        Lose: sad img (with text "you lost"), flips all card down + restart button ? 
+                hermit - hermitAdvice
+                        prophecy: gives the most important rule of the game * no real instruction needed then :3
+                chariot - chariotMove 
+                        move: make the cards gain += y speed ?
+
      
      ## music variation 
 
