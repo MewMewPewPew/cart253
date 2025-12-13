@@ -14,6 +14,7 @@ let selectedM = [];
 let flippedCardsM = [];
 let myFontM;
 let pickedM;
+let shuffledM;
 let cardFaceM;
 //Images
 let backgroundImageM;
@@ -47,29 +48,43 @@ function musicSetup() {
   // rectMode(CENTER)
 
   faceCardsM = [
-    img1M,
-    img2M,
-    img3M,
-    img4M,
-    img5M,
-    img6M,
-    img7M,
-    img8M,
-    img1M,
-    img2M,
-    img3M,
-    img4M,
-    img5M,
-    img6M,
-    img7M,
-    img8M,
-  ];
-console.log(img1);
- 
+    {
+      image: img1M,
+      sound: sound1,
+    },
+    {
+      image: img2M,
+      sound: sound2,
+    },
+    {
+      image: img3M,
+      sound: sound3,
+    },
+    {
+      image: img4M,
+      sound: sound4,
+    },
+    {
+      image: img5M,
+      sound: sound5,
+    },
+    {
+      image: img6M,
+      sound: sound6,
+    },
+    {
+      image: img7M,
+      sound: sound7,
+    },
+    {
+      image: img8M,
+      sound: sound8,
+    },    
+  ]
+ let selectedM = [...faceCardsM, ...faceCardsM];
+  
+  myShuffleM(selectedM);
   faceCardsCopyM = [];
-
-  myShuffleM();
-
   cardsM = [];
   
 
@@ -81,7 +96,7 @@ console.log(img1);
       // cards.push(new Card(cardX, cardY,50,50));
 
       var cardFaceM = selectedM.pop();
-      cardM = new CardM(cardX, cardY, 50, 50, cardFaceM);
+      cardM = new CardM(cardX, cardY, 50, 50, cardFaceM.image, cardFaceM.sound);
       cardsM.push(cardM);
     }
   }
@@ -154,7 +169,7 @@ function musicDraw() {
 }
 
 class CardM {
-  constructor(x, y, w, h, pickedM) {
+  constructor(x, y, w, h, pickedM,pickedSoundM) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -165,6 +180,7 @@ class CardM {
     this.soundButtonOffH = soundButtonOffH;
     this.soundButtonWin =soundButtonWin;
     this.pickedM = pickedM;
+    this.pickedSoundM = pickedSoundM;
     this.isFaceUp = false;
     this.set = false;
   }
@@ -200,12 +216,14 @@ class CardM {
     if (this.isFaceUp) {
       imageMode(CORNER);
       image(this.pickedM, this.x-25, this.y-25, this.w, this.h);
+      pickedSoundM.play();
     }
     // else {
     //   stroke("yellow");
     //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
     // }
   }
+  
   winDisplay(){
 imageMode(CORNER);
       image(this.soundButtonWin, this.x-25, this.y-25, this.w, this.h);
@@ -218,7 +236,45 @@ imageMode(CORNER);
 }
 
 
-// fisher yates shuffle as a function
+
+
+function myShuffleM(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = shuffledM;
+        faceCardsCopyM.unshift(pickedM);
+    }
+    
+}
+
+
+/* old functions
+function myShuffle() {
+    
+
+  //   faceCards = faceCards.concat(faceCards)
+  //   faceCards2=faceCards
+  //   // console.log(faceCards)
+  // console.log(faceCards2)
+
+ // console.log(faceCardsT);
+  for (let i = 0; i < 16; i++) {
+    // randomly picking one card from the array of face cards
+    randomIndexM= floor(random(0, faceCardsM.image.length));
+    pickedM = faceCardsM[randomIndexM];
+
+    // push 2 copies onto array since there are two of each
+    selectedM.push(pickedM);
+    // selected.push(picked);
+    // remove card from faces array so we don't re-pick the same cards
+    faceCardsM.splice(randomIndexM, 1);
+    faceCardsCopyM.unshift(shuffledM);
+  }
+  
+}
+// not being used
 function shufflingM(array) {
   let counter = array.length;
 
@@ -233,32 +289,7 @@ function shufflingM(array) {
     array[counter] = array[randomIndex];
     array[randomIndex] = tempSwap;
   }
-}
-
-function myShuffleM() {
-    
-
-  //   faceCards = faceCards.concat(faceCards)
-  //   faceCards2=faceCards
-  //   // console.log(faceCards)
-  // console.log(faceCards2)
-
- // console.log(faceCardsT);
-  for (let i = 0; i < 16; i++) {
-    // randomly picking one card from the array of face cards
-    randomIndexM= floor(random(0, faceCardsM.length));
-    pickedM = faceCardsM[randomIndexM];
-
-    // push 2 copies onto array since there are two of each
-    selectedM.push(pickedM);
-    // selected.push(picked);
-    // remove card from faces array so we don't re-pick the same cards
-    faceCardsM.splice(randomIndexM, 1);
-    faceCardsCopyM.unshift(pickedM);
-  }
-  
-}
-
+}*/
 /**
  * This will be called whenever a key is pressed while the music variation is active
  */
@@ -283,62 +314,9 @@ function soundChecked(){
         //sound1 = false;
     }
     
-    else if (img2M){
-        sound2.play();
-    }
-    else if (img3M){
-        sound3.play();
-    }
-    else if (img4M){
-        sound4.play();
-    }
-    else if (img5M){
-        sound5.play();
-    }
-    else if (img6M){
-        sound6.play();
-    }
-    else if (img7M){
-        sound7.play();
-    }
-    else if (img8M){
-        sound8.play();
-    }
-         if (flippedCardsM.indexOf(1)){
-         console.log("1check");
-        sound1.play();
-        }
-        else if (flippedCardsM ==[1]){
-            console.log("2check");
-        sound2.play();
-        }
-        else if (flippedCardsM ==[2]){
-         console.log("3check");
-        sound3.play();
-        }
-        else if (flippedCardsM ==[3]){
-         console.log("4check");
-        sound4.play();
-        }
-        else if (flippedCardsM ==[4]){
-         console.log("5check");
-        sound5.play();
-        }
-        else if (flippedCardsM ==[5]){
-         console.log("6check");
-        sound6.play();
-        }
-        else if (flippedCardsM ==[6]){
-         console.log("7check");
-        sound7.play();
-        }
-        else if (flippedCardsM ==[7]){
-         console.log("8check");
-        sound8.play();
-        }
-        
 }*/
 function musicGameWin(){
+  //add delay or add silence before in the file
         soundWin.play();
         playOnce = false;
         }
@@ -350,39 +328,6 @@ function musicMousePressed() {
         
   for (let i = 0; i < cardsM.length; i++) {
     if (cardsM[i].hoverBool) {
-        if (cardsM[0].isFaceUp){
-         console.log("1check");
-        sound1.play();
-        }
-        else if (cardsM[1].isFaceUp){
-         console.log("2check");
-        sound2.play();
-        }
-        else if (cardsM[2].isFaceUp){
-         console.log("3check");
-        sound3.play();
-        }
-        else if (cardsM[3].isFaceUp){
-         console.log("4check");
-        sound4.play();
-        }
-        else if (cardsM[4].isFaceUp){
-         console.log("5check");
-        sound5.play();
-        }
-        else if (cardsM[5].isFaceUp){
-         console.log("6check");
-        sound6.play();
-        }
-        else if (cardsM[6].isFaceUp){
-         console.log("7check");
-        sound7.play();
-        }
-        else if (cardsM[7].isFaceUp){
-         console.log("8check");
-        sound8.play();
-        }
-
         if (numFlippedM < 2) {
             cardsM[i].isFaceUp = true;
             numFlippedM++;
