@@ -23,7 +23,8 @@ function setup() {
 }
 function preload(){
     //menu
-    fontDot = loadFont("assets/images/BitcountPropSingle-Regular.ttf")
+    fontDotTitle =loadFont("assets/images/Codystar-Regular.ttf");
+    fontDot = loadFont("assets/images/BitcountPropSingle-Regular.ttf");
     //base memory card img
     img1 = loadImage("assets/images/cards/basic/star.png");
     img2 = loadImage("assets/images/cards/basic/triangle.png");
@@ -35,7 +36,7 @@ function preload(){
     img8 = loadImage("assets/images/cards/basic/trefle.png");
     //tarot memory card img + font
     instrucionScreen = loadImage("assets/images/cards/tarot/instructionT.png");
-    backgroundImageT = loadImage("assets/images/tarot-Aya-T-bg.png")
+    backgroundImageT = loadImage("assets/images/tarot-Aya-T-bg.png");
   coverCard = loadImage("assets/images/cards/tarot/cover-tarot.png");
   coverCardH = loadImage("assets/images/cards/tarot/cover-tarotH.png");
   sun = loadImage("assets/images/cards/tarot/theSun.png");
@@ -67,7 +68,7 @@ function preload(){
   img6M = loadImage("assets/images/button_on.PNG");
   img7M = loadImage("assets/images/button_on.PNG");
   img8M = loadImage("assets/images/button_on.PNG");
-  soundWin = loadSound("assets/sounds/youWin_pvz.mp3")
+  soundWin = loadSound("assets/sounds/youWin_pvz.mp3");
   sound1 = loadSound("assets/sounds/sound1.mp3");
   sound2 = loadSound("assets/sounds/sound2.mp3");
   sound3 = loadSound("assets/sounds/sound3.mp3");

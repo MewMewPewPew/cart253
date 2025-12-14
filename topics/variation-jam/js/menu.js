@@ -3,13 +3,14 @@
  * Note how it has its own draw, menuDraw(), and its own keyPressed, menuKeyPressed().
  * This keeps the stuff the menu needs to do *separate* from the rest of the program.
  */
-
+let fontDotTitle;
+const menuTitle =`Memory games`
 const menuText = `
-Memory games \n
-press any following key to start\n \n
+press any following key to start\n
 (T) Tarot memory
 (S) Sound memory
 (B) Basic memory` 
+const menuContext =`made by Ash as a project for the CART 253 class at Concordia`
 // add author + context text
 
 
@@ -20,13 +21,9 @@ press any following key to start\n \n
 function menuDraw() {
     createCanvas(500, 500);
     background(0);
-
-    push();
-    fill(255);
-    textSize(32);
-    textAlign(CENTER, CENTER);
-    text(menuText, width / 2, height / 2);
-    pop();
+    
+    menuDrawText();
+    
     //easiest debbuging solution
     hiddingTarotElements();
 }
@@ -70,8 +67,33 @@ function menuMousePressed() {
 }
 
 function hiddingTarotElements(){
-    if (magic === false || love === false){
+    if(magic === false || love === false){
         starsGif.hide();
         heartsGif.hide();
     }
+    
+}
+function menuDrawText(){
+    push();
+    fill(255);
+    textFont(fontDotTitle)
+    textSize(50);
+    textAlign(CENTER, CENTER);
+    text(menuTitle, width / 2, 140);
+    pop();
+    push();
+    fill(200);
+    textFont(fontDot)
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    text(menuText, width / 2, 300);
+    pop();
+    push();
+    fill(100);
+    textFont(fontDot)
+    textSize(15);
+    textAlign(CENTER, CENTER);
+    text(menuContext, width / 2, 475);
+    pop();
+
 }

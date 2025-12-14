@@ -1,7 +1,11 @@
 "use strict";
-//for text
+/* PAGE EXPLANATION DONT FORGET !!*/
+//fix bug of display bigCard order??
+
+//text
 let fontDot;
 let colorProphecy = "#3a6e50ff";
+let linkT; 
 // Intruction screen
 let instruction = true;
 let instructionDisplay = {
@@ -51,7 +55,7 @@ let starsGif;
 let heartsGif;
 let imgheart;
 // outcomes variables of cards :
-// The sun card 
+  // The sun card 
 let gameWin = false;
 let winning = {
   //img is contain 
@@ -202,7 +206,7 @@ let outcomes;
 let cardsArray;
 //let matchT = false;
 
-let artistMention ={
+let artistMention = {
   text: "Most of the art used in this project \nwere made by Aya Takano. The symbolism & spirituality \nin her tarot cards was researched with Reika Akatsuki.",
   x: 0,
   y: 680,
@@ -339,7 +343,8 @@ function tarotSetup() {
   }
   //fortune card outcome (gamble 1/2 chance to win/lose)
   shuffleOptions = shuffle(gambleOptions);
-  
+  //function for the artist's tarot detail website
+  tanakoLink();
 }
 
 // Flip toutes les cartes dans X frames
@@ -362,8 +367,7 @@ function tarotDraw() {
   // en attendant qu'il flip toutes les cartes
   if(flipAllCardsTimeout > 0) flipAllCardsTimeout--;
 
-  //function to mention the artist's work I used
-  takanoMention();
+  
 
   // checking to see display of card distribution
   for (let i = 0; i < cardsT.length; i++) { //is the i++ the cause of the layout img + text display bug when clicked 2nd or +.... ?
@@ -392,6 +396,8 @@ function tarotDraw() {
   outcomesEnd();
   //setTimeout( outcomesEnd, 3000);
   instrucionScreenDisplay();
+  //function to mention the artist's work I used
+  takanoMention();
 }
 
 
@@ -606,6 +612,7 @@ function tarotMousePressed() {
 function tarotKeyPressed(event) {
     if (event.keyCode === 27) {
         state = "menu";
+        linkT.hide();
     }
 }
 function instrucionScreenDisplay(){
@@ -849,8 +856,11 @@ function takanoMention(){
   noStroke();
   fill(artistMention.fill);
   text(artistMention.text, artistMention.x, artistMention.y);
+  }
+function tanakoLink(){
   //created a html element link 
-  let a = createA(artistMention.link.Link, artistMention.link.text, '_blank');
-  a.position(artistMention.link.x, artistMention.link.y);
-  a.style('color', artistMention.link.fill);
+  linkT = createA(artistMention.link.Link, artistMention.link.text, '_blank');
+  linkT.position(artistMention.link.x, artistMention.link.y);
+  linkT.style('color', artistMention.link.fill);
+  linkT.show();
 }
