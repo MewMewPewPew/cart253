@@ -220,9 +220,11 @@ let artistMention = {
     fill:"#1e3c5fff"
   },
 }
+// Flip toutes les cartes dans X frames
+let flipAllCardsTimeout = 0;
+let lastCardIdClicked = -1;
 
 function tarotSetup() {
-  
   createCanvas(1465, 800);
   // background(220)
   // rectMode(CENTER)
@@ -347,9 +349,6 @@ function tarotSetup() {
   tanakoLink();
 }
 
-// Flip toutes les cartes dans X frames
-let flipAllCardsTimeout = 0;
-
 /**
  * 
  */
@@ -385,13 +384,6 @@ function tarotDraw() {
     
   }
 
-  // if(match){
-  //  for(i=0;i<flippedCards.length;i++)
-  //  flippedCards[i].display()
-  // }
-
-  //if (setT == 8) {
-  // console.log("hello");
   cardsOutcomes();
   outcomesEnd();
   //setTimeout( outcomesEnd, 3000);
@@ -534,7 +526,7 @@ function myShuffleT(array) {
       }   
 }
 
-let lastCardIdClicked = -1;
+
 
 function tarotMousePressed() {
 
@@ -613,6 +605,8 @@ function tarotKeyPressed(event) {
     if (event.keyCode === 27) {
         state = "menu";
         linkT.hide();
+        starsGif.hide();
+        heartsGif.hide();
     }
 }
 function instrucionScreenDisplay(){

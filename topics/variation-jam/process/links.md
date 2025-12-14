@@ -10,11 +10,16 @@ https://p5js.org/reference/p5/image/
 https://editor.p5js.org/kjhollen/sketches/S1bVzeF8Z
 - wheel of fortune: https://editor.p5js.org/Q/sketches/07UvXkBLV - https://editor.p5js.org/schellenberg/sketches/_Ers-90T_ 
 - array : https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
+https://www.w3schools.com/jsref/jsref_includes_array.asp 
 
 // for restart button ? 
 https://p5js.org/reference/p5.Graphics/reset/
 
 
-//fun stuff :3 
+//fun stuff :3 (futur uses)
 https://editor.p5js.org/owenroberts/sketches/kQoPj38dj
 https://editor.p5js.org/stalgia.grigg/sketches/EDo7uplEz
+sound - https://medium.spatialpixel.com/sounds-bd05429aba38 
+basic stuff (useful) - https://archive.p5js.org/learn/interactivity.html 
+Optimization ??? -
+https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#identifying-slow-code-profiling
