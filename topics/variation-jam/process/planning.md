@@ -4,16 +4,41 @@
 
 ## general planning
 
-1. add 4 pairs of imgs in basic memory game
-    realized THERE IS 8 pairs ! 
-    - resise the triangle
-- added escape in varition possible
+~~- add 8 pairs of imgs in basic memory game ~~
+~~- added escape in varition possible~~
+- finish music variation
+- do basic finish of basic variaton
+- do all the comments/organization 
+- do read.me 
+- do index.html
+- finish basic variation 
+- fix "bug" in tarot variation
+- adapt comments + read.me
+- SUMBIT !
 
-- make a fun win end 
-- add instruction in keyPressed (if keycode I)
-- fix the images (corners)
+## music variation 
+~~- add same image for all cards~~
+~~- add different sound for each pairs (8)~~
+        sound 7- https://www.youtube.com/watch?v=HfrOSJRCsfM&t=46s 
+     add resonance interactive with sound thing ??
+~~- made the visuals cool !!!!! ~~
+- fix playOnce ? if (mouseIsPressed) {!playon =playon} 
+- add counter of matches, make 8th once == win 
 
-## Starting with the Tarot variation
+Idea :3 (no time tho)
+        - how cool would it be if each sound was a looping it self in a way that is rythmic and, when match, it continues... creating a real music with each try to match all of them
+        - add diff themes of sound (with the constructor) than can be changed with a button or could be random as well
+
+## basic variation 
+- make the background + visuals more interesting ...
+- if time add features : 
+        - make the card appear for like 3 second, 
+        - then player has to play normaly or has like 3 chances or smt ? (maybe too hard)
+        - add gamewin + gameLose 
+
+~~## Starting with the Tarot variation ~~
+## fIX THE IMG ORDER BUG ? 
+        - finished
 - create the variation file
 1. Add the tarot json for inspo (and futur telling stuff that could be added)
 2. Start by deciding what card should be use, then choose temporary pictures to represent them
@@ -75,16 +100,3 @@
                         move: make the cards gain += y speed ?
 
      
-     ## music variation 
-
-     add same image for all cards
-     add different sound for each pairs (8)
-        sound 7- https://www.youtube.com/watch?v=HfrOSJRCsfM&t=46s 
-        !! 
-     Yay! 
-     dark theme - with instruction to listen & use memory
-     add resonance interactive with sound thing ??
-
-## basic variation 
-        make the card appear for like 3 second, 
-        then player has to play normaly or has like 3 chances or smt ? (maybe too hard)
