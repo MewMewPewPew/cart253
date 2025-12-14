@@ -22,22 +22,25 @@ function setup() {
 
 }
 function preload(){
+    //menu
+    fontDot = loadFont("assets/images/BitcountPropSingle-Regular.ttf")
     //base memory card img
-  img1 = loadImage("assets/images/cards/basic/star.png");
-  img2 = loadImage("assets/images/cards/basic/triangle.png");
-  img3 = loadImage("assets/images/cards/basic/spiral.png");
-  img4 = loadImage("assets/images/cards/basic/circle.png");
-  img5 = loadImage("assets/images/cards/basic/heart.png");
-  img6 = loadImage("assets/images/cards/basic/diamond.png");
-  img7 = loadImage("assets/images/cards/basic/spade.png");
-  img8 = loadImage("assets/images/cards/basic/trefle.png");
-  //tarot memory card img + font
-  fontDot = loadFont("assets/images/cards/tarot/BitcountPropSingle-Regular.ttf")
-  backgroundImageT = loadImage("assets/images/tarot-Aya-T-bg.png")
+    img1 = loadImage("assets/images/cards/basic/star.png");
+    img2 = loadImage("assets/images/cards/basic/triangle.png");
+    img3 = loadImage("assets/images/cards/basic/spiral.png");
+    img4 = loadImage("assets/images/cards/basic/circle.png");
+    img5 = loadImage("assets/images/cards/basic/heart.png");
+    img6 = loadImage("assets/images/cards/basic/diamond.png");
+    img7 = loadImage("assets/images/cards/basic/spade.png");
+    img8 = loadImage("assets/images/cards/basic/trefle.png");
+    //tarot memory card img + font
+    instrucionScreen = loadImage("assets/images/cards/tarot/instructionT.png");
+    backgroundImageT = loadImage("assets/images/tarot-Aya-T-bg.png")
   coverCard = loadImage("assets/images/cards/tarot/cover-tarot.png");
   coverCardH = loadImage("assets/images/cards/tarot/cover-tarotH.png");
   sun = loadImage("assets/images/cards/tarot/theSun.png");
   death = loadImage("assets/images/cards/tarot/death.png");
+  deadEnd = loadImage("assets/images/cards/tarot/deadEnd.png");
   magician = loadImage("assets/images/cards/tarot/theMagician.png");
   wand = loadImage("assets/images/cards/tarot/wand2.png");
   swordCoin = loadImage("assets/images/cards/tarot/swordCoin.png");
