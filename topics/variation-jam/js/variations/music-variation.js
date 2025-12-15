@@ -23,8 +23,7 @@ let img1M, img2M, img3M, img4M, img5M, img6M, img7M, img8M;
 //Sounds
 let soundWin;
 let sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8;
-//let playPlay = true;
-//let playOnce = true;
+let hasPlayed = false;
 let faceCardsM, faceCardsCopyM;
 let randomIndexM;
 let hoverM = false;
@@ -85,6 +84,7 @@ function musicSetup() {
       sound: sound8,
     },    
   ]
+
  let selectedM = [...faceCardsM, ...faceCardsM];
   
   myShuffleM(selectedM);
@@ -117,7 +117,7 @@ function musicDraw() {
    // À chaque image affiché, on reduit de 1 le timeout,
   // en attendant qu'il flip toutes les cartes
   if(flipAllCardsTimeoutM > 0) flipAllCardsTimeoutM--;
-
+  
 /* --- STUFF FOR SET 8 --
   if (matchM) {
     for (let i = 0; i < setM; i++) {
@@ -141,6 +141,8 @@ function musicDraw() {
     cardsM[i].hover();
 
     cardsM[i].display();
+
+    cardsM[i].displaySound();
     
     if (setM == 8){
         cardsM[i].winDisplay();
@@ -167,7 +169,7 @@ class CardM {
     this.h = h;
     this.pickedM = pickedM;
     this.pickedSoundM = pickedSoundM;
-    this.playOnce = true;
+    //this.playOnce = true;
     this.stroke = color(255);
     this.col = color(225);
     this.soundButtonOff = soundButtonOff;
@@ -208,17 +210,17 @@ class CardM {
     if (this.isFaceUp) {
       imageMode(CORNER);
       image(this.pickedM, this.x-25, this.y-25, this.w, this.h);
-      if (this.playOnce) {
-        this.pickedSoundM.play();
-        this.playOnce = false;
-      } /*else if (this.isFaceUp ){this.playOnce = true;
-      }*/
     }
-    // else {
-    //   stroke("yellow");
-    //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
-    // }
   }
+
+  displaySound(){
+    if (this.isFaceUp && !this.pickedSoundM.isPlaying() && ! hasPlayed) { //&& !this.pickedSoundM.isPlaying()
+      this.pickedSoundM.play();
+      hasPlayed = true;
+      }else{
+        hasPlayed = false;
+      }
+    }
   
   winDisplay(){
 imageMode(CORNER);
@@ -241,54 +243,12 @@ function myShuffleM(array) {
     
 }
 
-/* old functions
-function myShuffle() {
-    
-
-  //   faceCards = faceCards.concat(faceCards)
-  //   faceCards2=faceCards
-  //   // console.log(faceCards)
-  // console.log(faceCards2)
-
- // console.log(faceCardsT);
-  for (let i = 0; i < 16; i++) {
-    // randomly picking one card from the array of face cards
-    randomIndexM= floor(random(0, faceCardsM.image.length));
-    pickedM = faceCardsM[randomIndexM];
-
-    // push 2 copies onto array since there are two of each
-    selectedM.push(pickedM);
-    // selected.push(picked);
-    // remove card from faces array so we don't re-pick the same cards
-    faceCardsM.splice(randomIndexM, 1);
-    faceCardsCopyM.unshift(shuffledM);
-  }
-  
-}
-// not being used
-function shufflingM(array) {
-  let counter = array.length;
-
-  // while there are still elements in the array
-  while (counter > 0) {
-    // picks a random index number of the array
-    var randomIndex = Math.floor(Math.random() * counter);
-    // decreases counter by 1
-    counter--;
-    // swaps the last element with the counter
-    var tempSwap = array[counter];
-    array[counter] = array[randomIndex];
-    array[randomIndex] = tempSwap;
-  }
-}*/
-/**
- * This will be called whenever a key is pressed while the music variation is active
- */
 
 /**
  * This will be called whenever the mouse is pressed while the music variation is active
  */
 function musicMousePressed() {
+  
   // console.log("clicked");
    // Si on attend pour flipper les cartes,
   // on ignore la sourie

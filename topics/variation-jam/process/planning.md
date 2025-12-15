@@ -32,9 +32,10 @@ Idea :3 (no time tho)
 ## basic variation 
 - make the background + visuals more interesting ...
 - if time add features : 
-        - make the card appear for like 3 second, 
-        - then player has to play normaly or has like 3 chances or smt ? (maybe too hard)
         - add gamewin + gameLose 
+        - make the card appear for like 3 second, 
+        - put a timer ?
+        - then player has to play normaly or has like 3 chances or smt ? (maybe too hard)
 
 ~~## Starting with the Tarot variation ~~
 ## fIX THE IMG ORDER BUG ? 

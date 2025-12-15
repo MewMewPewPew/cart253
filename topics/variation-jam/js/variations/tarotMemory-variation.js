@@ -2,7 +2,7 @@
 /* PAGE EXPLANATION DONT FORGET !!*/
 //fix bug of display bigCard order??
 
-//text
+// Text
 let fontDot;
 let colorProphecy = "#3a6e50ff";
 let linkT; 
@@ -11,21 +11,21 @@ let instruction = true;
 let instructionDisplay = {
   text: "Tarot Memory",
   x: 732,
-  y: 100,  
+  y: 105,  
   stroke: "#d32f5bb2",
-  weight: 6,
-  fill: "#e6d6bdff",
-  size: 60,
+  weight: 5,
+  fill: "#fdf5e8ff",
+  size: 55,
   below:{
-    text:"Pick 2 cards,\nbut be careful making pairs as they determined your fate...\n\n\nDouble-click to start",
+    text:"Select 2 cards,\nbut be careful when pairing them because they will determine your fate...\n\nDouble-click to start",
     size: 40,
-    x: 730,
-    y: 474,
+    x: 731,
+    y: 480,
     x2: 500,
     y2: 600,
-    stroke: "#e6d6bda8",
+    stroke: "#f1e5d0c2",
     weight: 4,
-    fill: "#d32f5b",
+    fill: "#254238ff", //"#d32f5b" "#1a1438ff"
   },
   img: {
     x:0,
@@ -142,9 +142,13 @@ let advice = {
   y: 250,
   fill: "#312b66ff",
   size: 20,
-  text: "Listen carefully... \n      As you may have experienced,\n           when you match a pair of tarot\n                cards together, your fate \n                  becomes determined by it's \n                   meaning... \n                   The sun will guide you\n                    Stay far from the tower\n                    Good luck",
-  //idk if a box is needed yet...
-  box:{
+  text: "Listen carefully... \n      As you may have experienced,\n           when you match a pair of tarot\n                cards together, your fate \n                  becomes determined by it's \n                   meaning... \n\n\n\n                  Good luck",
+  color: {
+    text: "\n                   The sun will guide you\n                   Stay far from the tower\n                   Fortune isn't always good",
+    fill: "#ee2842ff",
+    y: 375,
+  },
+    box:{
     x: 1390,
     y: 120,
     x2: 400,
@@ -615,7 +619,7 @@ function instrucionScreenDisplay(){
 
   push();
   textAlign(CENTER, CENTER);
-  textFont(fontDot);
+  textFont(fontDotTitle);
   stroke(instructionDisplay.stroke);
   strokeWeight(instructionDisplay.weight);
   textSize(instructionDisplay.size);
@@ -742,8 +746,15 @@ function cardsOutcomes(){
     textFont(fontDot);  
     text(advice.text,advice.x, advice.y );
     pop();
+    push();
+    noStroke();
+    textSize(advice.size);
+    fill(advice.color.fill);
+    textFont(fontDot);  
+    text(advice.color.text,advice.x, advice.color.y );
+    pop();
     
-    setTimeout(adviceGone,7000);
+    setTimeout(adviceGone,9000);
     
   }
   // The chariot outcome (put in Card class ?)

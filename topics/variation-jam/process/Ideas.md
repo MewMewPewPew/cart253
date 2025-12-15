@@ -76,7 +76,7 @@ Start with normal/simple chess + add at least 3 :
         - card game ? (magic/pokemon style)
         - memory card game
             https://editor.p5js.org/smitharaoaluri/sketches/chgs4aavq
-            https://www.youtube.com/watch?v=xWdkt6KSirw
+            
 
 ## Memory Card Game
  variations ideas: 
