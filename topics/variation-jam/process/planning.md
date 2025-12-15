@@ -1,12 +1,13 @@
-# Planning !
-## memory card game variations 
+# memory card game variations PLAN
 
 
 ## general planning
 
-~~- add 8 pairs of imgs in basic memory game ~~
-~~- added escape in varition possible~~
-- finish music variation
+- ~~add 8 pairs of imgs in basic memory game~~
+
+- ~~added escape in varition possible~~
+- finish sound variation
+- add music variaition >:D
 - do basic finish of basic variaton
 - do all the comments/organization 
 - do read.me 
@@ -16,18 +17,25 @@
 - adapt comments + read.me
 - SUMBIT !
 
-## music variation 
-~~- add same image for all cards~~
-~~- add different sound for each pairs (8)~~
-        sound 7- https://www.youtube.com/watch?v=HfrOSJRCsfM&t=46s 
-     add resonance interactive with sound thing ??
-~~- made the visuals cool !!!!! ~~
-- fix playOnce ? if (mouseIsPressed) {!playon =playon} 
-- add counter of matches, make 8th once == win 
+## music variation
 
-Idea :3 (no time tho)
-        - how cool would it be if each sound was a looping it self in a way that is rythmic and, when match, it continues... creating a real music with each try to match all of them
-        - add diff themes of sound (with the constructor) than can be changed with a button or could be random as well
+- ~~- add same image for all cards~~
+- ~~- add different sound for each pairs (8)~~
+- add resonance interactive with sound thing ??
+- ~~made the visuals cool !!!!!~~
+- ~~fix playOnce~~
+- ~~add counter of matches, make 8th once = win~~
+- since it loops why itself, and i'm not sure how to fix it... I'll do my idea of looping to create one coherent music (see idea file)
+- ~~make sound sample...~~
+- input in game ?
+- #### make music variation = sound variation & create new music variation !
+
+## Sound variation
+basically already done !
+- change the sound back to soundEffects,
+- make it so if won, once can access the music variation (cooler), else, they cannot (or maybe with a keyPressed)
+
+
 
 ## basic variation 
 - make the background + visuals more interesting ...
@@ -37,25 +45,26 @@ Idea :3 (no time tho)
         - put a timer ?
         - then player has to play normaly or has like 3 chances or smt ? (maybe too hard)
 
-~~## Starting with the Tarot variation ~~
-## fIX THE IMG ORDER BUG ? 
-        - finished
-- create the variation file
-1. Add the tarot json for inspo (and futur telling stuff that could be added)
-2. Start by deciding what card should be use, then choose temporary pictures to represent them
-3. look at the base code, make variable of each pair if not already done
-4. attribute proprieties to each like "gameWin" or "gameOver"
-5. make a restart button ?
-6. add futur telling text when one pair is revealed with json
-7. make starting screen... 
+## Starting with the Tarot variation
+finished
+> fIX THE IMG ORDER BUG ? 
 
-    2. deciding what card should be use, then choose temporary pictures to represent them:
-        ## CARD BY BELOVED AYA TAKANO <3 
+- ~~create the variation file~~
+1. ~~Add the tarot json for inspo (and futur telling stuff that could be added)~~
+2. ~~Start by deciding what card should be use, then choose temporary pictures to represent them~~
+3. ~~look at the base code, make variable of each pair if not already done~~
+4. ~~attribute proprieties to each like "gameWin" or "gameOver~~"
+5. make a restart button ?
+6. ~~add futur telling text when one pair is revealed when flipped write them~~
+7. ~~make starting screen...~~ 
+
+    2. deciding what card should be use, then choose ~~temporary~~ pictures to represent them:
+        #### CARD BY BELOVED AYA TAKANO <3 
         + background : image_2025_07_03_aya-takano-perrotin-los-angeles-how-deep-how-far-we-can-go-exhibition-announcement 
 
             with Shinto & tarot(christianism/paganism) Symbolism
             full story here : https://en.gallery-kaikaikiki.com/2021/08/aya-takano-tarot-card/
-        - i should add a lil note to say the art is hers !
+        - ~~i should add a lil note to say the art is hers !~~
     - The sun(19*) = winning, 
     - The magician(1) = The game does not end,
             Gaining 4 objects (sword, wand, cup, coin/pentacle)... why not? The game does not end
@@ -70,34 +79,33 @@ Idea :3 (no time tho)
             once paired they are finally reunited ! YAY
     - The Tower(16) = losing, everything crashes because the foundation where never safe & sound to begin with
 
-            Ideas :
-    - instead of having 1 pair of hermits, have 1 hermit + 1 Wheel of fortune(10) = randomly either win or lose s
+        Ideas :
+    - instead of having 1 pair of hermits, have 1 hermit + 1 Wheel of fortune(10) = randomly either win or loses
+        * The Chariot = winning fast ! go go go
+        * Tower = losing - magician objects if there
+        * Strengh = gain the power to :hover and see the card? or smt else ?
+        * The lovers = ? 
+        * The Devil = ? temptation
+       * The Moon = ? anxious, because you only see one side of the moon, gain the power to see 1 card?
 
-                The Chariot = winning fast ! go go go
-                Tower = losing - magician objects if there
-                Strengh = gain the power to :hover and see the card? or smt else ?
-                The lovers = ? 
-                The Devil = ? temptation
-                The Moon = ? anxious, because you only see one side of the moon, gain the power to see 1 card?
+        number represent where they are situated in the major arcana
 
-    *number represent where they are situated in the major arcana
-
-        If matched (in cardShuffle.outcome:)
-                sun - sunWin
-                        Win: happy img (with text "you win"), flips all cards up + restart button ? 
-                death - deathCycle
-                        fake restart: flips all cards down (ex: setT = 0)?
-                magician - magicianMagic
-                        fun: add 4 images (wand,coin/pentacle, sword, cup) + sparkles(gif)?
-                fortune - fortuneLuck
-                        Ending: random,floor 1/2 to either win or lose (ideally with a spinning wheel visual)
-                lovers -loversHeart
-                        fun: add 1 image of a heart (or gif of heart pumping) ?
-                tower - towerGameOver
-                        Lose: sad img (with text "you lost"), flips all card down + restart button ? 
-                hermit - hermitAdvice
-                        prophecy: gives the most important rule of the game * no real instruction needed then :3
-                chariot - chariotMove 
-                        move: make the cards gain += y speed ?
+   - If matched (in cardShuffle.outcome:)
+     * sun - sunWin
+        - Win: happy img (with text "you win"), flips all cards up + restart button ? 
+      * death - deathCycle
+        - fake restart: flips all cards down (ex: setT = 0)?
+      * magician - magicianMagic
+        - fun: add 4 images (wand,coin/pentacle, sword, cup) + sparkles(gif)?
+      * fortune - fortuneLuck
+        - Ending: random,floor 1/2 to either win or lose (ideally with a spinning wheel visual)
+      * lovers -loversHeart
+        - fun: add 1 image of a heart (or gif of heart pumping) ?
+       * tower - towerGameOver
+       - Lose: sad img (with text "you lost"), flips all card down + restart button ? 
+       * hermit - hermitAdvice
+       - prophecy: gives the most important rule of the game * no real instruction needed then :3
+      * chariot - chariotMove 
+       - move: make the cards gain += y speed ?
 
      

@@ -88,6 +88,9 @@ Start with normal/simple chess + add at least 3 :
 
 - Music memory game : Turn it into Simon says typa game ? 
         or match the same tone (or + difficult match the sound and not the tone)
+    - Idea :3 (from planning after reflexion)
+        - how cool would it be if each sound was a looping it self in a way that is rythmic and, when match, it continues... creating a real music with each try to match all of them
+        - add diff themes of sound (with the constructor) than can be changed with a button or could be random as well
 
 
     - guess who ? so the cards are all reveiled* and theres a random description (json)    

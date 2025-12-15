@@ -55,58 +55,40 @@ function preload(){
   hermit = loadImage("assets/images/cards/tarot/theHermit.png");
   imgWin = loadImage("assets/images/cards/tarot/win.png");
   imgLose = loadImage("assets/images/cards/tarot/lose.png");
-    // music memory card img + sound
-  backgroundImageM = loadImage('assets/images/sound_bg.png');
-  soundButtonWin = loadImage("assets/images/button_win.png");
-  soundButtonOff = loadImage("assets/images/button_off.PNG");
-  soundButtonOffH = loadImage("assets/images/button_offH.png");
-  img1M = loadImage("assets/images/button_on.PNG");
-  img2M = loadImage("assets/images/button_on.PNG");
-  img3M = loadImage("assets/images/button_on.PNG");
-  img4M = loadImage("assets/images/button_on.PNG");
-  img5M = loadImage("assets/images/button_on.PNG");
-  img6M = loadImage("assets/images/button_on.PNG");
-  img7M = loadImage("assets/images/button_on.PNG");
-  img8M = loadImage("assets/images/button_on.PNG");
-  soundWin = loadSound("assets/sounds/youWin_pvz.mp3");
-  sound1 = loadSound("assets/sounds/sound1.mp3");
-  sound2 = loadSound("assets/sounds/sound2.mp3");
-  sound3 = loadSound("assets/sounds/sound3.mp3");
-  sound4 = loadSound("assets/sounds/sound4.mp3");
-  sound5 = loadSound("assets/sounds/sound5.mp3");
-  sound6 = loadSound("assets/sounds/sound6.mp3");
-  sound7 = loadSound("assets/sounds/sound7.mp3");
-  sound8 = loadSound("assets/sounds/sound8.mp3");
+    // sound memory game img + sound
+    //backgroundImageS = loadImage('assets/images/sound_bg.png');
+    soundButtonWin = loadImage("assets/images/button_win.png");
+    soundButtonOff = loadImage("assets/images/button_off.PNG");
+    soundButtonOffH = loadImage("assets/images/button_offH.png");
+    img1M = loadImage("assets/images/button_on.PNG");
+    img2M = loadImage("assets/images/button_on.PNG");
+    img3M = loadImage("assets/images/button_on.PNG");
+    img4M = loadImage("assets/images/button_on.PNG");
+    img5M = loadImage("assets/images/button_on.PNG");
+    img6M = loadImage("assets/images/button_on.PNG");
+    img7M = loadImage("assets/images/button_on.PNG");
+    img8M = loadImage("assets/images/button_on.PNG");
+    soundWin = loadSound("assets/sounds/youWin_pvz.mp3");
+    sound1 = loadSound("assets/sounds/sound1.mp3");
+    sound2 = loadSound("assets/sounds/sound2.mp3");
+    sound3 = loadSound("assets/sounds/sound3.mp3");
+    sound4 = loadSound("assets/sounds/sound4.mp3");
+    sound5 = loadSound("assets/sounds/sound5.mp3");
+    sound6 = loadSound("assets/sounds/sound6.mp3");
+    sound7 = loadSound("assets/sounds/sound7.mp3");
+    sound8 = loadSound("assets/sounds/sound8.mp3");
+    // music memory game img + sound 
+    backgroundImageM = loadImage('assets/images/sound_bg.png');
+    //sound1M = loadSound("assets/sounds/sound1.m4a");
+    //sound2M = loadSound("assets/sounds/sound2.m4a");
+    //sound3M = loadSound("assets/sounds/sound3.m4a");
+    //sound4M = loadSound("assets/sounds/sound4.m4a");
+    //sound5M = loadSound("assets/sounds/sound5.m4a");
+    //sound6M = loadSound("assets/sounds/sound6.m4a");
+    //sound7M = loadSound("assets/sounds/sound7.m4a");
+    //sound8M = loadSound("assets/sounds/sound8.m4a");
 }
-/*
-function preload(){
-//base preload
 
-    base.preload();
-    base.baseSetup();
-    base.baseDraw();
-   // base.shuffling(array);
-    //base.myShuffle();
-    base.mouseClicked();
-    //base.baseMousePressed();
-    //base.baseKeyPressed();
-    
-
-//tarot preload
-    tarot.preload();
-    tarot.tarotSetup();
-    tarot.tarotDraw();
-   // base.shuffling(array);
-    //tarot.myShuffle();
-    tarot.mouseClicked();
-    tarot.tarotMousePressed();
-
-    
-}
-*/
-/**
- * Display the menu of chess variations
-*/
 function draw() {
     switch (state) {
         case "menu":
@@ -114,16 +96,13 @@ function draw() {
             break;
         case "tarotMemory-variation":
             tarotDraw();
-            break/*
-        case "revolution-variation":
-            revolutionDraw();
             break
-        case "pandemic-variation":
-            pandemicDraw();
-            break;*/
+        case "sound-variation":
+            soundDraw();
+            break;/*
         case "music-variation":
             musicDraw();
-            break;
+            break;*/
         case "BaseMemoryGame":
             baseDraw();
             break;
@@ -141,16 +120,13 @@ function mousePressed() {
             break;
         case "tarotMemory-variation":
             tarotMousePressed();
-            break/*
-        case "revolution-variation":
-            revolutionMousePressed();
             break
-        case "pandemic-variation":
-            pandemicMousePressed();
-            break;*/
+        case "sound-variation":
+            soundMousePressed();
+            break/*
         case "music-variation":
             musicMousePressed();
-            break;
+            break;*/
         case "BaseMemoryGame":
             baseMousePressed();
             break;
@@ -169,16 +145,12 @@ function keyPressed(event) {
         case "tarotMemory-variation":
             tarotKeyPressed(event);
             break;
-            /*
-        case "revolution-variation":
-            revolutionKeyPressed(event);
-            break
-        case "pandemic-variation":
-            pandemicKeyPressed(event);
-            break;*/
+        case "sound-variation":
+            soundKeyPressed(event);
+            break/*
         case "music-variation":
             musicKeyPressed(event);
-            break;
+            break;*/
         case "BaseMemoryGame":
             baseKeyPressed(event);
             break;

@@ -7,9 +7,10 @@ let fontDotTitle;
 const menuTitle =`Memory games`
 const menuText = `
 press any following key to start\n
-(T) Tarot memory
-(S) Sound memory
-(B) Basic memory` 
+B - Basic memory 
+T - Tarot memory
+S - Sound memory
+M - Music memory`
 const menuContext =`made by Ash as a project for the CART 253 class at Concordia`
 // add author + context text
 
@@ -37,17 +38,12 @@ function menuKeyPressed(event) {
             state = "tarotMemory-variation";
             tarotSetup();
             break;
-        case 82:
-            state = "revolution-variation";
-            revolutionSetup();
-            break;
-
-        case 80:
-            state = "pandemic-variation";
-            pandemicSetup();
-            break;
-
         case 83:
+            state = "sound-variation";
+            soundSetup();
+            break;
+
+        case 77:
             state = "music-variation";
             musicSetup();
             break;
@@ -66,13 +62,7 @@ function menuMousePressed() {
 
 }
 
-function hiddingTarotElements(){
-    if(magic === false || love === false){
-        starsGif.hide();
-        heartsGif.hide();
-    }
-    
-}
+// drawing the text on the menu canvas
 function menuDrawText(){
     push();
     fill(255);
@@ -86,7 +76,7 @@ function menuDrawText(){
     textFont(fontDot)
     textSize(30);
     textAlign(CENTER, CENTER);
-    text(menuText, width / 2, 300);
+    text(menuText, width / 2, 280);
     pop();
     push();
     fill(100);
@@ -96,4 +86,12 @@ function menuDrawText(){
     text(menuContext, width / 2, 475);
     pop();
 
+}
+// hidding elements from the tarot variation code
+function hiddingTarotElements(){
+    if(magic === false || love === false){
+        starsGif.hide();
+        heartsGif.hide();
+    }
+    
 }
