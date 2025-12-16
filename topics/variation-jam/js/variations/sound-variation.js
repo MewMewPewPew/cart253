@@ -1,65 +1,57 @@
-/**
- * This file contains the code to run *only* the music variation part of the program.
- * Note how it has its own draw, musicDraw(), and its own keyPressed, musicKeyPressed().
- * This keeps the stuff the menu needs to do *separate* from the rest of the program.
- */
 "use strict";
+/**Do you remember?
+ * MEMORY GAMES - Sound variation file
+ * 
+ * [explanation copied from scipt.js]
+ * The third variation changes our senses. This time, the visuals are made different with more industrial and 
+ * realistic images and styling. The cards are now on & off switch buttons that when clicked instead play 8 
+ * various sounds. 
+ *          Instruction:
+ *                      When clicking a button, hear 1 of 8 sound as the button light up.
+ *                      Try and match this same sounds. 
+ *                      If 2 buttons revealed don't have the same sound, they are turned off.
+ *                      If a pair of sounds is found, they stay on. 
+ *                      If one finds the 8 pairs of sounds successively, they win. All buttons turn green and a
+ *                      victory sound is heard.
+ */
 
-
+// html body background-color
+let backgroundColorS = "#000000ff"; 
 
 //Sounds
 let soundWin;
 let sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8;
 let hasPlayed = false;
 let hasPlayedW = false;
+
 //Images
 let backgroundImageM;
 let soundButtonOff, soundButtonOffH, soundButtonWin;
 let img1M, img2M, img3M, img4M, img5M, img6M, img7M, img8M;
 
-let backgroundColorS = "#000000ff"; //"#4e4c49"
+// cards & important variables 
 let faceCardsM;
 let cardFaceM;
 let cardsM;
 let cardM;
-
-
 var colNumM = 4;
 var rowNumM = 4;
 let selectedM = [];
-let flippedCardsM = [];
 let pickedM;
-let shuffledM;
 let winningM = false;
 let cardsMatchedM = 0;
-
-
-// Flip toutes les cartes dans X frames
-let flipAllCardsTimeoutM = 0;
+let flipAllCardsTimeoutM = 0; // Flip all cards in "x" frames
 let lastCardIdClickedM = -1;
-
-
-let numFlippedM = 0;
-let timerM = -1;
-let matchBoolM;
-
-let delayM = 60;
-let setM = 0;
-let matchM = false;
-
-
 
 /**
  * This will be called just before the music variation starts
  */
 function soundSetup() {
   changeColorS();
-    createCanvas(500, 500);
-    background(0);
-//soundChecked();
-  // background(220)
-  // rectMode(CENTER)
+  createCanvas(500, 500);
+  background(0);
 
+  //Where the image & sound of each card/button is determined
   faceCardsM = [
     {
       image: img1M,
@@ -94,50 +86,47 @@ function soundSetup() {
       sound: sound8,
     },    
   ]
-
- let selectedM = [...faceCardsM, ...faceCardsM];
+  //make the 8 cards be a pair (16)
+  let selectedM = [...faceCardsM, ...faceCardsM];
   
-  myShuffleM(selectedM);
+  myShuffleM(selectedM);//shuffle all the cards objects
+
   cardsM = [];
-  //   calling class card + position of row
+  //calling the class card + defining they position
   for (let i = 0; i < colNumM; i++) {
     for (let j = 0; j < rowNumM; j++) {
       var cardX = 220 + i * 70;
       var cardY = j * 70 + 110;
-      // cards.push(new Card(cardX, cardY,50,50));
       var cardFaceM = selectedM.pop();
       cardM = new CardM(cardX, cardY, 50, 50, cardFaceM.image, cardFaceM.sound);
       cardsM.push(cardM);
     }
   }
-  
 }
-
 
 /**
  * This will be called every frame when the music variation is active
  */
 function soundDraw() {
- background(backgroundImageM);
-  // Quand on atteint "1", on flip toutes les cartes.
+  background(backgroundImageM);
+
+  // When reached "1", flip all cards
   if(flipAllCardsTimeoutM == 1){
     for (let i = 0; i < cardsM.length; i++) {
       cardsM[i].isFaceUp = false;
     }
   }
-   // À chaque image affiché, on reduit de 1 le timeout,
-  // en attendant qu'il flip toutes les cartes
+  //Each showned imaged, timeout -- until all cards get flipped
   if(flipAllCardsTimeoutM > 0) flipAllCardsTimeoutM--;
-  // checking to see display of card distribution
+  
+  // checking to see the display of card distribution
   for (let i = 0; i < cardsM.length; i++) {
     // cards[i].isFaceUp = true;
     cardsM[i].body();
 
     cardsM[i].hover();
 
-    cardsM[i].display();
-
-    //cardsM[i].displaySound();
+    cardsM[i].display(); // cards/button images
     
     if (cardsMatchedM == 8){
         //cardsM[i].winDisplay();
@@ -145,16 +134,10 @@ function soundDraw() {
     }
   }
 
-  // if(match){
-  //  for(i=0;i<flippedCards.length;i++)
-  //  flippedCards[i].display()
-  // }
-
-
   musicGameWin();
 
 }
-
+//CardM class acting on each cards and objects in the faceCardsM array
 class CardM {
   constructor(x, y, w, h, pickedM,pickedSoundM) {
     this.x = x;
@@ -163,14 +146,12 @@ class CardM {
     this.h = h;
     this.pickedM = pickedM;
     this.pickedSoundM = pickedSoundM;
-    //this.playOnce = true;
     this.stroke = color(255);
     this.col = color(225);
     this.soundButtonOff = soundButtonOff;
     this.soundButtonOffH = soundButtonOffH;
     this.soundButtonWin =soundButtonWin;
     this.isFaceUp = false;
-    this.set = false;
   }
 
   body() {
@@ -188,8 +169,7 @@ class CardM {
     ) {
       this.col = color(255);
       this.stroke = color(255);
-      // rect(this.x,this.y,this.w,this.h,10)
-      this.hoverBool = true;
+      this.hoverBool = true; //if hover on cards
       image(this.soundButtonOffH, this.x -25 , this.y -25 , this.w, this.h);
     } else {
       this.col = color("#ffffff1a");
@@ -200,23 +180,18 @@ class CardM {
   }
 
   display() {
-    // rectMode(CENTER)
-    if (this.isFaceUp) {
+    if (this.isFaceUp) { //if card is face up
       imageMode(CORNER);
       image(this.pickedM, this.x-25, this.y-25, this.w, this.h);
     }
   }
   winDisplay(){
-imageMode(CORNER);
-      image(this.soundButtonWin, this.x-25, this.y-25, this.w, this.h);
-  }/*
-  matched() {
-    if (matchM) {
-      this.display();
-    }
-  }*/
+    imageMode(CORNER);
+    image(this.soundButtonWin, this.x-25, this.y-25, this.w, this.h);
+  }
 }
 
+//shuffle all the cards objects 
 function myShuffleM(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -227,63 +202,53 @@ function myShuffleM(array) {
     
 }
 
-
 /**
  * This will be called whenever the mouse is pressed while the music variation is active
  */
 function soundMousePressed() {
-  
-  // console.log("clicked");
-   // Si on attend pour flipper les cartes,
-  // on ignore la sourie
+
+  // If we wait to flip the cards,
   if (flipAllCardsTimeoutM != 0) return;
   
-for (let i = 0; i < cardsM.length; i++) {
+  for (let i = 0; i < cardsM.length; i++) {
     if (cardsM[i].hoverBool) {
-      // si on "hover" par dessus la carte...
+    // if we hover on a card
        
-      let currentCard = cardsM[i]; // la carte qu'on click
-       currentCard.isFaceUp = true; // flip the card up!
-        // play card sound
-        if (!currentCard.pickedSoundM.isPlaying()){
-          currentCard.pickedSoundM.play();
-          hasPlayed = true;
-        } else if (currentCard.pickedSoundM.isPlaying && hasPlayed){ //!hasPlayed && 
-          currentCard.pickedSoundM.play();
-          //hasPlayed = true;
-        } else {
-          currentCard.pickedSoundM.stop();
-          hasPlayed = false;
-        }
+    let currentCard = cardsM[i]; // the clicked card
+    currentCard.isFaceUp = true; // flip the card up
+    // play card sound
+      if (!currentCard.pickedSoundM.isPlaying()){
+      currentCard.pickedSoundM.play();
+      hasPlayed = true;
+      } else if (currentCard.pickedSoundM.isPlaying && hasPlayed){ 
+        currentCard.pickedSoundM.play();
+      } else {
+        currentCard.pickedSoundM.stop();
+        hasPlayed = false;
+      }
 
-       if (lastCardIdClickedM == -1){ // Si on a jamais clicker sur une carte...
-        lastCardIdClickedM = i; // On la definit comme la dernière carte clicker
+      if (lastCardIdClickedM == -1){ // if user never clicked on a card
+      lastCardIdClickedM = i; // define "i" as the last card clicked
         
-      } else if (lastCardIdClickedM!= i){ // si on click sur une carte différente...
-        // si on click pas deux fois sur la même carte...
-        // flip the card up! 
-
+      } else if (lastCardIdClickedM!= i){ // If we click on a different card (& not the exact same one)
         if (cardsM[i].pickedM != cardsM[lastCardIdClickedM].pickedM){
-          // si les cartes ne sont pas pareil, on flip toutes les cartes
-          // dans 100 frames (or wayy less)
-          flipAllCardsTimeoutM = 30;
-          cardsMatchedM = 0;
-        } // same card is picked
-        else if (cardsM[i].pickedM == cardsM[lastCardIdClickedM].pickedM){
-  
+        // if the card is not the same, flip All cards in xnumber of frames
+        flipAllCardsTimeoutM = 30;
+        cardsMatchedM = 0;
+        } // if same card is picked
+          else if (cardsM[i].pickedM == cardsM[lastCardIdClickedM].pickedM){
           //adding a score for each matched
-        cardsMatchedM ++;
-        let knownedMatched = cardsM[i];
-        knownedMatched = true;
+          cardsMatchedM ++;
+          let knownedMatched = cardsM[i];
+          knownedMatched = true;
           console.log(cardsMatchedM + " matched sound");
           if(!knownedMatched){
             cardsMatchedM ++;
             console.log(cardsMatchedM + " matched sound");
           }
         }
-        // On "reset" la dernière carte clické
-        lastCardIdClickedM = -1;
-        
+      // Reset the last card clicked
+      lastCardIdClickedM = -1;
       }
     }
     
@@ -291,16 +256,15 @@ for (let i = 0; i < cardsM.length; i++) {
 
 }
 
+//Win ending
 function musicGameWin(){
-  //add delay or add silence before in the file
-  if(cardsMatchedM == 8 && !soundWin.isPlaying() && ! hasPlayedW){ //cardsMatchedM == 8
+  if(cardsMatchedM == 8 && !soundWin.isPlaying() && ! hasPlayedW){ 
     //soundWin.setVolume(0.8);
     soundWin.play();
     hasPlayedW = true;
   } 
-  
 }
-
+//escape key event
 function soundKeyPressed(event) {
     if (event.keyCode === 27) {
         state = "menu";

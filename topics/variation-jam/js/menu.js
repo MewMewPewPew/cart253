@@ -1,4 +1,7 @@
-/**
+/**Do you remember?
+ * MEMORY GAMES - Menu file
+ *  
+ * 
  * This menu file contains the code to run *only* the menu part of the program.
  * Note how it has its own draw, menuDraw(), and its own keyPressed, menuKeyPressed().
  * This keeps the stuff the menu needs to do *separate* from the rest of the program.
@@ -7,6 +10,7 @@ let fontDotTitle;
 let fontDot;
 let backgroundColorMenu = "#000000";
 
+// text in menu
 const menuTitle =`Memory games`
 const menuText = `
 press any following key to start\n
@@ -15,7 +19,6 @@ Tarot * T
 Sound * S
 Music * M`
 const menuContext =`made by Ash as a project for the CART 253 class at Concordia`
-// add author + context text
 
 
 
@@ -29,8 +32,7 @@ function menuDraw() {
     
     menuDrawText();
     
-    //easiest debbuging solution
-    hiddingTarotElements();
+    hiddingTarotElements();//self explanatory - easiest debbuging solution
 }
 
 /**
@@ -91,8 +93,9 @@ function menuDrawText(){
     pop();
 
 }
-function changeColorMenu(){
+
 // change the background color of the html
+function changeColorMenu(){
 document.body.style.background = backgroundColorMenu;
 }
 

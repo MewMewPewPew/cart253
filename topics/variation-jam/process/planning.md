@@ -8,10 +8,9 @@
 - ~~added escape in varition possible~~
 - ~~finish sound variation~~
 - ~~finish the basic variaton~~
-- do all the comments/organization 
-- do read.me 
-- do index.html
-- finish basic variation 
+- ~~do all the comments/organization~~ 
+- ~~do read.me~~ 
+- ~~do index.html~~
 - fix "bug" in tarot variation
 - ??? add music variaition >:D 
 - adapt comments + read.me

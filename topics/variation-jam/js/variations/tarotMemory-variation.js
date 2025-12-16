@@ -1,69 +1,88 @@
 "use strict";
-/* PAGE EXPLANATION DONT FORGET !!*/
-//fix bug of display bigCard order??
+/**Do you remember?
+ * MEMORY GAMES - Tarot variation file
+ * 
+ * [explanation copied from scipt.js]
+ * The second variation is the most complex of them all. Instead of a symbol on each pair, I was inspired by 
+ * the tarot cards and chose 8 archetypes of the major arcana of the fool's journey to replace it. The Idea was 
+ * to combine the two card "games" into one. With my own knowledge and the tarot deck from Aya Takano, I made 
+ * each archetypes their own prophecies and outcomes. Therefore, the goal is not to pair them all but to pair 
+ * the archetype you wish to make true for yourself. With this game, I unconscioully asked the user the question 
+ * if one's fate is determined or not.
+ *          Instruction:
+ *                      When starting the game, text appears: "Select 2 cards, but be careful when pairing them 
+ *                      because they will determine your fate... Double-click to start "
+ *                      When clicking a faced down card, it reveals 1 of the 8 archetypes on the card with a 
+ *                      bigger one also appearing on the left and a random related prophecy on the right. 
+ *                      Try and match this card with another sharing the same archetype. 
+ *                      The goal would be to experience all the different outcomes, rather than trying to win.
+ *                      To win, one must pair either The sun card or gamble they success with a 50% chance 
+ *                      with the Fortune card.
+ * 
+ *          Below are all the archetypes in order, their outcome in the game and meaning in real life: 
+ *                      The magician, The lovers, The chariot, The hermit, Fortune, Death, The Tower & The Sun.
+ *                      If "The magician" is paired: 
+ *                          4 elements are added as images or gifs: a wand, a cup, a sword & a coin/pentacle.
+ *                          They each represent in tarot: fire & action, water & emotion, air & ideas/rational 
+ *                          thinking and earth & harverst/material/money... meaning that the magician has all 
+ *                          elements required to infinitly create.
+ *                      If "The lovers" is paired:
+ *                          A gif of 2 hearts spinning are added to the screen. Easy methaphore here: love. The
+ *                          lovers aren't necessarely about romance, but rewarding & intimate relashionships. 
+ *                      If "The chariot" is paired: 
+ *                          The bigger card on the left starts leaving to new horizons (y -= 10). Representing
+ *                          mouvement, sometimes impulsive. Saying yes and go running in search of purpose 
+ *                          despite anxieties or obstacles.
+ *                      If "The hermit" is paired: 
+ *                          A new prophecy is revealed. It is the image also used in the starting screen for a 
+ *                          reason. Guidance, clearer instructions are showned: "Listen carefully... As you may 
+ *                          have experienced, when you match a pair of tarot cards together, your fate becomes 
+ *                          determined by it's meaning... Good luck". The hermit represents deep introspection 
+ *                          and the knowledge gain by it. They take then the role as guides for others.    
+ *                      If "Fortune" is paired: 
+ *                          A wheel of fortune appears with instructions on top: "Your fate is in the hands of 
+ *                          the Wheel of Fortune", both refering to the original name of this card. Fortune can
+ *                          be either good fortune or bad fortune, but it is unstoppable. This gamble of two 
+ *                          equal outcomes ends the game either by winning it or losing it. Fortune embraces
+ *                          chaos of life by taking action in what you can change. 
+ *                      If "Death" is paired: 
+ *                          A cropped and + sized image of the card appears with the text: "Dead end, Click to 
+ *                          restart". This outcome acts as an anti-pair and restarts the choosing process for 
+ *                          the user. The Death card is often miss-judged for it's name. As much as it means 
+ *                          the end of a cycle, it also means the begginning of a new one.
+ *                      If "The Tower" is paired: 
+ *                          A cropped and + sized image of the card appears with the text: "You Lost ! :(". It 
+ *                          also takes aways the images & gifs of The lovers & The magician if revealed before. 
+ *                          The tower is the losing endgame and is represented it by that because it annonces a 
+ *                          bad omen. A cycle of self-fulfilling prophecy of destruction caused by denial. The 
+ *                          methaphore here is that no matter how you build or try to fix something (like a 
+ *                          tower), it is bound to fall if the foundations are wrong.  
+ *                      If "The Sun" is paired: 
+ *                          A cropped and + sized image of the card appears with the text: "You Win ! :)". It is
+ *                          the winning endgame and is represented by The sun because this card means success,  
+ *                          joy, fun & abundance. Comparing oneself to the sun's radiance, strengh and freedom  
+ *                          or being blessed by it's warmth as a positive interpretation.
+*/
 
+//2 things are to be noted here: 
+//  - The program is really slow because I didn't have time to optomize it
+//  - There is an unwanted display happening making it so that: 
+//        if the first card picked is more to the right and/or down than the second, 
+//        the left image "this.pickedT" & the right prophecy "this.outcomes" are somehow not showned 
+//        (or showned under the first pick?)
 
-
-// Text
-let colorProphecy = "#3a6e50ff";
-let linkT; 
-// Intruction screen
-let instruction = true;
-let instructionDisplay = {
-  text: "Tarot Memory",
-  x: 732,
-  y: 105,  
-  stroke: "#d32f5bb2",
-  weight: 5,
-  fill: "#fdf5e8ff",
-  size: 55,
-  below:{
-    text:"Select 2 cards,\nbut be careful when pairing them because they will determine your fate...\n\nDouble-click to start",
-    size: 40,
-    x: 731,
-    y: 480,
-    x2: 500,
-    y2: 600,
-    stroke: "#f1e5d0c2",
-    weight: 4,
-    fill: "#254238ff", //"#d32f5b" "#1a1438ff"
-  },
-  img: {
-    x:0,
-    y:0,
-  }
-}
-//making the images I use undefined
-let instrucionScreen;
-let coverCard;
-let coverCardH;
-let backgroundImageT;
-let sun, death, magician, fortune, chariot, lovers, tower, hermit;
-let imgWin;
-let deadEnd;
-let imgLose;
-let imgCard;
-let bigCard;
-let bigCard1;
-let bigCard2;
-let chariotCard1 = {
-  y: 150,
-};
-let swordCoin;
-let cup;
-let wand;
-let imgheart;
-
+// html body background-color
 let backgroundColorT = "#ffffff";
+
 // outcomes variables of cards :
-  // The sun card 
+// The sun card 
 let gameWin = false;
 let winning = {
   //img is contain 
   x:0,
   y:0,
   text:{
-    text: "You Won ! :)",
+    text: "You Win ! :)",
     x: 732,
     y: 220,  
     stroke: "#faf88dff",
@@ -149,7 +168,7 @@ let advice = {
     fill: "#ee2842ff",
     y: 375,
   },
-    box:{
+  box:{
     x: 1390,
     y: 120,
     x2: 400,
@@ -159,7 +178,6 @@ let advice = {
 }
 // The chariot outcome
 let chariotGo = false;
-
 //The fortune(wheel of fortune)
 let gamble = false; 
 let textFortune = {
@@ -201,16 +219,10 @@ let speed = 0;
 let deceleration = 0.90; // Slow down factor
 let shuffleOptions;
 let textToShow;
-// Cards variables
-let cardsT = [];
-let cardT;
-var colNumT = 4;
-var rowNumT = 4;
-let pickedT;
-let outcomes;
-let cardsArray;
-//let matchT = false;
 
+// Text
+let colorProphecy = "#3a6e50ff";
+let linkT; 
 let artistMention = {
   text: "Most of the art used in this project \nwere made by Aya Takano. The symbolism & spirituality \nin her tarot cards was researched with Reika Akatsuki.",
   x: 0,
@@ -225,16 +237,69 @@ let artistMention = {
     fill:"#1e3c5fff"
   },
 }
-// Flip toutes les cartes dans X frames
-let flipAllCardsTimeout = 0;
+// Intruction screen
+let instruction = true;
+let instructionDisplay = {
+  text: "Tarot Memory",
+  x: 732,
+  y: 105,  
+  stroke: "#d32f5bb2",
+  weight: 5,
+  fill: "#fdf5e8ff",
+  size: 55,
+  below:{
+    text:"Select 2 cards,\nbut be careful when pairing them because they will determine your fate...\n\nDouble-click to start",
+    size: 40,
+    x: 731,
+    y: 480,
+    x2: 500,
+    y2: 600,
+    stroke: "#f1e5d0c2",
+    weight: 4,
+    fill: "#254238ff", //"#d32f5b" "#1a1438ff"
+  },
+  img: {
+    x:0,
+    y:0,
+  }
+}
+
+// making the images I use global
+let instrucionScreen;
+let coverCard;
+let coverCardH;
+let backgroundImageT;
+let sun, death, magician, fortune, chariot, lovers, tower, hermit;
+let imgWin;
+let deadEnd;
+let imgLose;
+let imgCard;
+let bigCard;
+let bigCard1;
+let bigCard2;
+let chariotCard1 = {
+  y: 150,
+};
+let swordCoin;
+let cup;
+let wand;
+let imgheart;
+
+// cards & important variables 
+let cardsT = [];
+let cardT;
+var colNumT = 4;
+var rowNumT = 4;
+let pickedT;
+let outcomes;
+let flipAllCardsTimeout = 0; // Flip all cards in "x" frames
 let lastCardIdClicked = -1;
 
 function tarotSetup() {
   changeColorT();
   createCanvas(1465, 800);
-  // background(220)
-  // rectMode(CENTER)
 
+  //Where the image, outcome & prophecies of each card is determined
   let cardsToShuffle = [
     {
       image: sun,
@@ -263,7 +328,7 @@ function tarotSetup() {
       outcome: "magicianMagic",
       prophecies: [
         "Realize you all within and around you to create.",
-        "Your power of manifestation is strong \nsince it drices you to act.",
+        "Your power of manifestation is strong \nsince it drives you to act.",
         "Create !!! ",
         "Your futur is something you make yourself", // quote from the tarot website*
         "Try to see the tools you have, \nimagine what you can make out of",
@@ -275,7 +340,7 @@ function tarotSetup() {
       outcome: "fortuneLuck",
       prophecies: [
         "Everyone has their own life, their own way of living. \nYou are you, and this is okay !", // quote from the tarot website
-        "What is good? What is bad? What does it mean to win or lose? Is objectivity real?", //*?
+        "What is good? What is bad? What does it mean to win or lose? We can only observe and do what we can", //*?
         "Embrace chaos, it's what made you",
         "Are you lucky in life?",
         "Our shadow can easily start dictating our light",
@@ -291,7 +356,7 @@ function tarotSetup() {
         "Do what you want no matter the obstacles",
         "Live your life!",
         "Run toward what you care for, and if you don't know your purpose go find it",
-        "YOLO !",
+        "YOLO!!",
       ]
     },
     {
@@ -329,76 +394,68 @@ function tarotSetup() {
       ]
     },
   ]
+  //make the 8 cards be a pair (16)
   let selectedT = [...cardsToShuffle, ...cardsToShuffle];
-  cardsArray = selectedT.outcome;  
 
-  myShuffleT(selectedT);
+  myShuffleT(selectedT);//shuffle all the cards objects
+  
+  //fortune card outcome (gamble 1/2 chance to win/lose)
+  shuffleOptions = shuffle(gambleOptions);
+
   cardT = [];
-  //   calling class card + position of row
+  //calling the class card + defining they position
   for (let i = 0; i < colNumT; i++) {
     for (let j = 0; j < rowNumT; j++) {
       var cardX = 510 + i * 150;
       var cardY = j * 180 + 120;
-      // cards.push(new Card(cardX, cardY,50,50));
-
       var cardFaceT = selectedT.pop();
       var cardFaceTP = cardFaceT.prophecies; 
       cardT = new CardT(cardX, cardY, 100, 170, cardFaceT.image,cardFaceT.outcome, cardFaceTP[Math.floor(Math.random()*cardFaceTP.length )]);
       cardsT.push(cardT);
-      
-      //if (cardFaceT.outcome)
     }
   }
-  //fortune card outcome (gamble 1/2 chance to win/lose)
-  shuffleOptions = shuffle(gambleOptions);
-  //function for the artist's tarot detail website
+  //function for the artist's link to the tarot detail website
   tanakoLink();
 }
 
 /**
- * 
+ * Drawing the title screen, background, outcomes & ending with images & text
+ * CardT class (prophecies, cards) + if they are flipped\hoved
  */
 function tarotDraw() {
   background(225);
   background(backgroundImageT);
   
-  // Quand on atteint "1", on flip toutes les cartes.
+  // When reached "1", flip all cards
   if(flipAllCardsTimeout == 1){
     for (let i = 0; i < cardsT.length; i++) {
       cardsT[i].isFaceUp = false;
     }
   }
-   // À chaque image affiché, on reduit de 1 le timeout,
-  // en attendant qu'il flip toutes les cartes
+  //Each showned imaged, timeout -- until all cards get flipped
   if(flipAllCardsTimeout > 0) flipAllCardsTimeout--;
 
-  
-
-  // checking to see display of card distribution
+  // checking to see the display of card distribution
   for (let i = 0; i < cardsT.length; i++) { //is the i++ the cause of the layout img + text display bug when clicked 2nd or +.... ?
-    // cards[i].isFaceUp = true;
+    
     cardsT[i].body();
 
     cardsT[i].hover();
 
-    cardsT[i].displayImg();
+    cardsT[i].displayImg(); //cards + big card on left
 
-    cardsT[i].displayText();
+    cardsT[i].displayText(); //prophecy text
 
-    cardsT[i].matched();
-      //cardsT[i].outcome = true;
-    
   }
-
   cardsOutcomes();
   outcomesEnd();
-  //setTimeout( outcomesEnd, 3000);
   instrucionScreenDisplay();
-  //function to mention the artist's work I used
+
+  //text to mention the artist's work I used
   takanoMention();
 }
 
-
+//CardT class acting on each cards and objects in the cardsToShuffle array
 class CardT {
   constructor(x, y, w, h, pickedT, outcomes, text) {
     this.x = x;
@@ -433,10 +490,10 @@ class CardT {
       mouseX > this.x - this.w / 2 &&
       mouseX < this.x + this.w / 2 &&
       mouseY < this.y + this.h / 2 &&
-      mouseY > this.y - this.h / 2 && gameLose === false && gameWin === false && endCycle === false && instruction === false
-    ) {
+      mouseY > this.y - this.h / 2 && 
+      !gameLose && !gameWin && !endCycle && !instruction ) 
+    { // if mouse on card & not in starting or ending gameplay (make it playable)
       this.col = color(160);
-      // rect(this.x,this.y,this.w,this.h,10)
       this.hoverBool = true;
       image(this.coverCardH, this.x -50, this.y -85, this.w, this.h);
     }  else {
@@ -447,25 +504,23 @@ class CardT {
   }
 
   displayImg() {
-    // rectMode(CENTER)
     if (this.isFaceUp) {
       imageMode(CORNER);
-      imgCard = image(this.pickedT, this.x -50, this.y -85, this.w, this.h);
-      bigCard = image(this.pickedT, 0, 150, 260, 442); 
-      //this.isFaceUp = false; 
-        } if (chariotGo){
+      imgCard = image(this.pickedT, this.x -50, this.y -85, this.w, this.h); // cards
+      bigCard = image(this.pickedT, 0, 150, 260, 442); // + size card on left of the cards
+        } if (chariotGo){ // outcome of The chariot card (if paired)
           bigCard = image(this.chariot, 0, chariotCard1.y, 260, 442); 
         }
   }
   displayText(){
-    if (this.isFaceUp) {
+    if (this.isFaceUp) { //if card is face up
+      //making a white box behind the text
       push();
       noStroke();
       fill(this.stroke);
       rect(1390, 300, 400, 1000);
       pop();
-      //imageMode(CORNER);
-      //console.log(this.text);
+      //prophecy text
       noStroke();
       textSize(this.size);
       fill(this.fill);
@@ -473,24 +528,10 @@ class CardT {
       textFont(this.font);
     } 
   }
-  matched() {
-    if (this.matchT){ //this.isFaceUp && ?
-     /*
-      else if(chariotGo){  //The chariot outcome ??
-      this.x = this.x +1
-      // add constrain !
-      }
-      else if (chariot === false){
-      }*/
-    }
-  }
   
 }
-//is it being used ?
-function hiddingCard1(){
-  bigCard1.hide();
-}
-// copied from : https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
+
+//shuffle all the cards objects 
 function myShuffleT(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -501,70 +542,64 @@ function myShuffleT(array) {
 }
 
 
-
 function tarotMousePressed() {
 
-  // Si on attend pour flipper les cartes,
-  // on ignore la sourie
+  // If we wait to flip the cards,
   if (flipAllCardsTimeout != 0) return;
 
-  // console.log("clicked");
   for (let i = 0; i < cardsT.length; i++) {
     if (cardsT[i].hoverBool) {
-      // si on "hover" par dessus la carte...
+    // if we hover on a card
        
-      let currentCard = cardsT[i]; // la carte qu'on click
-       currentCard.isFaceUp = true; // flip the card up!
+    let currentCard = cardsT[i]; // the clicked card
+    currentCard.isFaceUp = true; // flip the card up
 
-       if (lastCardIdClicked == -1){ // Si on a jamais clicker sur une carte...
-        lastCardIdClicked = i; // On la definit comme la dernière carte clicker
-      } else if (lastCardIdClicked != i){ // si on click sur une carte différente...
-        // si on click pas deux fois sur la même carte...
+      if (lastCardIdClicked == -1){ // if user never clicked on a card
+      lastCardIdClicked = i; // define "i" as the last card clicked
+      } else if (lastCardIdClicked != i){ // If we click on a different card (& not the exact same one)
         if (cardsT[i].pickedT != cardsT[lastCardIdClicked].pickedT){
-          // si les cartes ne sont pas pareil, on flip toutes les cartes
-          // dans 100 frames (or wayy less)
-          flipAllCardsTimeout = 15;
-        } // same card is picked
-        else if (cardsT[i].pickedT == cardsT[lastCardIdClicked].pickedT){
+        // if the card is not the same, flip All cards in xnumber of frames
+        flipAllCardsTimeout = 15;
+        } else if (cardsT[i].pickedT == cardsT[lastCardIdClicked].pickedT){ // if same card is picked
           // sun card outcome
           if (cardsT[i].outcomes.includes("sunWin")){
             flipAllCardsTimeout = 3;
             gameWin = true; 
             cardsT[i].hoverBool = false;
-          }
-          else if (cardsT[i].outcomes.includes("towerGameOver")){ // tower card
+          } // tower card
+          else if (cardsT[i].outcomes.includes("towerGameOver")){ 
             flipAllCardsTimeout = 3;
             gameLose = true; 
             cardsT[i].hoverBool = false;
-          }
+          } //hermit card
           else if (cardsT[i].outcomes.includes("hermitAdvice")){
-            hermitSpeech = true; //hermit card
-          }
+            hermitSpeech = true; 
+          } //lover card
           else if (cardsT[i].outcomes.includes("loversHeart")){
-            love = true; //lover card
-          }
+            love = true; 
+          } //magician card
           else if (cardsT[i].outcomes.includes("magicianMagic")){
-             magic = true; //magician card
-          }
+             magic = true; 
+          } //fortune card
           else if (cardsT[i].outcomes.includes("fortuneLuck")){
             flipAllCardsTimeout = 3;
-            gamble = true; //fortune card
-          }
-          else if (cardsT[i].outcomes.includes("deathCycle")){ //death card
+            gamble = true; 
+          } //death card
+          else if (cardsT[i].outcomes.includes("deathCycle")){ 
             flipAllCardsTimeout = 10;
             endCycle = true;
-          }
+          } //chariot card
           else if (cardsT[i].outcomes.includes("chariotMove")){
-            chariotGo = true; //chariot card
+            chariotGo = true; 
           }
         }
-        // On "reset" la dernière carte clické
-        lastCardIdClicked = -1;
+      // Reset the last card clicked
+      lastCardIdClicked = -1;
       }
     }
     
   }
-  //Fortune Card outcome :3 
+  //Fortune Card outcome 
   if (!spinning && gamble === true) {
     angle = 0;
     targetAngle = random(PI, 2 * PI) * 5;
@@ -574,7 +609,7 @@ function tarotMousePressed() {
   }
 
 }
-//escape key
+//escape key event
 function tarotKeyPressed(event) {
     if (event.keyCode === 27) {
         state = "menu";
@@ -583,36 +618,37 @@ function tarotKeyPressed(event) {
         heartsGif.hide();
     }
 }
+//Starting screen (image + text)
 function instrucionScreenDisplay(){
   if(instruction === true){
-    image(instrucionScreen, instructionDisplay.img.x, instructionDisplay.img.y, width, height, 0, 0, instrucionScreen.width, instrucionScreen.height, CONTAIN)
-
-  push();
-  textAlign(CENTER, CENTER);
-  textFont(fontDotTitle);
-  stroke(instructionDisplay.stroke);
-  strokeWeight(instructionDisplay.weight);
-  textSize(instructionDisplay.size);
-  fill(instructionDisplay.fill);
-  text(instructionDisplay.text, instructionDisplay.x, instructionDisplay.y);
-  pop();
-  push();
-  textAlign(CENTER, CENTER);
-  textFont(fontDot);
-  stroke(instructionDisplay.below.stroke);
-  strokeWeight(instructionDisplay.below.weight);
-  textSize(instructionDisplay.below.size);
-  fill(instructionDisplay.below.fill);
-  text(instructionDisplay.below.text, instructionDisplay.below.x, instructionDisplay.below.y, instructionDisplay.below.x2, instructionDisplay.below.y2);
-  pop();
-  if (mouseIsPressed){
-    instruction = false;
-  }
+    image(instrucionScreen, instructionDisplay.img.x, instructionDisplay.img.y, width, height, 0, 0, instrucionScreen.width, instrucionScreen.height, CONTAIN);
+    
+    push();
+    textAlign(CENTER, CENTER);
+    textFont(fontDotTitle);
+    stroke(instructionDisplay.stroke);
+    strokeWeight(instructionDisplay.weight);
+    textSize(instructionDisplay.size);
+    fill(instructionDisplay.fill);
+    text(instructionDisplay.text, instructionDisplay.x, instructionDisplay.y);
+    pop();
+    push();
+    textAlign(CENTER, CENTER);
+    textFont(fontDot);
+    stroke(instructionDisplay.below.stroke);
+    strokeWeight(instructionDisplay.below.weight);
+    textSize(instructionDisplay.below.size);
+    fill(instructionDisplay.below.fill);
+    text(instructionDisplay.below.text, instructionDisplay.below.x, instructionDisplay.below.y, instructionDisplay.below.x2, instructionDisplay.below.y2);
+    pop();
+    if (mouseIsPressed){ //program is so slow I had to write double-click...
+      instruction = false;
+    }
   }
 }
 
-function outcomesEnd(){
 //Wining ending
+function outcomesEnd(){
   if (gameWin === true){
     //console.log("Win");
     bigCard1 = image(sun, 0, 150, 260, 442); 
@@ -627,8 +663,7 @@ function outcomesEnd(){
     fill(winning.text.fill);
     text(winning.text.text, winning.text.x, winning.text.y);
     pop();
-    //make all the cards flip down + unflippable ! 
-    //restart button?
+    // add restart button?
     }
  
   //Losing ending
@@ -650,16 +685,12 @@ function outcomesEnd(){
     love = false;
     magic = false;
     chariotGo = false;
-
-    //make all the cards flip down + unflippable ! 
-    //restart button?
-    
+    // add restart button?
   }
 }
 
 
 function cardsOutcomes(){
-  
   //The magician outcome (add-on)
   if (magic === true){
     //console.log("magic is real !");
@@ -684,9 +715,7 @@ function cardsOutcomes(){
   }
   // Death outcome (fake restart)
   if(endCycle === true){
-    
     image(deadEnd, restart.x, restart.y, width, height, 0, 0, deadEnd.width, deadEnd.height, CONTAIN);
-  
     push();
     textAlign(CENTER, CENTER);
     textFont(fontDot);
@@ -700,8 +729,7 @@ function cardsOutcomes(){
       endCycle = false;
     }
     //console.log("transformation is real !");
-    // add transition like a black flash or lil gif/animation ? 
-    //matchT = false; // doesn't work cuz of setT*
+
   }
   // The hermit outcome (add-on advice/instruction)
   if(hermitSpeech === true){
@@ -723,17 +751,17 @@ function cardsOutcomes(){
     textFont(fontDot);  
     text(advice.color.text,advice.x, advice.color.y );
     pop();
-    
+
     setTimeout(adviceGone,9000);
     
   }
-  // The chariot outcome (put in Card class ?)
+  // The chariot outcome 
   if (chariotGo === true){
     chariotCard1.y -= 10;
   }
-  // Now the fortune outcome...
+  // Now the fortune outcome
   if(gamble === true){
-    // draw the text ?
+    
     bigCard1 = image(fortune, 0, 150, 260, 442); 
     bigCard2 = image(fortune, 1205, 150, 260, 442);
     textAlign(CENTER, CENTER);
@@ -752,7 +780,7 @@ function cardsOutcomes(){
 function adviceGone(){ //to make the hermit's advice disappear
   hermitSpeech = false;
 }
-function wheelOfFortune(){
+function wheelOfFortune(){ //to make the wheel of fortune (copied code)
   textAlign(CENTER, CENTER);
   translate(width / 2, height / 2);
 
@@ -822,8 +850,9 @@ function wheelOfFortune(){
   }
 
 }
+
 function changeColorT(){
-// change the background color of the html
+  // change the background color of the html
 document.body.style.background = backgroundColorT;
 }
 
