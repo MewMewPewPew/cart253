@@ -165,15 +165,16 @@ function preload(){
     sound7 = loadSound("assets/sounds/bark.wav");
     sound8 = loadSound("assets/sounds/sound8.mp3");
     // music memory variation
-    //backgroundImageS = loadImage('assets/images/sound_bg.png');
-    //sound1M = loadSound("assets/sounds/sound1M.m4a");
-    //sound2M = loadSound("assets/sounds/sound2.m4a");
-    //sound3M = loadSound("assets/sounds/sound3.m4a");
-    //sound4M = loadSound("assets/sounds/sound4.m4a");
-    //sound5M = loadSound("assets/sounds/sound5.m4a");
-    //sound6M = loadSound("assets/sounds/sound6.m4a");
-    //sound7M = loadSound("assets/sounds/sound7.m4a");
-    //sound8M = loadSound("assets/sounds/sound8.m4a");
+    backgroundImageV = loadImage('assets/sounds/music_bg.png');
+    foregroundImageV = loadImage('assets/sounds/music_bgReflet.png');
+    sound1M = loadSound("assets/sounds/sound1.m4a");
+    sound2M = loadSound("assets/sounds/sound2.m4a");
+    sound3M = loadSound("assets/sounds/sound3.m4a");
+    sound4M = loadSound("assets/sounds/sound4.m4a");
+    sound5M = loadSound("assets/sounds/sound5.m4a");
+    sound6M = loadSound("assets/sounds/sound6.m4a");
+    sound7M = loadSound("assets/sounds/sound7.m4a");
+    sound8M = loadSound("assets/sounds/sound8.m4a");
 }
 
 function draw() {
@@ -186,10 +187,10 @@ function draw() {
             break
         case "sound-variation":
             soundDraw();
-            break;/*
+            break;
         case "music-variation":
             musicDraw();
-            break;*/
+            break;
         case "BaseMemoryGame":
             baseDraw();
             break;
@@ -210,10 +211,10 @@ function mousePressed() {
             break
         case "sound-variation":
             soundMousePressed();
-            break/*
+            break
         case "music-variation":
             musicMousePressed();
-            break;*/
+            break;
         case "BaseMemoryGame":
             baseMousePressed();
             break;
@@ -234,10 +235,10 @@ function keyPressed(event) {
             break;
         case "sound-variation":
             soundKeyPressed(event);
-            break/*
+            break
         case "music-variation":
             musicKeyPressed(event);
-            break;*/
+            break;
         case "BaseMemoryGame":
             baseKeyPressed(event);
             break;
