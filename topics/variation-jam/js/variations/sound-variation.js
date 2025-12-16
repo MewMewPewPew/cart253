@@ -28,7 +28,7 @@ let hasPlayedW = false;
 let winningM = false;
 let faceCardsM;
 let cardsMatchedM = 0;
-//let setTotal = 0;
+let setTotal = 0;
 // Flip toutes les cartes dans X frames
 let flipAllCardsTimeoutM = 0;
 let lastCardIdClickedM = -1;
@@ -150,7 +150,7 @@ function soundDraw() {
 
     cardsM[i].display();
 
-    cardsM[i].displaySound();
+    //cardsM[i].displaySound();
     
     if (cardsMatchedM == 8){
         cardsM[i].winDisplay();
@@ -163,10 +163,9 @@ function soundDraw() {
   //  flippedCards[i].display()
   // }
 
-  if (cardsMatchedM == 8 || winningM ) { // & set/matched ===8 
-    
-    musicGameWin();
-   }
+
+  musicGameWin();
+
 }
 
 class CardM {
@@ -221,25 +220,49 @@ class CardM {
     }
   }
 
-  displaySound(){
-    if (this.isFaceUp && !this.pickedSoundM.isPlaying() && ! hasPlayed ) { 
+  /*displaySound(){
+    if (this.isFaceUp && !this.pickedSoundM.isPlaying() && ! hasPlayed ) { // && !this.pickedSoundM.isPlaying()
       this.pickedSoundM.playMode('restart');
       this.pickedSoundM.play();
       hasPlayed = true;
+      }else if (hasPlayed){
+        this.pickedSoundM.stop();
       }else{
+        //this.pickedSoundM.stop();
         hasPlayed = false;
       } // makes loop when matched !
     }
-  
+    -- WAS IN MOUSEPRESSED
+    if (cardsM[i].isFaceUp && !cardsM[i].pickedSoundM.isPlaying() && !hasPlayed ){
+            //cardsM[lastCardIdClickedM].pickedSoundM.playMode('restart');
+            cardsM[i].pickedSoundM.play();
+            //cardsM[lastCardIdClickedM].pickedSoundM.stop();
+            hasPlayed = true;
+          } else{
+            //this.pickedSoundM.stop();
+            hasPlayed = false;
+            //cardsM[i].pickedSoundM.stop();
+          } // makes loop when mat
+
+          if (!cardsM[i].pickedSoundM.isPlaying() && !hasPlayed ){
+            //cardsM[lastCardIdClickedM].pickedSoundM.playMode('restart');
+            cardsM[i].pickedSoundM.play();
+            hasPlayed = true;
+          } else{
+            //this.pickedSoundM.stop();
+            hasPlayed = false;
+            //cardsM[i].pickedSoundM.stop();
+          } // makes loop when mat
+   }*/
   winDisplay(){
 imageMode(CORNER);
       image(this.soundButtonWin, this.x-25, this.y-25, this.w, this.h);
-  }
+  }/*
   matched() {
     if (matchM) {
       this.display();
     }
-  }
+  }*/
 }
 
 function myShuffleM(array) {
@@ -269,24 +292,57 @@ for (let i = 0; i < cardsM.length; i++) {
        
       let currentCard = cardsM[i]; // la carte qu'on click
        currentCard.isFaceUp = true; // flip the card up!
+        // play card sound
+        if (!currentCard.pickedSoundM.isPlaying()){
+          currentCard.pickedSoundM.play();
+          hasPlayed = true;
+        } else if (currentCard.pickedSoundM.isPlaying && hasPlayed){ //!hasPlayed && 
+          currentCard.pickedSoundM.play();
+          //hasPlayed = true;
+        } else {
+          currentCard.pickedSoundM.stop();
+          hasPlayed = false;
+        }
 
        if (lastCardIdClickedM == -1){ // Si on a jamais clicker sur une carte...
         lastCardIdClickedM = i; // On la definit comme la dernière carte clicker
+        
       } else if (lastCardIdClickedM!= i){ // si on click sur une carte différente...
         // si on click pas deux fois sur la même carte...
+        // play card soundstill 
+        /* 
+        let newCard = cardsM[i]; // new card clicked
+          newCard.isFaceUp = true */ // flip the card up! 
+
         if (cardsM[i].pickedM != cardsM[lastCardIdClickedM].pickedM){
           // si les cartes ne sont pas pareil, on flip toutes les cartes
           // dans 100 frames (or wayy less)
-          cardsM[i].pickedSoundM.stop();
-          flipAllCardsTimeoutM = 15;
+          //cardsM[i].pickedSoundM.stop();
+          flipAllCardsTimeoutM = 30;
+          cardsMatchedM = 0;
         } // same card is picked
         else if (cardsM[i].pickedM == cardsM[lastCardIdClickedM].pickedM){
-         cardsMatchedM += 1;
-         console.log(cardsMatchedM + " matched sound");
+          // if the button is already playing the sound, play it again, but no looping so
+        /*if (currentCard.pickedSoundM.isPlaying && hasPlayed ()){ //!hasPlayed && 
+          currentCard.pickedSoundM.play();
+          //hasPlayed = true;
+        } else {
+          currentCard.pickedSoundM.stop();
+          //hasPlayed = false;
+        }*/
+          //adding a score for each matched
+        cardsMatchedM ++;
+        let knownedMatched = cardsM[i];
+        knownedMatched = true;
+          console.log(cardsMatchedM + " matched sound");
+          if(!knownedMatched){
+            cardsMatchedM ++;
+            console.log(cardsMatchedM + " matched sound");
+          }
         }
         // On "reset" la dernière carte clické
         lastCardIdClickedM = -1;
-        //cardsMatchedM = 0;
+        
       }
     }
     
@@ -351,9 +407,9 @@ for (let i = 0; i < cardsM.length; i++) {
 
 function musicGameWin(){
   //add delay or add silence before in the file
-  if(winningM || !soundWin.isPlaying() && ! hasPlayedW){
+  if(cardsMatchedM == 8 && !soundWin.isPlaying() && ! hasPlayedW){ //cardsMatchedM == 8
+    //soundWin.setVolume(0.8);
     soundWin.play();
-    soundWin.setVolume(0.8, 0.3, 0.5);
     hasPlayedW = true;
   } 
   

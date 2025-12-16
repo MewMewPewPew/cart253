@@ -68,18 +68,18 @@ function preload(){
     img6M = loadImage("assets/images/button_on.PNG");
     img7M = loadImage("assets/images/button_on.PNG");
     img8M = loadImage("assets/images/button_on.PNG");
-    soundWin = loadSound("assets/sounds/youWin_pvz.mp3");
+    soundWin = loadSound("assets/sounds/youWinPvZ.mp3");
     sound1 = loadSound("assets/sounds/sound1.mp3");
     sound2 = loadSound("assets/sounds/sound2.mp3");
     sound3 = loadSound("assets/sounds/sound3.mp3");
     sound4 = loadSound("assets/sounds/sound4.mp3");
     sound5 = loadSound("assets/sounds/sound5.mp3");
     sound6 = loadSound("assets/sounds/sound6.mp3");
-    sound7 = loadSound("assets/sounds/sound7.mp3");
+    sound7 = loadSound("assets/sounds/bark.wav");
     sound8 = loadSound("assets/sounds/sound8.mp3");
     // music memory game img + sound 
     backgroundImageM = loadImage('assets/images/sound_bg.png');
-    //sound1M = loadSound("assets/sounds/sound1.m4a");
+    //sound1M = loadSound("assets/sounds/sound1M.m4a");
     //sound2M = loadSound("assets/sounds/sound2.m4a");
     //sound3M = loadSound("assets/sounds/sound3.m4a");
     //sound4M = loadSound("assets/sounds/sound4.m4a");
