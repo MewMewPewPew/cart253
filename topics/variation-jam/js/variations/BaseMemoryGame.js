@@ -1,124 +1,117 @@
 "use strict";
 
+//Images
+let backgroundImage;
+let coverCardB;    
+let coverCardBH;
+let flippedCardB;
+let img1, img2, img3, img4, img5, img6, img7, img8;
+let imgWinB;
+let faceCards;
+
+let backgroundColorB = "#2f2f2f"; 
 let cards;
 let card;
 var colNum = 4;
 var rowNum = 4;
-let selected = [];
-let flippedCards = [];
-let myFont;
-let picked;
-let img1, img2, img3, img4, img5, img6, img7, img8;
-let faceCards, faceCardsCopy;
-let randomIndex;
+let selectedB = [];
+let pickedB;
 let hover = false;
-let numFlipped = 0;
-let timer = -1;
-let matchBool;
-let delay = 60;
-let set = 0;
-let match = false;
-let matchedCards = [];
-let confetti = [];
+let flipAllCardsTimeoutB = 0;
+let lastCardIdClickedB = -1;
+let cardsMatchedB = 0;
 
-/* -put in script js preload
-function preload() {
-  console.log("hey");
-  img1 = loadImage("assets/images/cards/basic/star.png");
-  img2 = loadImage("assets/images/cards/basic/triangle.png");
-  img3 = loadImage("assets/images/cards/basic/spiral.png");
-  img4 = loadImage("assets/images/cards/basic/circle.png");
-  img5 = loadImage("assets/images/cards/basic/heart.png");
-  img6 = loadImage("assets/images/cards/basic/diamond.png");
-  img7 = loadImage("assets/images/cards/basic/spade.png");
-  img8 = loadImage("assets/images/cards/basic/trefle.png");
-  // faceCards = [img1, img2, img3, img4, img5, img6, img7, img8];
+let winDisplayB = {
+  yimg: -120,
+  size: 100,
+  fill: "#f03860ff",
+  stroke: "#1f222bff",
+  weight: 5, 
+  fill2: "#ffffff00",
+  stroke2: "#39435e96",
+  weight2: 8,
+  stroke3: "#e0e5f173",
+  weight3: 14,
+  text: "you Won !",
+  x:325,
+  y: 250,
 }
-*/
 
 function baseSetup() {
-  
-  createCanvas(600, 400);
+  changeColorB();
+  createCanvas(650, 750);
   // background(220)
   // rectMode(CENTER)
 
   faceCards = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
+    {
+      image: img1,
+    },
+    {
+      image: img2,
+    },
+    {
+      image: img3,
+    },
+    {
+      image: img4,
+    },
+    {
+      image: img5,
+    },
+    {
+      image: img6,
+    },
+    {
+      image: img7,
+    },
+    {
+      image: img8,
+    },    
   ];
 
-  faceCardsCopy = [];
+ let selectedB = [...faceCards, ...faceCards];
 
-  myShuffle();
+  myShuffleB(selectedB);
 
   cards = [];
-
-  //   calling class card
-  for (let i = 0; i < colNum; i++) {
-    for (let j = 0; j < rowNum; j++) {
-      var cardX = 190 + i * 70;
-      var cardY = j * 70 + 90;
+  
+  //   calling class card + position of row
+  for (let i = 0; i < colNumT; i++) {
+    for (let j = 0; j < rowNumT; j++) {
+      var cardX = 145 + i * 120;
+      var cardY = j * 180 + 105;
       // cards.push(new Card(cardX, cardY,50,50));
 
-      var cardFace = selected.pop();
-      card = new Card(cardX, cardY, 50, 50, cardFace);
+      var cardFace = selectedB.pop();
+      card = new Card(cardX, cardY, 90, 164, cardFace.image);
       cards.push(card);
+      
+
     }
   }
 
-  for (let i = 0; i < 50; i++) {
-    confetti[i] = new Confetti();
-  }
+
 }
 /**
  * This will be called every frame when the music variation is active
  */
 
 function baseDraw() {
-  background(220);
+  background(225);
+  background(backgroundImage);
+  // add img or smt? 
 
-  // shuffling(selected);
-  if (!match) {
-    if (frameCount - timer > delay && timer != -1) {
-      for (let i = 0; i < cards.length; i++) {
-        if (!cards[i].set) {
-          cards[i].isFaceUp = false;
-        }
-        numFlipped = 0;
-        timer = -1;
-        set = 0;
-      }
+  // Quand on atteint "1", on flip toutes les cartes.
+  if(flipAllCardsTimeoutB == 1){
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].isFaceUp = false;
     }
   }
+   // À chaque image affiché, on reduit de 1 le timeout,
+  // en attendant qu'il flip toutes les cartes
+  if(flipAllCardsTimeoutB > 0) flipAllCardsTimeoutB--;
 
-  if (match) {
-    for (let i = 0; i < set; i++) {
-      // flippedCards[i].isFaceUp = true;
-      console.log("set is " + set);
-      numFlipped = 0;
-      timer = -1;
-      // match=false
-      // flippedCardsCopy[i].set=false
-      // matchedCards.push(card[i])
-      // cards[i].matched()
-      // cards[i].isFaceUp = true;
-    }
-  }
-  
   // checking to see display of card distribution
   for (let i = 0; i < cards.length; i++) {
     // cards[i].isFaceUp = true;
@@ -127,19 +120,13 @@ function baseDraw() {
     cards[i].hover();
 
     cards[i].display();
+
+  }
+  if(cardsMatchedB == 8){
+    gameWinB();
   }
 
-  // if(match){
-  //  for(i=0;i<flippedCards.length;i++)
-  //  flippedCards[i].display()
-  // }
-
-  // // if (set == 8) {
-  //   for (let i = 0; i < 100; i++) {
-  //     confetti[i].body();
-  //     confetti[i].fall();
-  //   // }
-  // }
+  //strokeWeight(5); // weird way to do a stroke I know...
 }
 /**
  * This will be called whenever a key is pressed while the music variation is active
@@ -150,266 +137,158 @@ function baseKeyPressed(event) {
     }
 }
 class Card {
-  constructor(x, y, w, h, picked) {
+
+  constructor(x, y, w, h, pickedB) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.col = color(200);
-    this.picked = picked;
+    this.pickedB = pickedB;
     this.isFaceUp = false;
-    this.set = false;
-  }
+    this.coverCardB = coverCardB;
+    this.coverCardBH = coverCardBH;
+    this.flippedCardB = flippedCardB;
+    this.stroke = "#151821";
+    this.darkBlue = "#151821";
+    this.blue = "#7d8497";
 
+  }
   body() {
-    rectMode(CENTER);
-    fill(this.col);
-    rect(this.x, this.y, this.w, this.h, 10);
-  }
 
+    rectMode(CENTER);
+    stroke(this.stroke);
+    strokeWeight(5);
+    fill(this.col);
+    rect(this.x, this.y, this.w, this.h);
+  }
   hover() {
+
     if (
       mouseX > this.x - this.w / 2 &&
       mouseX < this.x + this.w / 2 &&
       mouseY < this.y + this.h / 2 &&
       mouseY > this.y - this.h / 2
     ) {
-      this.col = color(160);
+      //this.col = color(160);
       // rect(this.x,this.y,this.w,this.h,10)
       this.hoverBool = true;
+      
+      this.stroke = this.blue; 
+      image(this.coverCardBH, this.x -45, this.y -82, this.w, this.h);
     } else {
-      this.col = color(200);
+      //this.col = color(200);
       this.hoverBool = false;
+      
+      this.stroke = this.darkBlue; 
+      //this.stroke = color(0); //"#181a26"
+      image(this.coverCardB, this.x -45, this.y -82, this.w, this.h);
     }
   }
 
   display() {
-    // rectMode(CENTER)
+
     if (this.isFaceUp) {
-      imageMode(CORNER);
-      image(this.picked, this.x -25, this.y-25, this.w, this.h);
-    }
-    // else {
-    //   stroke("yellow");
-    //   rect(this.x, this.y, this.w / 4, this.h / 4, 7);
-    // }
-  }
-
-  matched() {
-    if (match) {
-      this.display();
-    }
-  }
-}
-
-// fisher yates shuffle as a function
-function shuffling(array) {
-  let counter = array.length;
-
-  // while there are still elements in the array
-  while (counter > 0) {
-    // picks a random index number of the array
-    var randomIndex = Math.floor(Math.random() * counter);
-    // decreases counter by 1
-    counter--;
-    // swaps the last element with the counter
-    var tempSwap = array[counter];
-    array[counter] = array[randomIndex];
-    array[randomIndex] = tempSwap;
-  }
-}
-
-function myShuffle() {
-  // console.log(faceCards)
-
-  //   faceCards = faceCards.concat(faceCards)
-  //   faceCards2=faceCards
-  //   // console.log(faceCards)
-  // console.log(faceCards2)
-
-  for (let i = 0; i < 16; i++) {
-    // randomly picking one card from the array of face cards
-    randomIndex = floor(random(0, faceCards.length));
-    picked = faceCards[randomIndex];
-
-    // push 2 copies onto array since there are two of each
-    selected.push(picked);
-    // selected.push(picked);
-    // remove card from faces array so we don't re-pick the same cards
-    faceCards.splice(randomIndex, 1);
-    faceCardsCopy.unshift(picked);
-  }
-}
-/*--coppied in mousepressed
-function mouseClicked() {
-   //console.log("clicked");
-  for (let i = 0; i < cards.length; i++) {
-    if (cards[i].hoverBool) {
-      if (numFlipped < 2) {
-        cards[i].isFaceUp = true;
-        numFlipped++;
-
-        // console.log(faceCardsCopy[i]);
-        flippedCards.unshift(faceCardsCopy[i]);
-        // console.log(flippedCards);
-        console.log(numFlipped);
-
-        if (flippedCards[0] == flippedCards[1]) {
-          flippedCards[0].set = true;
-          flippedCards[1].set = true;
-          match = true;
-          console.log("match");
-          matchedCards.unshift(faceCardsCopy[i]);
-
-          numFlipped = 0;
-          set++;
-
-          // console.log(set)
-        } else {
-          match = false;
-        }
-      }
-      if (numFlipped == 2) {
-        timer = frameCount;
-        console.log(flippedCards);
-        flippedCards.pop();
-        flippedCards.pop();
-      }
-
-      if (numFlipped > 2) {
-        if (match) {
-          // cards[i].isFaceUp = true;
-          console.log(" match");
-          timer = frameCount;
-          numFlipped = 0;
-
-          console.log(flippedCards);
-          cards[i].set = true;
-        } else if (!match) {
-          // cards[i].isFaceUp = false;
-          console.log("no match");
-
-          console.log(flippedCards);
-          cards[i].set = false;
-        }
-      }
+      push();
+      imageMode(CENTER);
+      //this.stroke = color("#181a26"); //"#181a26"
+      //this.stroke = color(0); //"#181a26"
+      //strokeWeight(cardStrokeWeight);
+      image(this.flippedCardB, this.x, this.y, this.w, this.h);
+      pop();
+      push();
+      imageMode(CENTER);
+      //strokeWeight(cardStrokeWeight);
+      image(this.pickedB, this.x, this.y, this.w, this.h);
+      pop();
     }
   }
-  // }
-}
-*/
-class Confetti {
-  constructor() {
-    this.x = random(width);
-    this.y = 0;
-    this.w = 10;
-    this.col = random(255);
-    this.speed = random(1, 5);
-  }
-
-  body() {
-    fill(this.col);
-    circle(this.x, this.y, this.w);
-  }
-
-  fall() {
-    this.y += this.speed;
-    // if(this.y>height){
-    //   this.y=0
-    // }
-  }
 }
 
+function myShuffleB(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+}
 /**
  * This will be called whenever the mouse is pressed while the music variation is active
  */
 function baseMousePressed() {
+ // Si on attend pour flipper les cartes,
+  // on ignore la sourie
+  if (flipAllCardsTimeoutB != 0) return;
 
-   //console.log("clicked");
   for (let i = 0; i < cards.length; i++) {
     if (cards[i].hoverBool) {
-      if (Card.picked === 0){
-         console.log("1check");
-        sound1.play();
-        }
-        else if (Card.picked === 1){
-         console.log("2check");
-        sound2.play();
-        }
-        else if (Card.picked === 2){
-         console.log("3check");
-        sound3.play();
-        }
-        else if (picked = 3){
-         console.log("4check");
-        sound4.play();
-        }
-        else if (picked = 4){
-         console.log("5check");
-        sound5.play();
-        }
-        else if (picked = 5){
-         console.log("6check");
-        sound6.play();
-        }
-        else if (picked = 6){
-         console.log("7check");
-        sound7.play();
-        }
-        else if (picked = 7){
-         console.log("8check");
-        sound8.play();
-        }
-      if (numFlipped < 2) {
-        cards[i].isFaceUp = true;
-        numFlipped++;
+      // si on "hover" par dessus la carte...
 
-         console.log(faceCardsCopy[i]);
-        flippedCards.unshift(faceCardsCopy[i]);
-        // console.log(flippedCards);
-        console.log(numFlipped);
+      let currentCard = cards[i]; // la carte qu'on click
+       currentCard.isFaceUp = true; // flip the card up!
 
-        if (flippedCards[0] == flippedCards[1]) {
-          flippedCards[0].set = true;
-          flippedCards[1].set = true;
-          match = true;
-          console.log("match");
-          matchedCards.unshift(faceCardsCopy[i]);
-
-          numFlipped = 0;
-          set++;
-
-          // console.log(set)
-        } else {
-          match = false;
+       if (lastCardIdClickedB == -1){ // Si on a jamais clicker sur une carte...
+        lastCardIdClickedB = i; // On la definit comme la dernière carte clicker
+      
+      } else if (lastCardIdClickedB!= i){ // si on click sur une carte différente...
+        // si on click pas deux fois sur la même carte...
+        if (cards[i].pickedB != cards[lastCardIdClickedB].pickedB){
+          flipAllCardsTimeoutB = 50;
+          cardsMatchedB = 0;
+        } // same card is picked
+        else if (cards[i].pickedB == cards[lastCardIdClickedB].pickedB){
+        cardsMatchedB ++;
+        let knownedMatched = cards[i];
+        knownedMatched = true;
+          console.log(cardsMatchedB + " matched sound");
+          if(!knownedMatched){
+            cardsMatchedB ++;
+            console.log(cardsMatchedB + " matched sound");
+          }
         }
-      }
-      if (numFlipped == 2) {
-        timer = frameCount;
-        console.log(flippedCards);
-        flippedCards.pop();
-        flippedCards.pop();
-      }
-
-      if (numFlipped > 2) {
-        if (match) {
-          // cards[i].isFaceUp = true;
-          console.log(" match");
-          timer = frameCount;
-          numFlipped = 0;
-
-          console.log(flippedCards);
-          cards[i].set = true;
-        } else if (!match) {
-          // cards[i].isFaceUp = false;
-          console.log("no match");
-
-          console.log(flippedCards);
-          cards[i].set = false;
-        }
+        // On "reset" la dernière carte clické
+        lastCardIdClickedB = -1;
+        
       }
     }
+    
   }
+}
+
+function gameWinB(){
+textAlign(CENTER, CENTER);
+image(imgWinB, 0, winDisplayB.yimg, width, height, 0, 0, imgWinB.width, imgWinB.height, CONTAIN);
+
+//Text drawing (I wanted many stoke)
+push();
+textAlign(CENTER, CENTER);
+textFont(fontDotTitle);
+stroke(winDisplayB.stroke3);
+strokeWeight(winDisplayB.weight3);
+textSize(winDisplayB.size);
+fill(winDisplayB.fill2);
+text(winDisplayB.text, winDisplayB.x, winDisplayB.y);
+pop();
+push();
+textAlign(CENTER, CENTER);
+textFont(fontDotTitle);
+stroke(winDisplayB.stroke2);
+strokeWeight(winDisplayB.weight2);
+textSize(winDisplayB.size);
+fill(winDisplayB.fill2);
+text(winDisplayB.text, winDisplayB.x, winDisplayB.y);
+pop();
+push();
+textAlign(CENTER, CENTER);
+textFont(fontDotTitle);
+stroke(winDisplayB.stroke);
+strokeWeight(winDisplayB.weight);
+textSize(winDisplayB.size);
+fill(winDisplayB.fill);
+text(winDisplayB.text, winDisplayB.x, winDisplayB.y);
+pop();
 }
 
 /**
@@ -419,4 +298,10 @@ function baseMousePressed() {
     if (event.keyCode === 27) {
         state = "menu";
     }
+}
+
+
+function changeColorB(){
+// change the background color of the html
+document.body.style.background = backgroundColorB;
 }

@@ -10,6 +10,7 @@ Also hides overflow.
 **********************************************/
 
 body {
+  background-color: #000000; /* #2f2f2f  #ffffff */
   padding: 0;
   margin: 0;
   display: grid; /* Set up the grid and justify/align to center */

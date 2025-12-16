@@ -2,8 +2,9 @@
 /* PAGE EXPLANATION DONT FORGET !!*/
 //fix bug of display bigCard order??
 
+
+
 // Text
-let fontDot;
 let colorProphecy = "#3a6e50ff";
 let linkT; 
 // Intruction screen
@@ -51,9 +52,9 @@ let chariotCard1 = {
 let swordCoin;
 let cup;
 let wand;
-let starsGif;
-let heartsGif;
 let imgheart;
+
+let backgroundColorT = "#ffffff";
 // outcomes variables of cards :
   // The sun card 
 let gameWin = false;
@@ -229,6 +230,7 @@ let flipAllCardsTimeout = 0;
 let lastCardIdClicked = -1;
 
 function tarotSetup() {
+  changeColorT();
   createCanvas(1465, 800);
   // background(220)
   // rectMode(CENTER)
@@ -411,11 +413,8 @@ class CardT {
     this.coverCard = coverCard;
     this.coverCardH = coverCardH;
     this.isFaceUp = false;
-    this.setT = false;
-    this.matchT = false;
     this.size = 30;
     this.font = fontDot;
-    //this.fill = color(0);
     this.fill = colorProphecy;
     this.tower = tower;
     this.sun = sun;
@@ -485,35 +484,6 @@ class CardT {
       }*/
     }
   }
-  /*
-  bigDisplay(){
-    //if (this.isFaceUp && numFlippedT<= 1) {
-      //imageMode(CORNER);
-      //console.log("heyheyehey");
-    //making a replica of the card (to give a fortune)
-      //bigCard1 = image(this.pickedT, 0, 150, 260, 442);  
-
-    //}
-    //else 
-      if  (this.isFaceUp && numFlippedT>=2) {
-      console.log("yoyoyo");
-      imageMode(CORNER);
-    //making a replica of the card (to give a fortune)
-      //bigCard1 = hide();
-      //bigCard1 = image(this.pickedT, -100, 150, 260, 442); 
-      //hiddingCard1();
-      //bigCard1 = image(this.pickedT, 500, 150, 260, 442); 
-      //bigCard2 = image(this.pickedT, 0, 150, 260, 442);  
-      
-    }else if (this.isFaceUp ) {
-      imageMode(CORNER);
-      console.log("heyheyehey");
-    //making a replica of the card (to give a fortune)
-      bigCard1 = image(this.pickedT, 0, 150, 260, 442);  
-
-    }
-  }
-*/
   
 }
 //is it being used ?
@@ -851,6 +821,10 @@ function wheelOfFortune(){
     }
   }
 
+}
+function changeColorT(){
+// change the background color of the html
+document.body.style.background = backgroundColorT;
 }
 
 function takanoMention(){

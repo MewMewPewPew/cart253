@@ -6,14 +6,14 @@
 - ~~add 8 pairs of imgs in basic memory game~~
 
 - ~~added escape in varition possible~~
-- finish sound variation
-- add music variaition >:D
-- do basic finish of basic variaton
+- ~~finish sound variation~~
+- ~~finish the basic variaton~~
 - do all the comments/organization 
 - do read.me 
 - do index.html
 - finish basic variation 
 - fix "bug" in tarot variation
+- ??? add music variaition >:D 
 - adapt comments + read.me
 - SUMBIT !
 
@@ -31,8 +31,9 @@
 - #### make music variation = sound variation & create new music variation !
 
 ## Sound variation
-basically already done !
-- change the sound back to soundEffects,
+Finished !
+- ~~change the sound back to soundEffects,~~
+- ~~make it so if all match == win~~
 - make it so if won, once can access the music variation (cooler), else, they cannot (or maybe with a keyPressed)
 
 
@@ -46,7 +47,7 @@ basically already done !
         - then player has to play normaly or has like 3 chances or smt ? (maybe too hard)
 
 ## Starting with the Tarot variation
-finished
+Finished ! (?)
 > fIX THE IMG ORDER BUG ? 
 
 - ~~create the variation file~~

@@ -26,14 +26,19 @@ function preload(){
     fontDotTitle =loadFont("assets/images/Codystar-Regular.ttf");
     fontDot = loadFont("assets/images/BitcountPropSingle-Regular.ttf");
     //base memory card img
-    img1 = loadImage("assets/images/cards/basic/star.png");
+    imgWinB = loadImage("assets/images/cards/basic/win.PNG");
+    backgroundImage = loadImage("assets/images/backgroundBasic.jpg");
+    coverCardB =loadImage("assets/images/cards/basic/CaptureSireneEdit.png");
+    coverCardBH = loadImage("assets/images/cards/basic/CaptureSireneEditH.png");
+    flippedCardB = loadImage("assets/images/cards/basic/flippedCardB.png");
+    img1 = loadImage("assets/images/cards/basic/1.png");
     img2 = loadImage("assets/images/cards/basic/triangle.png");
-    img3 = loadImage("assets/images/cards/basic/spiral.png");
-    img4 = loadImage("assets/images/cards/basic/circle.png");
-    img5 = loadImage("assets/images/cards/basic/heart.png");
-    img6 = loadImage("assets/images/cards/basic/diamond.png");
+    img3 = loadImage("assets/images/cards/basic/2.png");
+    img4 = loadImage("assets/images/cards/basic/3.png");
+    img5 = loadImage("assets/images/cards/basic/4.png");
+    img6 = loadImage("assets/images/cards/basic/5.png");
     img7 = loadImage("assets/images/cards/basic/spade.png");
-    img8 = loadImage("assets/images/cards/basic/trefle.png");
+    img8 = loadImage("assets/images/cards/basic/6.png");
     //tarot memory card img + font
     instrucionScreen = loadImage("assets/images/cards/tarot/instructionT.png");
     backgroundImageT = loadImage("assets/images/tarot-Aya-T-bg.png");
