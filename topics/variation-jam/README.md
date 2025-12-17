@@ -39,6 +39,8 @@ the end of a cycle, it also means the begginning of a new one.
 also takes aways the images & .gifs of *The lovers* & *The magician* if revealed before. *The tower* is the losing endgame and is represented it by that because it annonces a bad omen. A cycle of self-fulfilling prophecy of destruction caused by denial. The methaphore here is that no matter how you build or try to fix something (like a tower), it is bound to fall if the foundations are wrong.  
 >* If *The Sun* is paired: A cropped and + sized image of the card appears with the text: "You Win ! :)". Contrary to *The tower*, it is the winning endgame and is represented by *The sun* because this card means success, joy, fun & abundance. Comparing oneself to the sun's radiance, strengh and freedom or being blessed by it's warmth as a positive interpretation.
 
+**without proper optimization, the program runs a bit slow :(
+
 ### *Sound* variation
 The third variation changes our senses. This time, the visuals are made different with more industrial and realistic images and styling. The cards are now on & off switch buttons that when clicked instead play 8 various sounds. 
  * Instruction:
