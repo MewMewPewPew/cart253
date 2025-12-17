@@ -49,10 +49,10 @@ I spend some time trying to add a fourth variation, which is a not completed exp
 
 
 ## Screenshot(s)
-> ![Menu](./assets/images/cards/screenshots/menu.png)
+> ![Menu](./assets/images/cards/screenshots/menu.PNG)
 #### *Base* variation
-> ![Image base variation ](./assets/images/cards/screenshots/base1.png)
-> ![Image base variation Win](./assets/images/cards/screenshots/baseWin.png)
+> ![Image base variation ](./assets/images/cards/screenshots/base1.PNG)
+> ![Image base variation Win](./assets/images/cards/screenshots/baseWin.PNG)
 
 #### *Tarot* variation
 > ![Image Tarot variation Title](./assets/images/cards/screenshots/TarotTitle.png)
@@ -62,8 +62,8 @@ I spend some time trying to add a fourth variation, which is a not completed exp
 > ![Image Tarot variation Win](./assets/images/cards/screenshots/TarotSun.png)
 > ![Image Tarot variation Lose](./assets/images/cards/screenshots/Tarot_Lost.png)
 #### *Sound* variation
-> ![Image Sound variation ](./assets/images/cards/screenshots/sound.png)
-> ![Image Sound variation Win](./assets/images/cards/screenshots/SoundWin.png)
+> ![Image Sound variation ](./assets/images/cards/screenshots/sound.PNG)
+> ![Image Sound variation Win](./assets/images/cards/screenshots/SoundWin.PNG)
 ## Attribution
 Links of the code copied & adapted + online references I used
 - This project uses [p5.js](https://p5js.org).
