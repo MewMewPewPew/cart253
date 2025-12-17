@@ -108,7 +108,7 @@ https://p5js.org/reference/p5.Element/style/
 
 
 ## Process
-Here is my process of this project's [ideas](./process/ideas.md) & [planning](./process/planning.md)...
+Here is my process of this project's [ideas](./process/Ideas.md) & [planning](./process/planning.md)...
 
 ## License
 
