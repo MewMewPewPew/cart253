@@ -13,7 +13,7 @@
 - ~~do index.html~~
 - fix "bug" in tarot variation
 - ??? add music variaition >:D 
-- adapt comments + read.me
+- ~~adapt comments + read.me~~
 - SUMBIT !
 
 ## music variation
@@ -40,7 +40,7 @@ Finished !
 ## basic variation 
 - make the background + visuals more interesting ...
 - if time add features : 
-        - add gamewin + gameLose 
+        - add ~~gamewin~~ + gameLose 
         - make the card appear for like 3 second, 
         - put a timer ?
         - then player has to play normaly or has like 3 chances or smt ? (maybe too hard)

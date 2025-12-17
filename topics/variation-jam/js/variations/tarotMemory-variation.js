@@ -111,8 +111,8 @@ let losing = {
 let magic = false;
 let sorcery = {
   swordCoin:{
-    x: 1100,
-    y: 400,
+    x: 1000,
+    y: 490,
     w: 200,
     h: 342,
   },
@@ -491,7 +491,7 @@ class CardT {
       mouseX < this.x + this.w / 2 &&
       mouseY < this.y + this.h / 2 &&
       mouseY > this.y - this.h / 2 && 
-      !gameLose && !gameWin && !endCycle && !instruction ) 
+      !gameLose && !gameWin && !endCycle && !instruction &&!gamble ) 
     { // if mouse on card & not in starting or ending gameplay (make it playable)
       this.col = color(160);
       this.hoverBool = true;
@@ -657,7 +657,7 @@ function outcomesEnd(){
     push();
     textAlign(CENTER, CENTER);
     textFont(fontDot);
-    stroke(winning.text.stroke);
+    stroke("#faf88dff");//winning.text.stroke
     strokeWeight(winning.text.weight);
     textSize(winning.text.size);
     fill(winning.text.fill);
@@ -733,6 +733,7 @@ function cardsOutcomes(){
   }
   // The hermit outcome (add-on advice/instruction)
   if(hermitSpeech === true){
+    chariotGo = false;
     push();
     fill(advice.box.fill);
     rect(advice.box.x, advice.box.y,advice.box.x2,advice.box.y2);

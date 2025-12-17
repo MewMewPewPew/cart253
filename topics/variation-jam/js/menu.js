@@ -11,13 +11,14 @@ let fontDot;
 let backgroundColorMenu = "#000000";
 
 // text in menu
+const extraMenuTitle =`Do you remember?`
 const menuTitle =`Memory games`
 const menuText = `
 press any following key to start\n
 Base * B 
 Tarot * T
-Sound * S
-Music * M`
+Sound * S`
+
 const menuContext =`made by Ash as a project for the CART 253 class at Concordia`
 
 
@@ -68,8 +69,15 @@ function menuMousePressed() {
 
 }
 
-// drawing the text on the menu canvas
-function menuDrawText(){
+// drawing the text on the menu canvas 
+function menuDrawText(){ 
+    push();
+    fill(255);
+    textFont(fontDotTitle)
+    textSize(25);
+    textAlign(CENTER, CENTER);
+    text(extraMenuTitle, width / 2, 40);
+    pop();
     push();
     fill(255);
     textFont(fontDotTitle)

@@ -5,7 +5,7 @@
  * 
  * This is the code for the variation-jam for the CART 253 class. 
  * I chose to start the project from a memory card game, which it's essence is still present in all variation: 
- * 1-"Base" 2- "Tarot" 3- "Sound" 4-"Music"
+ * 1-"Base" 2- "Tarot" 3- "Sound" 
  * 
  * The first variation plays more the role of the base version of this memory card game than a variation of it. 
  * Still, I made it different by adding my own touch of styling and my art.
@@ -86,8 +86,8 @@
  *                      If a pair of sounds is found, they stay on. 
  *                      If one finds the 8 pairs of sounds successively, they win. All buttons turn green and a
  *                      victory sound is heard.
- *                      
- * The fourth variation is a not completed experiment of the third variation.  
+ * 
+ * I started a fourth variation "music", which is a not completed experiment of the third variation.                    
  *             
  * All links & information are in README.MD
  * Made with p5
@@ -172,7 +172,7 @@ function preload(){
     sound3M = loadSound("assets/sounds/sound3.m4a");
     sound4M = loadSound("assets/sounds/sound4.m4a");
     sound5M = loadSound("assets/sounds/sound5.m4a");
-    sound6M = loadSound("assets/sounds/sound6.m4a");
+    sound6M = loadSound("assets/sounds/sound6M.mp3");
     sound7M = loadSound("assets/sounds/sound7.m4a");
     sound8M = loadSound("assets/sounds/sound8.m4a");
 }
@@ -187,10 +187,10 @@ function draw() {
             break
         case "sound-variation":
             soundDraw();
-            break;
+            break; /*
         case "music-variation":
             musicDraw();
-            break;
+            break; */
         case "BaseMemoryGame":
             baseDraw();
             break;
@@ -211,10 +211,10 @@ function mousePressed() {
             break
         case "sound-variation":
             soundMousePressed();
-            break
+            break /*
         case "music-variation":
             musicMousePressed();
-            break;
+            break;*/
         case "BaseMemoryGame":
             baseMousePressed();
             break;
@@ -235,10 +235,10 @@ function keyPressed(event) {
             break;
         case "sound-variation":
             soundKeyPressed(event);
-            break
+            break /*
         case "music-variation":
             musicKeyPressed(event);
-            break;
+            break;*/
         case "BaseMemoryGame":
             baseKeyPressed(event);
             break;

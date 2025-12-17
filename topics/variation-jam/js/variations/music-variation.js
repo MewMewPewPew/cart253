@@ -19,9 +19,16 @@ let sound1M, sound2M, sound3M, sound4M, sound5M, sound6M, sound7M, sound8M;
 
 let hasPlayedV = false;
 let hasPlayedWV = false;
-let allSounds;
+let allSoundsNotPlaying = true;
+//let allSounds;
 let amp;
+let ampVolumeNormal = 0.8;
+let ampVolume;
+let volumeTimeOut = 0.8;
+let boolSoundAmp = 1;
 let volHistory;
+let soundTimeout = 0;
+let startSound0 = 0;
 
 //Images *some elements are already declared in other variations
 let backgroundImageV; 
@@ -42,6 +49,7 @@ let winningV = false;
 let cardsMatchedV = 0;
 let flipAllCardsTimeoutV = 0; // Flip all cards in "x" frames
 let lastCardIdClickedV = -1;
+let restartS = true;
 
 /**
  * This will be called just before the music variation starts
@@ -102,7 +110,26 @@ function musicSetup() {
       cardsV.push(cardV);
     }
   }
-  //musicPlayVolumeSetup();
+  amp = new p5.Amplitude(); //Control & get data from the amplitude/Volume
+  
+  ampVolume = ampVolumeNormal*boolSoundAmp;
+  musicPlayVolumeSetup(); //Looping all sound but turning down the
+  
+  /*
+  for (let i = 0; i < cardsV.length; i++) {
+    allSounds = cardsV[cardsV.length];
+    if(allSounds.pickedSoundV = !isPlaying){
+      allSounds.pickedSoundV.loop();
+      }
+      }
+      
+  //allSounds.play();//starting all the sound at the same time (defining it at draw?)
+  
+  allSounds.amp(0);//make the volume at 0
+  //sound1M.playMode('restart');
+  allSounds = cardsV.pickedSoundV;
+  allSounds.playMode('restart'); //? */
+  
 }
 
 /**
@@ -110,18 +137,27 @@ function musicSetup() {
  */
 function musicDraw() {
   
-
-  // When reached "1", flip all cards
-  if(flipAllCardsTimeoutV == 1){
-    for (let i = 0; i < cardsV.length; i++) {
-      cardsV[i].isFaceUp = false;
-    }
-  }
-  //Each showned imaged, timeout -- until all cards get flipped
-  if(flipAllCardsTimeoutV > 0) flipAllCardsTimeoutV--;
+  // //restartCheck();
+   // When reached "1", flip all cards
+   if(flipAllCardsTimeoutV == 1){
+   for (let i = 0; i < cardsV.length; i++) {
+       cardsV[i].isFaceUp = false;
+     }
+   }
+   //Each showned imaged, timeout -- until all cards get flipped
+   if(flipAllCardsTimeoutV > 0) flipAllCardsTimeoutV--;
   
+  //When reached "1", cut all sound
+  if(soundTimeout == 1){
+    volumeTimeOut = 0;
+   } else { volumeTimeOut = 0.8;
+   }
+   //each frame, timeout -- until sound is cut
+   if(soundTimeout > 0) soundTimeout--;
+
   // checking to see the display of card distribution
   for (let i = 0; i < cardsV.length; i++) {
+    
     // cards[i].isFaceUp = true;
     cardsV[i].body();
 
@@ -130,17 +166,18 @@ function musicDraw() {
     cardsV[i].display(); // cards/button images
     
     if (cardsMatchedV == 8){
-        //cardsM[i].winDisplay();
+        cardsV[i].winDisplay();
         
     }
   }
   //musicPlayVolumeDraw();
   musicGameWinV();
+  //overlay Image for the fake display
   image(foregroundImageV, 0, 0, width, height, 0, 0, foregroundImageV.width, foregroundImageV.height, CONTAIN);
 }
 //CardM class acting on each cards and objects in the faceCardsV array
 class CardV {
-  constructor(x, y, w, h, pickedV,pickedSoundV) {
+  constructor(x, y, w, h, pickedV, pickedSoundV) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -179,8 +216,8 @@ class CardV {
       image(this.soundButtonOff, this.x -25, this.y -25, this.w, this.h);
     }
   }
-
   display() {
+
     if (this.isFaceUp) { //if card is face up
       imageMode(CORNER);
       image(this.pickedV, this.x-25, this.y-25, this.w, this.h);
@@ -210,34 +247,47 @@ function musicMousePressed() {
 
   // If we wait to flip the cards,
   if (flipAllCardsTimeoutV != 0) return;
+ if (soundTimeout!= 0) return;
   
   for (let i = 0; i < cardsV.length; i++) {
+    /*
+    allSounds = cardsV[cardsV.length];
+    
+    allSounds.pickedSoundV.play(); */
     if (cardsV[i].hoverBool) {
-    // if we hover on a card
-       
+    // if we hover on a card   
     let currentCard = cardsV[i]; // the clicked card
     currentCard.isFaceUp = true; // flip the card up
-    // play card sound
-      if (!currentCard.pickedSoundV.isPlaying()){
-      currentCard.pickedSoundV.play();
+    if(!hasPlayedV){
+      // play card sound
+      currentCard.pickedSoundV.amp(volumeTimeOut);
       hasPlayedV = true;
-      } else if (currentCard.pickedSoundV.isPlaying && hasPlayedV){ 
-        currentCard.pickedSoundV.play();
-      } else {
-        currentCard.pickedSoundV.stop();
-        hasPlayedV = false;
-      }
-
+    }  
+    // else {
+    //    //currentCard.pickedSoundV.amp(startSound0);
+    //    hasPlayedV = false;
+    //   }
+     
       if (lastCardIdClickedV == -1){ // if user never clicked on a card
       lastCardIdClickedV = i; // define "i" as the last card clicked
         
-      } else if (lastCardIdClickedM!= i){ // If we click on a different card (& not the exact same one)
+      } else if (lastCardIdClickedV!= i){ // If we click on a different card (& not the exact same one)
+        //cardsV[lastCardIdClickedV].pickedSoundV.amp(volumeTimeOut);
         if (cardsV[i].pickedV != cardsV[lastCardIdClickedV].pickedV){
-        // if the card is not the same, flip All cards in xnumber of frames
-        flipAllCardsTimeoutV = 30;
+        // // if the card is not the same, flip All cards in xnumber of frames
+        cardsV[i].pickedSoundV.amp(volumeTimeOut); //turn down the volume
+        cardsV[lastCardIdClickedV].pickedSoundV.amp(volumeTimeOut);
+        // //cardsV[]
+        hasPlayedV = false;  
+        soundTimeout= 20;
+        flipAllCardsTimeoutV = 20;
         cardsMatchedV = 0;
+        // if(cardsMatchedV == 0){
+        //   restartS = true;
+        // }
         } // if same card is picked
           else if (cardsV[i].pickedV == cardsV[lastCardIdClickedV].pickedV){
+          cardsV[lastCardIdClickedV].pickedSoundV.amp(volumeTimeOut);
           //adding a score for each matched
           cardsMatchedV ++;
           let knownedMatched = cardsV[i];
@@ -250,23 +300,58 @@ function musicMousePressed() {
         }
       // Reset the last card clicked
       lastCardIdClickedV = -1;
+      // if(!currentCard.isFaceUp){
+      //   currentCard.pickedSoundV.amp(0.5,1);
+      // }
       }
     }
     
   }
 
 }
-//Starting all the song, to only change the volume later (so they all match)
+//Looping all sound but turning down the volume
 function musicPlayVolumeSetup(){
-  
+  sound1M.loop();
+  sound2M.loop();
+  sound3M.loop();
+  sound4M.loop();
+  sound5M.loop();
+  sound6M.loop();
+  sound7M.loop();
+  sound8M.loop();
+  sound1M.amp(startSound0);
+    sound2M.amp(startSound0);
+    sound3M.amp(startSound0);
+    sound4M.amp(startSound0);
+    sound5M.amp(startSound0);
+    sound6M.amp(startSound0);
+    sound7M.amp(startSound0);
+    sound8M.amp(startSound0);
+}
+    /*
+  if(allSoundsNotPlaying){
+  }
   for (let i = 0; i < cardsV.length; i++) {
   allSounds = cardsV[cardsV.length].pickedSoundV;
   amp = new p5.Amplitude()
   allSounds.playMode('restart'); //?
   allSounds.play();
+  
   }
   
-}
+} 
+function restartCheck(){
+  if (restartS){
+    sound1M.amp(startSound0);
+    sound2M.amp(startSound0);
+    sound3M.amp(startSound0);
+    sound4M.amp(startSound0);
+    sound5M.amp(startSound0);
+    sound6M.amp(startSound0);
+    sound7M.amp(startSound0);
+    sound8M.amp(startSound0);
+  } 
+}*/
 function musicPlayVolumeDraw(){
   //Drawing the "screen" sound display
 
@@ -294,7 +379,7 @@ function musicPlayVolumeDraw(){
 }
 //Win ending
 function musicGameWinV(){
-  if(cardsMatchedV == 8 && !soundWinV.isPlaying() && ! hasPlayedWV){ 
+  if(cardsMatchedV == 8 && ! hasPlayedWV){ 
     //soundWinV.setVolume(0.8);
     soundWinV.play();
     hasPlayedWV = true;

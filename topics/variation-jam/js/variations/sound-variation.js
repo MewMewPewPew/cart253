@@ -129,7 +129,7 @@ function soundDraw() {
     cardsM[i].display(); // cards/button images
     
     if (cardsMatchedM == 8){
-        //cardsM[i].winDisplay();
+        cardsM[i].winDisplay();
         
     }
   }
@@ -245,6 +245,9 @@ function soundMousePressed() {
           if(!knownedMatched){
             cardsMatchedM ++;
             console.log(cardsMatchedM + " matched sound");
+            if(cardsMatchedM == 8){
+              //flipAllCardsTimeoutM = 150; //make the green button stay a while
+            }
           }
         }
       // Reset the last card clicked

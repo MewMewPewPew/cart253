@@ -2,13 +2,13 @@
 
 Ash Oest O'Leary
 
-[View this project online](URL_FOR_THE_RUNNING_PROJECT)
+[View this project online](https://mewmewpewpew.github.io/cart253/topics/variation-jam/)
 
 ## Description
 
 This is the code for the variation-jam for the CART 253 class. 
 I chose to start the project from a memory card game, which it's essence is still present in all variation:  
-1. *Base* - 2.*Tarot* - 3. *Sound* - 4.*Music*
+1. *Base* - 2.*Tarot* - 3. *Sound* 
 
 ### *Base* variation
 The first variation plays more the role of the base version of this memory card game than a variation of it. 
@@ -44,20 +44,26 @@ The third variation changes our senses. This time, the visuals are made differen
  * Instruction:
  >When clicking a button, hear 1 of 8 sound as the button light up. Try and match this same sounds. If 2 buttons revealed don't have the same sound, they are turned off. If a pair of sounds is found, they stay on.If one finds the 8 pairs of sounds successively, they win. All buttons turn green and a victory sound is heard.
 
- #### *Sound* variation                  
-The fourth variation is a not completed experiment of the third variation.  
+ #### *Music* variation                  
+I spend some time trying to add a fourth variation, which is a not completed experiment/continuation of the third variation. would off been the continuation of the sound variation, with nicer loops that, when completed, would produce a full music with it's 8 tracks. I wanted to add a sound visualizer as well :3 I gave up on it, not because it was too hard, but because of time and mental health.
 
 
 ## Screenshot(s)
-
+> ![Menu](./assets/images/cards/screenshots/menu.png)
 #### *Base* variation
-
-> ![Image base variation 1](./assets/images/clown.png)
+> ![Image base variation ](./assets/images/cards/screenshots/base1.png)
+> ![Image base variation Win](./assets/images/cards/screenshots/baseWin.png)
 
 #### *Tarot* variation
-
+> ![Image Tarot variation Title](./assets/images/cards/screenshots/TarotTitle.png)
+> ![Image Tarot variation ](./assets/images/cards/screenshots/TarotHM.png) 
+> ![Image Tarot variation Dead end](./assets/images/cards/screenshots/TarotDeath.png)
+> ![Image Tarot variation Wheel of Fortune](./assets/images/cards/screenshots/TarotFortune.png)
+> ![Image Tarot variation Win](./assets/images/cards/screenshots/TarotSun.png)
+> ![Image Tarot variation Lose](./assets/images/cards/screenshots/Tarot_Lost.png)
 #### *Sound* variation
-
+> ![Image Sound variation ](./assets/images/cards/screenshots/sound.png)
+> ![Image Sound variation Win](./assets/images/cards/screenshots/SoundWin.png)
 ## Attribution
 Links of the code copied & adapted + online references I used
 - This project uses [p5.js](https://p5js.org).
@@ -91,8 +97,10 @@ https://p5js.org/reference/p5.Element/style/
 - cat sound origin (Minecraft): https://www.youtube.com/watch?v=7pPiI-EHIeI
 - other sounds of this variation are from free sample library of a program called [Bandlab](https://www.bandlab.com/) where I mixed/edited it all.
 - button images(just used a screenshoot): https://dev.to/ykadosh/how-i-made-this-realistic-red-switch-pure-css-49g2 
+- I edited the "winning sound" from the game Plant vs Zombie in my own "winning sound"
     #### Futur uses ? /fun/helpful stuff
 - https://medium.spatialpixel.com/sounds-bd05429aba38 
+- https://editor.p5js.org/codingtrain/sketches/F0ZnzjvJC 
 
 
 
